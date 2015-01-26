@@ -1,0 +1,16 @@
+{
+  "name": "Gamma 2",
+  "version": "0.0.1",
+  "homepage": "http://eadpucv.github.io/gamma2",
+  "author": "TIG",
+  "description": "Tema de Wordpress creado con Pyxis para la e[ad] Escuela de Arquitectura y Diseño PUCV",
+  "license": "Artistic Licence 2.0",
+  "private": false,
+  "ignore": [
+    "**/.*",
+    "bower_components"
+  ],
+  "dependencies": {
+    "pyxis": "https://github.com/eadpucv/pyxis.git"
+  }
+}

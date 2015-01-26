@@ -1,0 +1,53 @@
+
+@pyxis-path: '../bower_components/pyxis/less/';
+@stampa-path: '../bower_components/stampa/less/';
+
+/* 
+	e[ad] - PYXIS 2014
+*/
+
+// Neutralizadores
+
+@import '@{pyxis-path}reset.less';					// volver a no saber, redefinir el blanco
+
+// Stampa
+
+@import '@{stampa-path}compiler.less';
+
+// Ensamblador
+
+@import '@{pyxis-path}tipografias-web.less';			// las familias tipográficas de base
+@import '@{pyxis-path}variables.less';				// los nombres de las cifras 
+@import '@{pyxis-path}mixins.less';					// los nombres de los algoritmos conformadores
+
+// Nav Dividers
+
+@import '@{pyxis-path}navs.less';					// las formas de navegación
+
+// Grilla y Estructura
+
+@import '@{pyxis-path}grilla.less';					// la grilla que partiociona y modula la pantalla
+
+// Elementos
+
+@import '@{pyxis-path}documentacion.less';			// las clases específicas para la documentación
+@import '@{pyxis-path}pagina.less';					// el espacio
+@import '@{pyxis-path}auxiliares.less';				// los dones comunes
+@import '@{pyxis-path}tipografia.less';				// los valores tipográficos
+@import '@{pyxis-path}interaccion.less';				// los elementos de diálogo y uso
+
+// Javascript
+
+@import '@{pyxis-path}collapse.less';				// la forma de cerrar (js)
+@import '@{pyxis-path}modals.less';					// los modales
+@import '@{pyxis-path}tooltip.less';					// los tooltips
+@import '@{pyxis-path}popovers.less';				// los popovers
+@import '@{pyxis-path}dropdowns.less';				// los dropdowns
+@import '@{pyxis-path}carousel.less';				// los carouseles
+@import '@{pyxis-path}parallax.less';				// los affix
+@import '@{pyxis-path}sticky.less';					// los menú stickies de navegación
+@import '@{pyxis-path}scrollspy.less';					// los menú stickies de navegación
+
+// Incorporación de estilos parametrizados de Gamma
+
+@import '@{pyxis-path}wp.less';						// estilos para bloques en wordpress
