@@ -1,3 +1,4 @@
+jQuery(document).ready(function($){
 var lastId,
     topMenu = $("#ejemplo-sticky"),
     topMenuHeight = topMenu.outerHeight()+0,
@@ -41,4 +42,5 @@ $(window).scroll(function(){
          .parent().removeClass("active")
          .end().filter("[href=#"+id+"]").parent().addClass("active");
    }                   
+});
 });
