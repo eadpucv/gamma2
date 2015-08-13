@@ -358,6 +358,15 @@ class sitio {
 		$features = new WP_Query($args);
 		return $features->posts;
 	}
+	static function get_events($posts=4) {
+		$args = array(
+				'post_type' => 'event',
+				'posts_per_page' => $posts,
+				'post_status' => 'publish'
+			);
+		$features = new WP_Query($args);
+		return $features->posts;	
+	}
 }
 
 
