@@ -26,7 +26,7 @@ define('MULTILINGUAL', function_exists( 'qtrans_use' ));
 	calling related files
 */
 
-	//include TEMPLATEPATH . '/inc/widgets.php';
+	include TEMPLATEPATH . '/inc/widgets.php';
 	//include TEMPLATEPATH . '/inc/taxonomies.php';
 	//include TEMPLATEPATH . '/inc/helpers.php';
 	// include TEMPLATEPATH . '/inc/modules.php';
@@ -197,8 +197,8 @@ class site {
 		 	//wp_enqueue_script( 'script-admin', THEME_JS . '/admin_scripts.js', array('jquery'), THEME_VERSION );
 		 }
 		 if ( is_admin() && ($pagenow == 'widgets.php' ) ) {
-		 	//wp_enqueue_media();
-		 	//wp_enqueue_script( 'script-admin', THEME_JS . '/admin_scripts.js', array('jquery'), THEME_VERSION );
+		 	wp_enqueue_media();
+		 	wp_enqueue_script( 'script-admin', THEME_JS . '/admin_scripts.js', array('jquery'), THEME_VERSION );
 		 }
 		// if ($pagenow == 'nav-menus.php' || $pagenow == 'edit-tags.php') {
 		// 	wp_enqueue_media();
