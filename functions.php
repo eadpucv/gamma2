@@ -50,6 +50,7 @@ add_theme_support( 'post-thumbnails' );
 // add_image_size( $name, $width, $height, $crop );
 add_image_size('squared', 300, 300, true);
 add_image_size('main-feature', 1024, 9999, false);
+add_image_size('entry-img', 530, 320, true);
 
 
 
@@ -366,6 +367,18 @@ class sitio {
 			);
 		$features = new WP_Query($args);
 		return $features->posts;	
+	}
+	static function get_posts_by_category($category,$limit=-1) {
+		$args = array(
+				'post_type' => 'post',
+				'posts_per_page' => $limit,
+				'post_status' => 'publish',
+				'category_name' => $category,
+				'orderby' => 'menu_order',
+				'order' => 'ASC'
+			);
+		$features = new WP_Query($args);
+		return $features->posts;
 	}
 }
 
