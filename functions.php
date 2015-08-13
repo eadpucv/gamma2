@@ -49,6 +49,7 @@ add_theme_support( 'post-thumbnails' );
 // Define custom thumbnail sizes
 // add_image_size( $name, $width, $height, $crop );
 add_image_size('squared', 300, 300, true);
+add_image_size('main-feature', 1024, 9999, false);
 
 
 
@@ -282,120 +283,25 @@ class ThemeSettings{
 				array(
 					'value' => isset($data['twitter_username']) ? $data['twitter_username'] : ''
 				)
+			) )->addElement( new Element\InputText(
+				_x('Vimeo username', 'site settings fields', 'ead'),
+				'vimeo_username',
+				array(
+					'value' => isset($data['vimeo_username']) ? $data['vimeo_username'] : ''
+				)
+			) )->addElement( new Element\InputText(
+				_x('Flickr url', 'site settings fields', 'ead'),
+				'flickr_url',
+				array(
+					'value' => isset($data['flickr_url']) ? $data['flickr_url'] : ''
+				)
+			) )->addElement( new Element\InputText(
+				_x('Soundcloud url', 'site settings fields', 'ead'),
+				'soundcloud_url',
+				array(
+					'value' => isset($data['soundcloud_url']) ? $data['soundcloud_url'] : ''
+				)
 			) );
-
-			$form->addElement( new Element\WPImage(
-				_x('Imagen Principal', 'site settings fields', 'ead'),
-				'home_image',
-				array(
-					'value' => isset($data['home_image']) ? $data['home_image'] : '',
-					'description' => _x('Imagen de la portada', 'ead')
-				)
-			) )->addElement( new Element\InputText(
-				_x('Desfase vertical', 'site settings fields', 'ead'),
-				'home_image_offset',
-				array(
-					'value' => isset($data['home_image_offset']) ? $data['home_image_offset'] : ''
-				)
-			) )->addElement( new Element\InputText(
-				_x('Frase portada', 'site settings fields', 'ead'),
-				'home_phrase',
-				array(
-					'value' => isset($data['home_phrase']) ? $data['home_phrase'] : '',
-				)
-			) )->addElement( new Element\InputText(
-				_x('Frase Empresa', 'site settings fields', 'ead'),
-				'home_phrase_2',
-				array(
-					'value' => isset($data['home_phrase_2']) ? $data['home_phrase_2'] : '',
-				)
-			) )->addElement( new Element\DivContent(
-				'<h3>Configuraciones de contenido de la pagina principal</h3>'
-				) )->addElement( new Element\DivContent(
-				'<h4>Primer elemento</h4>'
-				) )->addElement( new Element\WPImage(
-				_x('Imagen', 'site settings fields', 'ead'),
-				'home_e1',
-				array(
-					'value' => isset($data['home_e1']) ? $data['home_e1'] : '',
-					'description' => _x('Primer elemento arriba a la izquierda','site settings fields', 'ead')
-				)
-			) )->addElement( new Element\InputText(
-				_x('Título', 'site settings fields', 'ead'),
-				'home_e1_title',
-				array(
-					'value' => isset($data['home_e1_title']) ? $data['home_e1_title'] : '',
-				)
-			) )->addElement( new Element\InputText(
-				_x('Enlace', 'site settings fields', 'ead'),
-				'home_e1_url',
-				array(
-					'value' => isset($data['home_e1_url']) ? $data['home_e1_url'] : '',
-				)
-			) )->addElement( new Element\Textarea(
-				_x('Bajada 1', 'site settings fields', 'ead'),
-				'home_e1_summary',
-				array(
-					'class' => 'large-text',
-					'value' => isset($data['home_e1_summary']) ? $data['home_e1_summary'] : ''
-				)
-			))->addElement( new Element\DivContent(
-				'<h4>Segundo elemento</h4>'
-				) )->addElement( new Element\WPImage(
-				_x('Imagen', 'site settings fields', 'ead'),
-				'home_e2',
-				array(
-					'value' => isset($data['home_e2']) ? $data['home_e2'] : '',
-					'description' => _x('Primer elemento arriba a la izquierda','site settings fields', 'ead')
-				)
-			) )->addElement( new Element\InputText(
-				_x('Título', 'site settings fields', 'ead'),
-				'home_e2_title',
-				array(
-					'value' => isset($data['home_e2_title']) ? $data['home_e2_title'] : '',
-				)
-			) )->addElement( new Element\InputText(
-				_x('Enlace', 'site settings fields', 'ead'),
-				'home_e2_url',
-				array(
-					'value' => isset($data['home_e2_url']) ? $data['home_e2_url'] : '',
-				)
-			) )->addElement( new Element\Textarea(
-				_x('Bajada 2', 'site settings fields', 'ead'),
-				'home_e2_summary',
-				array(
-					'class' => 'large-text',
-					'value' => isset($data['home_e2_summary']) ? $data['home_e2_summary'] : ''
-				)
-			))->addElement( new Element\DivContent(
-				'<h4>Tercer elemento</h4>'
-				) )->addElement( new Element\WPImage(
-				_x('Imagen', 'site settings fields', 'ead'),
-				'home_e3',
-				array(
-					'value' => isset($data['home_e3']) ? $data['home_e3'] : '',
-					'description' => _x('Primer elemento arriba a la izquierda','site settings fields', 'ead')
-				)
-			) )->addElement( new Element\InputText(
-				_x('Título', 'site settings fields', 'ead'),
-				'home_e3_title',
-				array(
-					'value' => isset($data['home_e3_title']) ? $data['home_e3_title'] : '',
-				)
-			) )->addElement( new Element\InputText(
-				_x('Enlace', 'site settings fields', 'ead'),
-				'home_e3_url',
-				array(
-					'value' => isset($data['home_e3_url']) ? $data['home_e3_url'] : '',
-				)
-			) )->addElement( new Element\Textarea(
-				_x('Bajada 3', 'site settings fields', 'ead'),
-				'home_e3_summary',
-				array(
-					'class' => 'large-text',
-					'value' => isset($data['home_e3_summary']) ? $data['home_e3_summary'] : ''
-				)
-			));
 
 			/*
 			Fin opciones newsletter
@@ -427,25 +333,9 @@ class ThemeSettings{
 		$fields = array(
 			'facebook_url',
 			'twitter_username',
-			'home_phrase',
-			'home_phrase_2',
-			'home_image',
-			'home_image_offset',
-
-			'home_e1',
-			'home_e1_title',
-			'home_e1_url',
-			'home_e1_summary',
-
-			'home_e2',
-			'home_e2_title',
-			'home_e2_url',
-			'home_e2_summary',
-
-			'home_e3',
-			'home_e3_title',
-			'home_e3_url',
-			'home_e3_summary',
+			'vimeo_username',
+			'flickr_url',
+			'soundcloud_url'
 		);
 		$raw_post = stripslashes_deep( $_POST );
 		$data = array_intersect_key($raw_post, array_combine($fields, $fields) );
@@ -455,3 +345,101 @@ class ThemeSettings{
 	}
 }
 $_set = new ThemeSettings;
+
+class sitio {
+	static function get_features($posts=4) {
+		$args = array(
+				'post_type' => 'feature',
+				'posts_per_page' => $posts,
+				'post_status' => 'publish',
+				'orderby' => 'menu_order',
+				'order' => 'ASC'
+			);
+		$features = new WP_Query($args);
+		return $features->posts;
+	}
+}
+
+
+// helpers
+
+/**
+ * Generate a exceprt from whatever argument it's passed to it
+ * @param $post object|string Post object with excerpt and/or content OR string
+ * @param $args object|array|string Arguments: length, echo, strict mode
+ * @return string Formatted excerpt
+ * @author Felipe Lavín <felipe@yukei.net>
+ * */
+function do_excerpt($post, $args=null){
+	$params = wp_parse_args($args, array(
+		'length' => 255,
+		'echo' => false,
+		'strict' => false,
+		'wrap' => null,
+		'wrap_id' => null,
+		'wrap_class' => 'entry-excerpt',
+		'hellip' => false,
+		'append' => null
+	));
+	$out = $wrap = '';
+	if ( $params['wrap'] ) {
+		$wrap_id = $params['wrap_id'] ? ' id="'. esc_attr( $params['wrap_id'] ) .'"' : null;
+		$wrap_class = $params['wrap_class'] ? ' class="'. esc_attr( $params['wrap_class'] ) .'"' : null;
+		$wrap = '<'. $params['wrap'] . $wrap_id . $wrap_class .'>';
+	}
+	if ( is_string($post) ) {
+		$excerpt = strip_shortcodes($post);
+		$excerpt = strip_tags($excerpt);
+		if ( strlen($excerpt) > $params['length'] ) {
+			$excerpt = smart_substr($excerpt, $params['length']);
+			if ( $params['hellip'] ) $excerpt .= ' '. $params['hellip'];
+		}
+		if ( $params['append'] ) $excerpt .= ' '. $params['append'];
+		$out .= apply_filters('the_excerpt', $excerpt);
+	} elseif ( is_object($post) ) {
+		if ( isset($post->post_excerpt) && !empty($post->post_excerpt) ) {
+			if ( $params['strict'] && strlen($post->post_excerpt) > $params['length'] ) {
+				$buff = smart_substr($post->post_excerpt, $params['length']);
+				if ($params['hellip'] ) $buff .= ' '. $params['hellip'];
+				if ( $params['append'] ) $buff .= ' '. $params['append'];
+				$out .= apply_filters('the_excerpt', $buff);
+			} else {
+				if ( $params['append'] ) $post->post_excerpt .= ' '. $params['append'];
+				$out .= apply_filters('the_excerpt', $post->post_excerpt);
+			}
+		} elseif ( isset($post->post_content) && !empty($post->post_content) ) {
+			return do_excerpt($post->post_content, $params);
+		}
+	}
+
+	if ( !$out ) return false;
+
+	if ( $out ) {
+		if ( $params['wrap'] ) {
+		    $wrap .= $out . '</'. $params['wrap'] .'>';
+		    $out = $wrap;
+		}
+		if( $params['echo'] ) echo $out;
+		else return $out;
+	}
+}
+
+/**
+ * Smarter text cutting
+ * @param $str string contenido a cortar
+ * @param string cantidad de caracteres que se mostraran
+ * @return string
+ * @author Basilio Cáceres <bcaceres@ayerviernes.com>
+ */
+function smart_substr($str,$n,$hellip=true){
+	if ( strlen($str) > $n ) {
+		$out = substr( strip_tags($str), 0, $n );
+		$out = explode(" ",$out);
+		array_pop( $out );
+		$out = implode(" ",$out);
+		if ( $hellip ) $out .= ' [&hellip;]';
+	} else {
+		$out = $str;
+	}
+	return $out;
+}
