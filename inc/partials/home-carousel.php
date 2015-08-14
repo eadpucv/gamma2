@@ -1,129 +1,63 @@
+<?php
+    $features = sitio::get_features();
+ ?>
 <!-- carrusel-index WP-->
 <div id='carrusel-index'>
   <!-- Carrousel -->
   <div data-ride="carousel" class="carousel slide" id="carousel-home">
+    <?php if ( count($features) ): ?>
     <ol class="carousel-indicators">
-      <li data-slide-to="0" data-target="#carousel-home" class="active"></li>
-      <li data-slide-to="1" data-target="#carousel-home"></li>
-      <li data-slide-to="2" data-target="#carousel-home"></li>
+        <?php $x = 0; 
+            foreach ( $features as $feature ): 
+                $class_active = ( $x == 0 ) ? ' class="active"' : ''; // si es el primer punto tendrá la clase active
+                echo '<li data-slide-to="'. $x .'" data-target="#carousel-home"'.$class_active.'></li>';
+                $x++;
+            endforeach; 
+        ?>
     </ol>
+
     <div class="carousel-inner">
       <!-- item (la clase 'car-sm' corresponde al height de visibilidad) -->
-      <div class="item active car-sm">
-        <img alt="Third slide" src="https://c1.staticflickr.com/1/81/231940814_ca6bd0139d_b.jpg">
-        <div class='pag sin-relleno'>
-          <div class='col-md-4 col-sm-6 oculto-xs'>
-              <!-- enlace -->
-              <a href='#'>
-                <div>
-                  <!-- título de noticia-->
-                  <h2><i class='icn icn-noticias'></i>Diseño gráfico organiza taller para alumnos interesados en la carrera</h2>
-                  <!-- texto de noticia -->
-                  <p>A los alumnos indicados para el taller se les permitirá buscar las opciones diferentes si presentan noticiass sobre Valparaíso de los arquitectos Mauricio Puentes y Juan Purcell en FILSA [...]</p>
-                  <!-- autor de noticia -->
-                  <span class='xs'><i class='icn icn-usuario'></i>Francesca Cambiaso</span>
-                </div>
-              </a>
-          </div>
-          <!-- móviles -->
-          <div class='oculto-lg oculto-md oculto-sm col-xs-12'>
-            <!-- enlace -->
-            <a href='#'>
-              <div>
-                <!-- título de noticia-->
-                <h5 class='sm'><i class='icn icn-noticias'></i>Diseño gráfico organiza taller para alumnos interesados en la carrera</h5>
+      <?php 
+            $x = 0;
+            foreach ($features as $feature): 
+                $class_active = ( $x == 0 ) ? 'active' : ''; //si es el primer slide, tendrá la clase active
+        ?>
+          <div class="item <?php echo $class_active ?> car-sm">
+            <?php echo get_the_post_thumbnail( $feature->ID, 'main-feature' ); ?>
+            <div class='pag sin-relleno'>
+              <div class='col-md-4 col-sm-6 oculto-xs'>
+                  <!-- enlace -->
+                  <a href="<?php echo $feature->feature_url ?>">
+                    <div>
+                      <h2><i class='icn icn-noticias'></i> <?php echo get_the_title($feature->ID) ?></h2>
+                      <?php 
+                        if ( !empty( $feature->post_excerpt ) ) {
+                            echo apply_filters( 'the_content', $feature->post_excerpt );
+                        }
+                       ?>
+                       <?php 
+                          /* No hay autor por el momento
+                          <!-- autor de noticia -->
+                          <span class='xs'><i class='icn icn-usuario'></i>Francesca Cambiaso</span>*/
+                      ?>
+                    </div>
+                  </a>
               </div>
-            </a>
-          </div><!-- fin de móvil -->
-        </div><!-- fin de pag -->
-      </div><!-- fin de item -->
-      <!-- item (la clase 'car-sm' corresponde al height de visibilidad) -->
-      <div class="item car-sm">
-        <img alt="First slide" src="http://www.ead.pucv.cl/wp-content/uploads/2014/12/IMG_3945.jpg">
-        <div class='pag sin-relleno'>
-          <div class='col-md-4 col-sm-6 oculto-xs'>
-            <!-- enlace -->
-            <a href="{{ site.baseurl }}/maquetas/post">
-              <div>
-                <!-- título de noticia-->
-                <h2><i class='icn icn-noticias'></i>Presentación libros Triángulo de Pascal y Estructura Esencial</h2>
-                <!-- texto de noticia -->
-                <p>En un encuentro entre arquitectura, matemática y poesía se llevó a cabo la presentación de los libros de Isabel Margarita Reyes y Miguel Eyquem, ambos arquitectos y académicos [...]</p>
-                <!-- autor de noticia -->
-                <span class='xs'><i class='icn icn-usuario'></i>Francesca Cambiaso</span>
-              </div>
-            </a>
-          </div>
-          <!-- móviles -->
-          <div class='oculto-lg oculto-md oculto-sm col-xs-12'>
-            <!-- enlace -->
-            <a href='#'>
-            <div>
-              <!-- título de noticia-->
-              <h5 class='sm'><i class='icn icn-noticias'></i>Presentación libros Triángulo de Pascal y Estructura Esencial</h5>
-            </div>
-            </a>
-          </div><!-- fin de móvil -->
-        </div><!-- fin de pag -->
-      </div><!-- fin de item -->
-      <!-- item (la clase 'car-sm' corresponde al height de visibilidad) -->
-      <div class="item car-sm">
-        <img alt="Second slide" src="http://www.ead.pucv.cl/wp-content/uploads/2012/02/Vodudahue-1b.jpg">
-        <div class='pag sin-relleno'>
-          <div class='col-md-4 col-sm-6 oculto-xs'>
-            <!-- enlace -->
-            <a href='#'>
-              <div>
-                <!-- título de noticia-->
-                <h2><i class='icn icn-noticias'></i>Proyectos de Diseño Gráfico participan en feria de fondos concursables DAE</h2>
-                <!-- texto de noticia -->
-                <p>La Escuela de Arquitectura y Diseño estuvo presente en la actividad mediante dos proyectos que se adjudicaron el fondo extraordinario Ideas y Manos para Valparaíso [...]</p>
-                <!-- autor de noticia -->
-                <span class='xs'><i class='icn icn-usuario'></i>e[ad]</span>
-              </div>
-            </a>
-          </div>
-          <!-- móviles -->
-          <div class='oculto-lg oculto-md oculto-sm col-xs-12'>
-            <!-- enlace -->
-            <a href='#'>
-            <div>
-              <!-- título de noticia-->
-              <h5 class='sm'><i class='icn icn-noticias'></i>Proyectos de Diseño Gráfico participan en feria de fondos concursables DAE</h5>
-            </div>
-            </a>
-          </div><!-- fin de móvil -->
-        </div><!-- fin de pag -->
-      </div><!-- fin de item -->
-      <!-- item (la clase 'car-sm' corresponde al height de visibilidad) -->
-      <div class="item car-sm">
-        <img alt="Third slide" src="http://www.ead.pucv.cl/wp-content/uploads/2014/11/PERSPECTIVA-RENDER-2.jpg">
-        <div class='pag sin-relleno'>
-          <div class='col-md-4 col-sm-6 oculto-xs'>
-            <!-- enlace -->
-            <a href='#'>
-              <div>
-                <!-- título de noticia-->
-                <h2><i class='icn icn-noticias'></i>Diseño gráfico organiza taller para alumnos interesados en la carrera</h2>
-                <!-- texto de noticia -->
-                <p>A los alumnos indicados para el taller se les permitirá buscar las opciones diferentes si presentan noticiass sobre Valparaíso de los arquitectos Mauricio Puentes y Juan Purcell en FILSA [...]</p>
-                <!-- autor de noticia -->
-                <span class='xs'><i class='icn icn-usuario'></i>Francesca Cambiaso</span>
-              </div>
-            </a>
-          </div>
-          <!-- móviles -->
-          <div class='oculto-lg oculto-md oculto-sm col-xs-12'>
-            <!-- enlace -->
-            <a href='#'>
-              <div>
-                <!-- título de noticia-->
-                <h5 class='sm'><i class='icn icn-noticias'></i>Diseño gráfico organiza taller para alumnos interesados en la carrera</h5>
-              </div>
-            </a>
-          </div><!-- fin de móvil -->
-        </div><!-- fin de pag -->
-      </div><!-- fin de item -->
+              <!-- móviles -->
+              <div class='oculto-lg oculto-md oculto-sm col-xs-12'>
+                <!-- enlace -->
+                <a href="<?php echo $feature->feature_url ?>">
+                  <div>
+                    <!-- título de noticia-->
+                    <h5 class='sm'><i class='icn icn-noticias'></i> <?php echo get_the_title($feature->ID) ?></h5>
+                  </div>
+                </a>
+              </div><!-- fin de móvil -->
+            </div><!-- fin de pag -->
+          </div><!-- fin de item -->
+
+        <?php $x++; endforeach; ?>
     </div> <!-- fin de carousel inner -->
         <!-- botones adelante y atrás -->
         <a data-slide="prev" data-target='#carousel-home' href="#carousel-2" class="left carousel-control">
@@ -133,4 +67,5 @@
           <span class="icn icn-nav"></span>
         </a>
   </div>
+  <?php endif; ?>
 </div><!-- fin de carrusel-index -->

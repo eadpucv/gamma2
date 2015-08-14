@@ -82,7 +82,7 @@ class WP_Widget_events extends WP_Widget {
     function widget($args, $instance) {
         extract($instance);
         extract($args);
-        $num_events ( !empty( $events ) ) ? $events : 4;
+        $num_events = ( !empty( $events ) ) ? $events : 4;
         $event_list = sitio::get_events($num_events);
         $the_title = (!empty( $title )) ? $title : 'Eventos';
 
@@ -106,6 +106,9 @@ class WP_Widget_events extends WP_Widget {
                         $the_excerpt = ( !empty( $event->post_excerpt ) ) ? apply_filters( 'the_content', $event->post_excerpt ) : do_excerpt( $event->post_content );
                         echo '<p class="xs">'.$the_excerpt.' <a class="" href="'.get_permalink($event->iD).'">[<i class="icn icn-lentes"></i>]</a></p>';
                     echo '</div>';
+                echo '</div>';
+            echo '</div>';
+
             endforeach;
                 echo '</div>';
               echo '</div>';
@@ -133,8 +136,8 @@ class WP_Widget_news extends WP_Widget {
     function widget($args, $instance) {
         extract($instance);
         extract($args);
-        $num ( !empty( $num_posts ) ) ? $num_posts : 4;
-        $post_list = sitio::get_posts_by_category($category,$num_events);
+        $num = ( !empty( $num_posts ) ) ? $num_posts : 4;
+        $post_list = sitio::get_posts_by_category($category,$num);
         $the_title = (!empty( $title )) ? $title : 'Entradas';
 
         if (!empty($post_list)):
@@ -143,7 +146,7 @@ class WP_Widget_news extends WP_Widget {
                 foreach ($post_list as $entry):
                     if ($x == 0) { echo '<div class="fila">'; }
                     $x++;
-                    if ($x == 4) { echo '</div><div class="fila">'; $x = 0; }
+                    if ($x == 4) { echo '</div><div class="fila">'; $x = 1; }
                         echo '<div class="col-md-4 col-sm-6 col-xs-12 noticia">';
                             if ( has_post_thumbnail( $entry->ID ) ):
                                 echo '<div class="cabecera">';
@@ -154,7 +157,7 @@ class WP_Widget_news extends WP_Widget {
                             endif;
                             //<!-- Título, fecha de publicación, reseña de noticia -->
                             echo '<h4 class="xs sin-margen"><a href="'.get_permalink( $entry->ID ).'">'.get_the_title( $entry->ID ).'</a></h4>';
-                            echo '<div class="xs entry-details">Publicado el '.mysql2date('d \d\e F\, Y',$entry->event_date).'.';
+                            echo '<div class="xs entry-details">Publicado el '.mysql2date('d \d\e F\, Y',$entry->post_date).'.';
                                 // echo '<a data-toggle="tooltip" href="#" title="Editar" class="xs sin-margen" href="#">';
                                 //     echo '<span class="icn-stack">';
                                 //         echo '<span class="icn icn-cuadrolleno icn-stack-2x"></span>';
@@ -200,8 +203,8 @@ class WP_Widget_posts extends WP_Widget {
     function widget($args, $instance) {
         extract($instance);
         extract($args);
-        $num ( !empty( $num_posts ) ) ? $num_posts : 6;
-        $post_list = sitio::get_posts_by_category(null,$num_events);
+        $num = ( !empty( $num_posts ) ) ? $num_posts : 6;
+        $post_list = sitio::get_posts_by_category(null,$num_posts);
         $the_title = (!empty( $title )) ? $title : 'Publicaciones';
 
         if ( !empty( $post_list ) ):
@@ -210,15 +213,16 @@ class WP_Widget_posts extends WP_Widget {
               echo '<div class="fila">';
                 foreach ( $post_list as $the_post ):
                     $categories = wp_get_post_categories( $the_post->ID );
+                    $the_category = get_category($categories[0]);
                     echo '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 publicacion">';
                     if ( count( $categories ) ):
-                          echo '<a class="categoria" href="'.get_category_link($categories[0]->term_id).'">';
-                            echo '<i class="icn icn-archivo"></i><h6 class="xs">'.$categories[0]->name.'</h6>';
+                          echo '<a class="categoria" href="'.get_category_link($the_category->term_id).'">';
+                            echo '<i class="icn icn-archivo"></i><h6 class="xs">'.$the_category->name.'</h6>';
                           echo '</a>';
                     endif;
                       echo '<div class="alto-xs auto margen-inf-sm tooltip-demo">';
                         echo '<h5 class="xs sin-margen relleno-inf-xs"><a href="'.get_permalink($the_post->ID).'">'.get_the_title($the_post->ID).'</a></h5>';
-                        echo '<span class="xs entry-details">Publicado el '.mysql2date('d \d\e F\, Y',$the_post->event_date).'.</span>';
+                        echo '<span class="xs entry-details">Publicado el '.mysql2date('d \d\e F\, Y',$the_post->post_date).'.</span>';
                           /*<!--ícono de Tooltip -->
                           <a data-toggle="tooltip" href="#" title="Editar" class="xs en-linea sin-margen" href="#">
                           <span><i class="icn icn-lapiz icn-sm"></i></span>
@@ -262,11 +266,12 @@ class WP_Widget_school_links extends WP_Widget {
                 echo '<div class="carousel-inner">';
                 for ( $i = 0; $i < $num; $i++ ) {
                       //<!-- item (la clase "car-xs" corresponde al height de visibilidad) -->
-                        $current_title = $link_title[$x];
-                        $current_content = $link_content[$x];
-                        $current_image = wp_get_attachment_image( $attachment_id[$x], 'landscape-medium', array( 'class' => 'ocultar-desborde ancho-completo') );
-                        $current_pages = ${"pages_".$x};
-                      echo '<div class="item active car-xs escuela-y-enlaces">';
+                        $current_title = $link_title[$i];
+                        $current_content = $link_content[$i];
+                        $current_image = wp_get_attachment_image( $attachment_id[$i], 'landscape-medium', 0, array( 'class' => 'ocultar-desborde ancho-completo') );
+                        $current_pages = ${"pages_".$i};
+                        $class_active = ( $i == 0 ) ? ' active' : '';
+                      echo '<div class="item'.$class_active.' car-xs escuela-y-enlaces">';
                         echo '<div class="pag sin-relleno">';
                           echo '<div class="fila">';
                             echo '<div class="col-md-4 col-sm-12 oculto-xs">';
@@ -288,6 +293,13 @@ class WP_Widget_school_links extends WP_Widget {
                       echo '</div>';
               }
                 echo '</div>';
+                //<!-- botones adelante y atrás -->
+                echo '<a data-slide="prev" data-target="#carousel-enlaces" href="#carousel-2" class="left carousel-control">';
+                  echo '<span class="icn icn-navizquierda"></span>';
+                echo '</a>';
+                echo '<a data-slide="next" data-target="#carousel-enlaces" href="#carousel-2" class="right carousel-control">';
+                  echo '<span class="icn icn-nav"></span>';
+                echo '</a>';
               echo '</div>';
             echo '</div>';
         endif;
