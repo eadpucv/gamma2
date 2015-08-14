@@ -139,8 +139,11 @@ class WP_Widget_news extends WP_Widget {
         $num = ( !empty( $num_posts ) ) ? $num_posts : 4;
         $post_list = sitio::get_posts_by_category($category,$num);
         $the_title = (!empty( $title )) ? $title : 'Entradas';
-
+        $link_category = get_category_link( $category );
         if (!empty($post_list)):
+            echo '<h2 class="xs titulo-seccion margen-inf-md">';
+                echo '<a href="'.$link_category.'"><i class="icn icn-noticias icn-light"></i> '.$the_title.'</a>';
+            echo '</h2>';
             echo '<div class="pag sin-relleno gutter margen-sup-sm">';
                 $x = 0;
                 foreach ($post_list as $entry):
