@@ -30,7 +30,7 @@
                 echo '</div>';
                 echo '<div class="col-md-5 col-sm-12 relleno-izq-sm">';
                   echo '<div class="der-lineal-xs">';
-                    echo '<p class="xs sans sin-margen justificado">'.do_excerpt( $the_post->post_content ).'</p>';
+                    echo '<p class="xs sans sin-margen justificado">'.smart_substr( $the_post->post_content,255 ).'</p>';
                   echo '</div>';
                 echo '</div>';
                 echo '<div class="col-md-4 oculto-sm oculto-xs">';
@@ -103,7 +103,7 @@ class WP_Widget_events extends WP_Widget {
                         /*echo '<a data-toggle="tooltip" href="#" title="Editar" class="xs en-linea sin-margen" href="#">';
                           echo '<span><i class="icn icn-lapiz icn-sm"></i></span>';
                         echo '</a>';*/
-                        $the_excerpt = ( !empty( $event->post_excerpt ) ) ? apply_filters( 'the_content', $event->post_excerpt ) : do_excerpt( $event->post_content );
+                        $the_excerpt = ( !empty( $event->post_excerpt ) ) ?  $event->post_excerpt : smart_substr( $event->post_content, 255 );
                         echo '<p class="xs">'.$the_excerpt.' <a class="" href="'.get_permalink($event->iD).'">[<i class="icn icn-lentes"></i>]</a></p>';
                     echo '</div>';
                 echo '</div>';
@@ -165,7 +165,7 @@ class WP_Widget_news extends WP_Widget {
                                 //     echo '</span>';
                                 // echo '</a>';
                             echo '</div>';
-                            $the_excerpt = ( !empty( $entry->post_excerpt ) ) ? $entry->post_excerpt : do_excerpt( $entry->post_content );
+                            $the_excerpt = ( !empty( $entry->post_excerpt ) ) ? $entry->post_excerpt : smart_substr( $entry->post_content, 255 );
                             echo '<p class="xs">'.$the_excerpt.' <a href="'.get_permalink($entry->ID).'">[<i class="icn icn-lentes"></i>]</a></p>';
                         echo '</div>';
                 endforeach;
@@ -227,7 +227,7 @@ class WP_Widget_posts extends WP_Widget {
                           <a data-toggle="tooltip" href="#" title="Editar" class="xs en-linea sin-margen" href="#">
                           <span><i class="icn icn-lapiz icn-sm"></i></span>
                           </a>*/
-                        $the_excerpt = ( !empty( $the_post->post_excerpt ) ) ? $the_post->post_excerpt : do_excerpt( $the_post->post_content );
+                        $the_excerpt = ( !empty( $the_post->post_excerpt ) ) ? $the_post->post_excerpt : smart_substr( $the_post->post_content, 255 );
                         echo '<p class="xs margen-sup-xs">'.$the_excerpt.' <a class=" href="'.get_permalink( $the_post->ID ).'">[<i class="icn icn-lentes"></i>]</a></p>';
                       echo '</div>';
                     echo '</div>';
