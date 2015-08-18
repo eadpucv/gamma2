@@ -31,7 +31,7 @@ define('MULTILINGUAL', function_exists( 'qtrans_use' ));
 	//include TEMPLATEPATH . '/inc/helpers.php';
 	// include TEMPLATEPATH . '/inc/modules.php';
 	//include TEMPLATEPATH . '/inc/metaboxes.php';
-	// include TEMPLATEPATH . '/inc/walkers.php';
+	include TEMPLATEPATH . '/inc/walkers.php';
 	// include TEMPLATEPATH . '/inc/modules-helpers.php';
 	// include TEMPLATEPATH . '/inc/mail-share.php';
 	//include TEMPLATEPATH . '/inc/shortcodes.php';
@@ -129,7 +129,7 @@ class site {
 		add_action( 'after_setup_theme', array($this, 'setup_theme') );
 		add_action( 'wp_enqueue_scripts', array($this, 'enqueue_styles') );
 		add_action( 'wp_enqueue_scripts', array($this, 'enqueue_scripts') );
-		add_action( 'admin_enqueue_scripts', array($this, 'enqueue_scripts') );
+		add_action( 'enqueue_scripts', array($this, 'enqueue_scripts') );
 		add_action( 'admin_enqueue_scripts', array($this, 'admin_enqueue_scripts') );
 		add_action('init', array($this, 'init_functions') );
 		add_action('init', array($this,'register_menus_locations') );

@@ -28,11 +28,18 @@
     $('#parallax-historia, .foto-1, .foto-2, .foto-3, .foto-4').parallax("100%", 0.1, true);
     $('#lala, .foto-5, .foto-6, .foto-7').parallax("100%", 0.1, true);
     $('#lolo, .foto-8, .foto-9, .foto-10').parallax("0%", 0.1, true);
-
+    // $('menu-menu-principal').find('a').delegate('click',function(ev){
+    //     var obj = $(this);
+    //     if ( obj.hasClass('dropdown-toggle') ) {
+    //         obj.next('.dropdown-menu').
+    //     }
+    // });
     $('a[href*=#]').click(function() {
         if ( location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname ) {
             var $target = $(this.hash);
+            console.log($target);
             $target = $target.length && $target || $('[name=' + this.hash.slice(1) +']');
+
             if ($target.length) {
                 var targetOffset = $target.offset().top;
                 $('html,body').animate({scrollTop: targetOffset}, 750);
@@ -59,8 +66,8 @@
     $('.titulo-post').sticky({topSpacing:0, bottomSpacing:limit_bottom});
 
     $('a[href=#topbar]').click(function(){
-    $('html, body').animate({scrollTop:0}, 'slow');
-    return false;
+        $('html, body').animate({scrollTop:0}, 'slow');
+        return false;
     });
 
     $(".go-top").goTop();
