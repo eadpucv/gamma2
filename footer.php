@@ -1,3 +1,7 @@
+<?php 
+    global $_set;
+    $settings = $_set->settings;
+ ?>
 <footer class='fondo-negro'> 
   <div class='fondo-negro-fundido'>
   <div class='pag'>
@@ -14,39 +18,49 @@
         <p class='xs fino sans gris relleno-inf-xs sin-margen relleno-inf-sm'>e[ad] de la Escuela de Arquitectura y Diseño PUCV está licenciado bajo <a href='#' class='sans blanco'>Creative Commons Atribución-No Comercial-Licenciar Igual 2.0 Chile License</a>.</p>
       </div>
       <div class='col-md-4 col-sm-3 col-xs-12'>
-        <a class='en-linea derecha responsive-izquierda' href='#'>
-         <span class="icn-stack">
-          <span class="icn icn-cuadrolleno icn-stack-2x"></span>
-          <span class="icn icn-facebook icn-stack-1x blanco"></span>
-        </span>
-        </a>
-        <a class='en-linea derecha responsive-izquierda' href='#'>
-        <span class="icn-stack">
-          <span class="icn icn-cuadrolleno icn-stack-2x"></span>
-          <span class="icn icn-twitter icn-stack-1x blanco"></span>
-        </span>
-        </a>
-        <a class='en-linea derecha responsive-izquierda' href='#'>
-        <span class="icn-stack">
-          <span class="icn icn-cuadrolleno icn-stack-2x"></span>
-          <span class="icn icn-flickr icn-stack-1x blanco"></span>
-        </span>
-        </a>
-        <a class='en-linea derecha responsive-izquierda' href='#'>
-        <span class="icn-stack">
-          <span class="icn icn-cuadrolleno icn-stack-2x"></span>
-          <span class="icn icn-soundcloud icn-stack-1x blanco"></span>
-        </span>
-        </a>
-        <a class='en-linea derecha responsive-izquierda' href='#'>
-        <span class="icn-stack">
-          <span class="icn icn-cuadrolleno icn-stack-2x"></span>
-          <span class="icn icn-vimeo icn-stack-1x blanco"></span>
-        </span>
-        </a>
+      <?php if ( !empty($settings['facebook_url'] ) ): ?>
+            <a class="en-linea derecha responsive-izquierda" href="<?php echo $settings['facebook_url'] ?>">
+             <span class="icn-stack">
+              <span class="icn icn-cuadrolleno icn-stack-2x"></span>
+              <span class="icn icn-facebook icn-stack-1x blanco"></span>
+            </span>
+            </a>
+        <?php endif; ?>
+        <?php if ( !empty($settings['twitter_username'] ) ): ?>
+            <a class='en-linea derecha responsive-izquierda' href="https://twitter.com/<?php echo str_replace('@','',$settings['twitter_username']) ?>">
+            <span class="icn-stack">
+              <span class="icn icn-cuadrolleno icn-stack-2x"></span>
+              <span class="icn icn-twitter icn-stack-1x blanco"></span>
+            </span>
+            </a>
+        <?php endif; ?>
+        <?php if ( !empty($settings['flickr_url'] ) ): ?>
+            <a class='en-linea derecha responsive-izquierda' href="<?php echo $settings['flickr_url'] ?>">
+            <span class="icn-stack">
+              <span class="icn icn-cuadrolleno icn-stack-2x"></span>
+              <span class="icn icn-flickr icn-stack-1x blanco"></span>
+            </span>
+            </a>
+        <?php endif; ?>
+        <?php if ( !empty($settings['soundcloud_url'] ) ): ?>
+            <a class='en-linea derecha responsive-izquierda' href="<?php echo $settings['soundcloud_url'] ?>">
+            <span class="icn-stack">
+              <span class="icn icn-cuadrolleno icn-stack-2x"></span>
+              <span class="icn icn-soundcloud icn-stack-1x blanco"></span>
+            </span>
+            </a>
+        <?php endif; ?>
+        <?php if ( !empty($settings['vimeo_username'] ) ): ?>
+            <a class='en-linea derecha responsive-izquierda' href="https://vimeo.com/<?php echo $settings['vimeo_username'] ?>">
+            <span class="icn-stack">
+              <span class="icn icn-cuadrolleno icn-stack-2x"></span>
+              <span class="icn icn-vimeo icn-stack-1x blanco"></span>
+            </span>
+            </a>
+        <?php endif; ?>
         <p class='relleno-sup texto-derecha bloque derecha responsive-izquierda ancho-completo italica bloque xs fino serif blanco sin-margen'>Diseñado con librería digital de estilos</p>
         <div class='logo-pyxis ancho-completo margen-sup-xs'>
-        <a class='sin-relleno bloque derecha responsive-izquierda texto-derecha' href='{{ site.baseurl }}/'>
+        <a class='sin-relleno bloque derecha responsive-izquierda texto-derecha' href="http://eadpucv.github.io/pyxis/">
           <h6 class='gruesa sans rojo sin-margen relleno-izq-xs relleno-inf-xs no-responsivo'>
             <img class='margen-der-xs' src='<?php bloginfo('template_directory') ?>/img/pyxis-logo-sm.png'>Pyxis<span class='fino blanco sans relleno-izq-xs'>framework</span>
           </h6>
