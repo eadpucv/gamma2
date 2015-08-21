@@ -381,6 +381,43 @@ class sitio {
 		$features = new WP_Query($args);
 		return $features->posts;
 	}
+	static function get_breadcrumb() {
+		/*
+			TODO: Falta agregar mas condiciones segun el funcionamiento
+		*/
+		echo '<ul id="breadcrumb" class="sin-relleno">';
+		  echo '<li><a href="#"><i class="icn icn-hogar"></i></a></li>';
+		
+		if ( is_category() ) {
+			$term_link = get_term_link( get_queried_object()->term_id, get_query_vat('taxonomy') );
+			$link = ( !is_wp_error( $term_link ) ) ? $term_link : '#';
+			echo '<li><a href="'.$link.'">'.get_queried_object()->name.'</a></li>';
+			echo '<li><a>Portada</a></li>';
+		}
+		if ( is_single() ) {
+			global $post;
+			$categories = wp_get_post_categories( $post->ID );
+			if (!empty( $categories[0] ) {
+				$link = get_category_link( $categories[0]->term_id );
+				echo '<li><a href="'.$link.'">'.$categories[0]->name.'</a></li>';
+			}
+			if (!empty( $categories[1] ) {
+				$link = get_category_link( $categories[1]->term_id );
+				echo '<li><a href="'.$link.'">'.$categories[1]->name.'</a></li>';
+			}
+			echo '<li><a>'.get_the_title( $post->ID ).'</a></li>';
+		 }
+		 if ( is_page() ) {
+		 	global $post;
+		 	$ancestors = get_ancestors($post->ID,'page');
+		 	foreach ( $ancestors as $item_id ) {
+		 		$item = get_post($item_id);
+		 		echo '<li><a href="'.get_permalink( $item->ID ).'">'.get_the_title( $item->ID ).'</a></li>';
+		 	}
+		 	echo '<li><a>'.get_the_title( $post->ID ).'</a></li>';
+		 }
+		echo '</ul>';
+	}
 }
 
 

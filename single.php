@@ -20,12 +20,7 @@
   <div class="al-frente cf margen-especial relleno-especial">
     <div class="pag cf">
 	
-        <ul id="breadcrumb" class="sin-relleno">
-		  <li><a href="#"><i class="icn icn-hogar"></i></a></li>
-		  <li><a href="#" class="md">Actualidad</a></li>
-		  <li><a href="#">Arquitectura</a></li>
-		  <li><a>Noticias</a></li>
-		</ul> 
+        <?php sitio::get_breadcrumb(); ?>
 
        <h3 class="lg entry-title"><?php the_title(); ?></h3>
 		<aside class="entry-details">
