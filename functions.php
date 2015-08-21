@@ -397,11 +397,11 @@ class sitio {
 		if ( is_single() ) {
 			global $post;
 			$categories = wp_get_post_categories( $post->ID );
-			if (!empty( $categories[0] ) {
+			if (!empty( $categories[0] )) {
 				$link = get_category_link( $categories[0]->term_id );
 				echo '<li><a href="'.$link.'">'.$categories[0]->name.'</a></li>';
 			}
-			if (!empty( $categories[1] ) {
+			if (!empty( $categories[1] )) {
 				$link = get_category_link( $categories[1]->term_id );
 				echo '<li><a href="'.$link.'">'.$categories[1]->name.'</a></li>';
 			}
