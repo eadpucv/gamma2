@@ -1,4 +1,25 @@
  //functions
+ /*
+    String to slug
+    http://dense13.com/blog/2009/05/03/converting-string-to-slug-javascript/
+*/
+function string_to_slug(str) {
+  str = str.replace(/^\s+|\s+$/g, ''); // trim
+  str = str.toLowerCase();
+  
+  // remove accents, swap ñ for n, etc
+  var from = "àáäâèéëêìíïîòóöôùúüûñç·/_,:;";
+  var to   = "aaaaeeeeiiiioooouuuunc------";
+  for (var i=0, l=from.length ; i<l ; i++) {
+    str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
+  }
+
+  str = str.replace(/[^a-z0-9 -]/g, '') // remove invalid chars
+    .replace(/\s+/g, '-') // collapse whitespace and replace by -
+    .replace(/-+/g, '-'); // collapse dashes
+
+  return str;
+}
  (function($){
       $.fn.goTop = function(){
         $(this).click(function(){
@@ -10,6 +31,18 @@
 })(jQuery);
 
  jQuery(document).ready(function($){
+
+    $('.page-contenido').find('h4').each(function(){
+        var obj = $(this);
+        var slug = string_to_slug(obj.text());
+        obj.attr('id',slug);
+        var icon = obj.find('.icn').clone().get(0);
+        var h6 = $('<h6>').addClass('xs').append(obj.text()).append(icon);
+        var link = $('<a>').attr('href','#'+slug).append(h6);
+        var li = $('<li>').addClass("sin-estilo").append(link);
+        $('.local-nav').append(li);
+    });
+
     $('#carousel-home, #carousel-enlaces, #carousel-portada').carousel();
     //$('div#scroll-able').scrollspy({ target: '#target_nav' });
     $('.tooltip-demo').tooltip({selector: "a[data-toggle=tooltip]"});
@@ -19,7 +52,7 @@
     })
 
     $('#popover-test').popover();
-    $('body').localScroll(2000);
+    //$('body').localScroll(2000);
     //.parallax(xPosition, speedFactor, outerHeight) options:
     //xPosition - Horizontal position of the element
     //inertia - speed to move relative to vertical scroll. Example: 0.1 is one tenth the speed of scrolling, 2 is twice the speed of scrolling
@@ -34,19 +67,19 @@
     //         obj.next('.dropdown-menu').
     //     }
     // });
-    $('a[href*=#]').click(function() {
-        if ( location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname ) {
-            var $target = $(this.hash);
-            console.log($target);
-            $target = $target.length && $target || $('[name=' + this.hash.slice(1) +']');
+    // $('a[href*=#]').click(function() {
+    //     if ( location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname ) {
+    //         var $target = $(this.hash);
+    //         console.log($target);
+    //         $target = $target.length && $target || $('[name=' + this.hash.slice(1) +']');
 
-            if ($target.length) {
-                var targetOffset = $target.offset().top;
-                $('html,body').animate({scrollTop: targetOffset}, 750);
-                return false;
-            }
-        }
-    });
+    //         if ($target.length) {
+    //             var targetOffset = $target.offset().top;
+    //             $('html,body').animate({scrollTop: targetOffset}, 750);
+    //             return false;
+    //         }
+    //     }
+    // });
       //Stickies
     $("#sub-componentes").sticky({topSpacing: 0});
     $("#ejemplo-sticky").sticky({topSpacing: 50});

@@ -9,12 +9,12 @@ var lastId,
       var item = $($(this).attr("href"));
       if (item.length) { return item; }
     });
-
 // Bind click handler to menu items
 // so we can get a fancy scroll animation
-menuItems.click(function(e){
+menuItems.on('click', function(e){
+  console.log('lala');
   var href = $(this).attr("href"),
-      offsetTop = href === "#" ? 0 : $(href).offset().top-50;
+      offsetTop = $(href).offset().top-50;
   $('html, body').stop().animate({ 
       scrollTop: offsetTop
   }, 600);

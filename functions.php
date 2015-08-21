@@ -216,7 +216,6 @@ class site {
 		wp_enqueue_script( 'tooltip', THEME_JS .'/tooltip.js', array('jquery'), self::theme_ver, '' );
 		wp_enqueue_script( 'popover', THEME_JS .'/popover.js', array('jquery'), self::theme_ver, '' );
 		wp_enqueue_script( 'affix', THEME_JS .'/affix.js', array('jquery'), self::theme_ver, '' );
-		wp_enqueue_script( 'scrollspy', THEME_JS .'/scrollspy.js', array('jquery'), self::theme_ver, '' );
 		wp_enqueue_script( 'dropdown', THEME_JS .'/dropdown.js', array('jquery'), self::theme_ver, '' );
 		wp_enqueue_script( 'nav', THEME_JS .'/nav.js', array('jquery'), self::theme_ver, '' );
 		wp_enqueue_script( 'smooth-scroll', THEME_JS .'/smooth-scroll.js', array('jquery'), self::theme_ver, '' );
@@ -225,6 +224,7 @@ class site {
 		wp_enqueue_script( 'jquery.parallax-1.1.3', THEME_JS .'/jquery.parallax-1.1.3.js', array('jquery'), self::theme_ver, '' );
 		wp_enqueue_script( 'jquery.localScroll', THEME_JS .'/jquery.localScroll.js', array('jquery'), self::theme_ver, '' );
 		wp_enqueue_script( 'giornata_script', THEME_JS .'/script.js', array('jquery'), self::theme_ver, '' );
+		wp_enqueue_script( 'scrollspy', THEME_JS .'/scrollspy.js', array('giornata_script'), self::theme_ver, '' );
 
 		//attach data to script.js
 		$ajax_data = array(
@@ -396,12 +396,12 @@ class sitio {
 		}
 		if ( is_single() ) {
 			global $post;
-			$categories = wp_get_post_categories( $post->ID );
-			if (!empty( $categories[0] )) {
+			$categories = get_the_category( $post->ID );
+			if (!empty( $categories[0] ) ) {
 				$link = get_category_link( $categories[0]->term_id );
 				echo '<li><a href="'.$link.'">'.$categories[0]->name.'</a></li>';
 			}
-			if (!empty( $categories[1] )) {
+			if (!empty( $categories[1] ) ) {
 				$link = get_category_link( $categories[1]->term_id );
 				echo '<li><a href="'.$link.'">'.$categories[1]->name.'</a></li>';
 			}

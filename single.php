@@ -1,6 +1,5 @@
 <?php 
 	get_header();
-	get_post();
 	global $post;
  ?>
 <div class="ocultar-desborde relativo alto-lg">
@@ -16,7 +15,7 @@
 	endif; ?>
 </div>
 
-<div style="background: url("<?php bloginfo('template_directory') ?>/img/ruido-fondo-pyxis.png") repeat center" id="post">
+<div id="post">
   <div class="al-frente cf margen-especial relleno-especial">
     <div class="pag cf">
 	
@@ -33,17 +32,17 @@
         <div class="fila">
 	       <article class="h-entry margen-sup-xs">
 	  			<div class="e-content p-sumary p-name">
-	  				<ul class='xs sin-relleno al-frente relleno-inf-sm sin-margen oculto-xs'>
+	  				<ul class="xs sin-relleno al-frente relleno-inf-sm sin-margen oculto-xs">
 			          
 			          <?php
-			          		$post_categories = wp_get_post_categories( $post->ID );
+			          		$post_categories = get_the_category( $post->ID );
 			          		if ( count($post_categories) ) {
 			          			echo '<li class="sin-estilo sans negro-fundido semi-gruesa relleno-sup-sm sombra-cabecera-claro-xs"><i class="icn icn-marcador relleno-der-xs"></i>Archivado en: ';
 			          		}
 			          		$x = 0;
 			          		$categories_list = '';
 			          		foreach ($post_categories as $cat) {
-			          			$coma = ( count( $post_categories ) == $x ) ? ', ' : '';
+			          			$coma = ( count( $post_categories ) != $x+1 ) ? ', ' : '';
 			          			$categories_list .= '<a href="'.get_category_link( $cat->term_id ).'" class="sans semi-gruesa">'.$cat->name.'</a>'.$coma;
 			          			$x++;
 
@@ -58,15 +57,16 @@
 			          		$x = 0;
 			          		$tags_list = '';
 			          		foreach ($post_tags as $tag) {
-			          			$coma = ( count( $post_tag ) == $x ) ? ', ' : '';
+			          			$coma = ( count( $post_tags ) != $x+1 ) ? ', ' : '';
 			          			$tags_list .= '<a href="'.get_category_link( $tag->term_id ).'" class="sans semi-gruesa">'.$tag->name.'</a>'.$coma;
 			          			$x++;
 			          		}
 			          		echo $tags_list;
 			           ?> 
 			        </ul>
-
-	  				<?php the_content(); ?>
+	  				<?php 
+	  					echo apply_filters( 'the_content', $post->post_content );
+	  					?>
 	  			</div>
 	  		</article>
         </div>
