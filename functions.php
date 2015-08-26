@@ -34,7 +34,7 @@ define('MULTILINGUAL', function_exists( 'qtrans_use' ));
 	include TEMPLATEPATH . '/inc/walkers.php';
 	// include TEMPLATEPATH . '/inc/modules-helpers.php';
 	// include TEMPLATEPATH . '/inc/mail-share.php';
-	//include TEMPLATEPATH . '/inc/shortcodes.php';
+	include TEMPLATEPATH . '/inc/shortcodes.php';
 	// include TEMPLATEPATH . '/inc/ajax-tabs.php';
 /**
  * Images
@@ -57,7 +57,8 @@ add_image_size('landscape-medium', 640, 480, true);
 
 $mandatory_sidebars = array(
 	'Entrada' => 'single-right',
-	'Home' => 'sidebar-home'
+	'Home' => 'sidebar-home',
+	'Sidebar Template' => 'sidebar-template'
 );
 foreach ( $mandatory_sidebars as $sidebar => $id_sidebar ) {
 	register_sidebar( array(
@@ -191,6 +192,9 @@ class site {
 
 		// admin scripts
 		 global $pagenow;
+		 if ($pagenow == 'post.php') {
+		 	wp_enqueue_style( 'uiEstilosShortcode', '//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/flick/jquery-ui.css' );
+		 }
 		// wp_enqueue_script( 'theme_admin_scripts', THEME_JS .'/admin_scripts.js', array('jquery'), true );
 		 if ( is_admin() && (($pagenow == 'index.php' ) || ($pagenow == 'admin.php')) ) {
 		 	if ($_GET['page'] == 'ead-site-settings')
@@ -418,8 +422,179 @@ class sitio {
 		 }
 		echo '</ul>';
 	}
+	static function get_featured_category($slug) {
+		$args = array(
+			'post_type' => 'post',
+			'post_status' => 'publish',
+			'category_name' => $slug,
+			'tag' => 'destacado'
+			);
+		$entries = new WP_Query($args);
+		if ( $entries->have_posts() ) {
+			return $entries->posts;
+		} else {
+			return null;
+		}
+	}
+	static function get_icons() {
+		$icons = array(
+			'icn-abierto',
+			'icn-acto',
+			'icn-admin',
+			'icn-alarma',
+			'icn-ampolleta',
+			'icn-anuncio',
+			'icn-archivo',
+			'icn-asterisco',
+			'icn-aviso',
+			'icn-biblioteca',
+			'icn-bower',
+			'icn-calendario',
+			'icn-camara',
+			'icn-caron',
+			'icn-caronabajo',
+			'icn-caronarriba',
+			'icn-caronizquierda',
+			'icn-casiopea',
+			'icn-cerrado',
+			'icn-ciclo',
+			'icn-circulo',
+			'icn-circulolleno',
+			'icn-clip',
+			'icn-codigo',
+			'icn-compartir',
+			'icn-constel',
+			'icn-corazon',
+			'icn-cruzdelsur',
+			'icn-cuadro',
+			'icn-cuadrolleno',
+			'icn-descargar',
+			'icn-documento',
+			'icn-email',
+			'icn-engranaje',
+			'icn-enlace',
+			'icn-enlacehorizontal',
+			'icn-equis',
+			'icn-ese',
+			'icn-estorninos',
+			'icn-estrella',
+			'icn-etiqueta',
+			'icn-facebook',
+			'icn-flecha',
+			'icn-flechaabajo',
+			'icn-flechaarriba',
+			'icn-flechaizquierda',
+			'icn-flickr',
+			'icn-grafico',
+			'icn-hedera',
+			'icn-hogar',
+			'icn-imagen',
+			'icn-impresora',
+			'icn-ingresar',
+			'icn-jekyll',
+			'icn-lapiz',
+			'icn-lentes',
+			'icn-less',
+			'icn-libro',
+			'icn-lupa',
+			'icn-lupamas',
+			'icn-lupamenos',
+			'icn-mano',
+			'icn-manoabajo',
+			'icn-manoarriba',
+			'icn-manoizquierda',
+			'icn-mapa',
+			'icn-mapamas',
+			'icn-marcador',
+			'icn-mas',
+			'icn-menos',
+			'icn-menu',
+			'icn-movil',
+			'icn-nav',
+			'icn-navabajo',
+			'icn-navarriba',
+			'icn-navizquierda',
+			'icn-noticias',
+			'icn-ojo',
+			'icn-ordenhorizontal',
+			'icn-ordenvertical',
+			'icn-palabra',
+			'icn-parlante',
+			'icn-parrafo',
+			'icn-pc',
+			'icn-perfil',
+			'icn-prohibir',
+			'icn-rama',
+			'icn-refrescar',
+			'icn-reloj',
+			'icn-rss',
+			'icn-salir',
+			'icn-sitemap',
+			'icn-soundcloud',
+			'icn-stampa',
+			'icn-subir',
+			'icn-tablet',
+			'icn-tiempo',
+			'icn-trabajo',
+			'icn-travesia',
+			'icn-twitter',
+			'icn-usuario',
+			'icn-usuariomas',
+			'icn-usuariomenos',
+			'icn-usuarios',
+			'icn-vimeo',
+			'icn-vineta',
+			'icn-visto',
+			'icn-youtube'
+		);
+	return $icons;
+	}
 }
 
+class render {
+	static function carousel_portadilla($slug) {
+		$entries = sitio::get_featured_category($slug);
+		echo '<div data-ride="carousel" class="carousel slide oculto-sm oculto-xs bloque ancho-completo" id="carousel-home">';
+	  		echo '<div class="carousel-inner">';
+	  			$x = 0;
+	  			foreach ( $entries as $entry) {
+	  				$class_active = ($x == 0) ? ' active' : '';
+	  				echo '<div class="item'.$class_active.' car-xs">';
+	  					if ( has_post_thumbnail( $entry->ID ) ){
+	  						echo get_the_post_thumbnail( $entry->ID, 'main-feature', array('class' => 'ancho-completo atras fijo absoluto abs-der portadilla') );
+	  					}
+				      echo '<div class="ancho-completo alto-completo oculto-xs izquierda cf">';
+				          echo '<a href="'.get_permalink( $entry->ID ).'">';
+				            echo '<div class="fondo-gris-blanco-trans-xs alto-completo absoluto abs-inf abs-izq bloque ancho-completo margen-sup-xs-negativo relleno-xs">';
+				              echo '<div class="pag sin-relleno cf">';
+				              	echo '<div class="col-md-10 col-md-offset-1">';
+				              		//echo '<h4 class="xs semi-gruesa interletraje-sm altas rojo relleno-sup-xs centrado sans fino">Noticias</h4>';
+				              		echo '<h2 class="sm interletraje-negativo relleno-sup-xs centrado margen-sup-xs sombra-cabecera-blanco-xs gruesa negro-fundido condensado"><i class="icn icn-noticias margen-der-xs sin-interletraje"></i> '.get_the_title( $entry->ID ).'</h2>';
+				              		echo '<div class="ancho-completo bloque izquierda">';
+				              			echo '<span class="italica negro-fundido sombra-cabecera-blanco-xs relleno-sup-xs centrado relleno-inf-xs gruesa">Publicado el '. mysql2date( 'd \d\e F\, Y',$entry->post_date ) .'</span>';
+				              			$the_excerpt = ( !empty( $entry->post_excerpt ) ) ? $entry->post_excerpt : smart_substr( $entry->post_content, 255 );
+				              			echo '<p class="margen-inf-sm sans sm negro centrado sombra-cabecera-blanco-xs relleno-sup-sm oculto-sm">'.$the_excerpt.'</p>';
+				              			echo '<div class="centrado oculto-sm">';
+				              			echo '</div>';
+				            		echo '</div>';
+				            	echo '</div>';
+				              echo '</div>';
+				            echo '</div>';
+				         echo '</a>';
+				    echo '</div>';
+				    echo '</div>';
+				    $x++;
+	  			}
+	  		echo '</div>';
+		      echo '<a data-slide="prev" data-target="#carousel-home" href="#carousel-2" class="left portadilla carousel-control">';
+		        echo '<span class="icn icn-navizquierda"></span>';
+		      echo '</a>';
+		      echo '<a data-slide="next" data-target="#carousel-home" href="#carousel-2" class="right portadilla carousel-control">';
+		        echo '<span class="icn icn-nav"></span>';
+		      echo '</a>';
+  		echo '</div>';
+	}
+}
 
 // helpers
 
