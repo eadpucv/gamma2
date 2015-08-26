@@ -58,7 +58,8 @@ add_image_size('landscape-medium', 640, 480, true);
 $mandatory_sidebars = array(
 	'Entrada' => 'single-right',
 	'Home' => 'sidebar-home',
-	'Sidebar Template' => 'sidebar-template'
+	'Sidebar Template' => 'sidebar-template',
+	'Sidebar Event' => 'sidebar-event'
 );
 foreach ( $mandatory_sidebars as $sidebar => $id_sidebar ) {
 	register_sidebar( array(
@@ -385,11 +386,12 @@ class sitio {
 		$features = new WP_Query($args);
 		return $features->posts;
 	}
-	static function get_breadcrumb() {
+	static function get_breadcrumb($classes) {
 		/*
 			TODO: Falta agregar mas condiciones segun el funcionamiento
 		*/
-		echo '<ul id="breadcrumb" class="sin-relleno">';
+		$list_classes = ( !empty( $classes ) ) ? implode(' ', $classes) : 'sin-relleno';
+		echo '<ul id="breadcrumb" class="'.$list_classes.'">';
 		  echo '<li><a href="#"><i class="icn icn-hogar"></i></a></li>';
 		
 		if ( is_category() ) {
@@ -398,6 +400,10 @@ class sitio {
 			echo '<li><a href="'.$link.'">'.get_queried_object()->name.'</a></li>';
 			echo '<li><a>Portada</a></li>';
 		}
+		if ( is_singular( 'event' ) ) {
+		 	$link = get_post_type_archive_link( 'event' );
+		 	echo '<li><a href="'.$link.'">Actividades</a></li>';
+		 }
 		if ( is_single() ) {
 			global $post;
 			$categories = get_the_category( $post->ID );
