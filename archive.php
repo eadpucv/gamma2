@@ -3,7 +3,7 @@
 <div id="tag">
   <div class="pag page">
   <?php sitio::get_breadcrumb( array( 'sin-relleno','margen-inf-xs' ) ); ?>
-  <h1 class="lg entry-title especifico">Diseño gráfico</h1>
+  <h1 class="lg entry-title especifico"><?php echo sitio::archive_title(); ?></h1>
   <?php 
   $x = 0;
   echo '<div class="fila alto-md margen-sup-sm margen-inf">';	

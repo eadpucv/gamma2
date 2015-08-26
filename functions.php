@@ -442,6 +442,9 @@ class sitio {
 			return null;
 		}
 	}
+	static function archive_title() {
+		return get_queried_object()->name;
+	}
 	static function get_icons() {
 		$icons = array(
 			'icn-abierto',

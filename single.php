@@ -1,21 +1,43 @@
 <?php 
 	get_header();
+	the_post();
 	global $post;
  ?>
-<div class="ocultar-desborde relativo alto-lg">
-  <div class="absoluto ancho-completo alto-lg">
-    <div class="cf h80 absoluto abs-inf ancho-completo">
-    <div id="fondo-publicacion" class="pag sin-relleno ancho-xs">
-    </div>
-    </div>
-  </div>
-  <?php 
-  	if ( has_post_thumbnail() ):
-  		echo get_the_post_thumbnail( $post->ID , 'main-feature', array( 'class' => 'ancho-completo fijo atras mas-atras noticia') );
-	endif; ?>
+ <?php if ( has_term( 'docencia','category' ) ): ?>
+ 	<div class="alto-xs ocultar-desborde">
+	  <img class="ancho-completo" src='https://c1.staticflickr.com/1/53/162453548_31f4f8ba99_b.jpg'>
+	</div>
+	<div class="pag sin-relleno gutter">
+		<?php sitio::get_breadcrumb( array('sin-relleno', 'margen-sup-sm', 'margen-inf-xs') ); ?>
+		<h2 class="entry-title md"><?php the_title() ?></h2>
+		<span class="entry-details">Publicado el <?php echo mysql2date( 'd \d\e F \d\e\l Y', $post->post_date ); ?></span>
+	</div>
+	<div class="pag page">
+	<div class="fila margen-sup">
+		<div class='col-md-9 col-sm-9 col-xs-12'>
+			<?php the_content(); ?>
+		</div>
+		<aside id="sidebar">
+  			<div class="col-md-3 col-sm-3">
+  			<?php dynamic_sidebar( 'single-right' ); ?>
+  			</div>
+  		</aside>
+	</div>
 </div>
-
-<div id="post">
+ <?php else: ?>
+	<div class="ocultar-desborde relativo alto-lg">
+	  <div class="absoluto ancho-completo alto-lg">
+	    <div class="cf h80 absoluto abs-inf ancho-completo">
+	    <div id="fondo-publicacion" class="pag sin-relleno ancho-xs">
+	    </div>
+	    </div>
+	  </div>
+	  <?php 
+	  	if ( has_post_thumbnail() ):
+	  		echo get_the_post_thumbnail( $post->ID , 'main-feature', array( 'class' => 'ancho-completo fijo atras mas-atras noticia') );
+		endif; ?>
+	</div>
+	<div id="post">
   <div class="al-frente cf margen-especial relleno-especial">
     <div class="pag cf">
 	
@@ -166,4 +188,7 @@
     </div>
   </div>
 </div>
+<?php endif; ?>
+
+
  <?php get_footer(); ?>
