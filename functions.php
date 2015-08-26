@@ -395,7 +395,7 @@ class sitio {
 		  echo '<li><a href="#"><i class="icn icn-hogar"></i></a></li>';
 		
 		if ( is_category() ) {
-			$term_link = get_term_link( get_queried_object()->term_id, get_query_vat('taxonomy') );
+			$term_link = get_term_link( get_queried_object()->term_id, 'category' );
 			$link = ( !is_wp_error( $term_link ) ) ? $term_link : '#';
 			echo '<li><a href="'.$link.'">'.get_queried_object()->name.'</a></li>';
 			echo '<li><a>Portada</a></li>';
