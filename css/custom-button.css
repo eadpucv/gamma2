@@ -1,0 +1,19 @@
+i.mce-i-icn {
+	font: normal 20px/1 'Stampa';
+	padding: 0;
+	vertical-align: top;
+	speak: none;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	margin-left: -2px;
+	padding-right: 2px;
+}
+.stampa-icon {
+	cursor: pointer !important;
+}
+.stampa-icon .icn {
+	margin: .1rem .2rem;
+	padding: .3rem !important;
+	border: 1px solid #333 !important;
+	border-radius: 3px;
+}

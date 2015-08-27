@@ -35,6 +35,7 @@ define('MULTILINGUAL', function_exists( 'qtrans_use' ));
 	// include TEMPLATEPATH . '/inc/modules-helpers.php';
 	// include TEMPLATEPATH . '/inc/mail-share.php';
 	include TEMPLATEPATH . '/inc/shortcodes.php';
+	include TEMPLATEPATH . '/inc/editor-buttons.php';
 	// include TEMPLATEPATH . '/inc/ajax-tabs.php';
 /**
  * Images
@@ -133,6 +134,7 @@ class site {
 		add_action( 'wp_enqueue_scripts', array($this, 'enqueue_scripts') );
 		add_action( 'enqueue_scripts', array($this, 'enqueue_scripts') );
 		add_action( 'admin_enqueue_scripts', array($this, 'admin_enqueue_scripts') );
+		add_action( 'admin_enqueue_styles', array($this, 'admin_enqueue_styles') );
 		add_action('init', array($this, 'init_functions') );
 		add_action('init', array($this,'register_menus_locations') );
 
@@ -188,11 +190,14 @@ class site {
 		wp_enqueue_style( 'ead_style', get_stylesheet_uri() );
 		wp_enqueue_style( 'dashicons' );
 	}
-
+	function admin_enqueue_styles(){
+		//
+	}
 	function admin_enqueue_scripts(){
 
 		// admin scripts
 		 global $pagenow;
+		 wp_enqueue_style( 'admin-stampa', THEME_CSS.'/stampa-only.css' );
 		 if ($pagenow == 'post.php') {
 		 	wp_enqueue_style( 'uiEstilosShortcode', '//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/flick/jquery-ui.css' );
 		 }
@@ -205,6 +210,9 @@ class site {
 		 if ( is_admin() && ($pagenow == 'widgets.php' ) ) {
 		 	wp_enqueue_media();
 		 	wp_enqueue_script( 'script-admin', THEME_JS . '/admin_scripts.js', array('jquery'), THEME_VERSION );
+		 }
+		 if ( ( $pagenow == 'post.php' ) || ( $pagenow == 'post-new.php' ) ) {
+		 	wp_enqueue_media();
 		 }
 		// if ($pagenow == 'nav-menus.php' || $pagenow == 'edit-tags.php') {
 		// 	wp_enqueue_media();
@@ -386,7 +394,7 @@ class sitio {
 		$features = new WP_Query($args);
 		return $features->posts;
 	}
-	static function get_breadcrumb($classes) {
+	static function get_breadcrumb($classes = null) {
 		/*
 			TODO: Falta agregar mas condiciones segun el funcionamiento
 		*/

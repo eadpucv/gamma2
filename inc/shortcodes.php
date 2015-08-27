@@ -92,66 +92,115 @@ class getCategoryPosts extends \GutenPress\Model\Shortcode{
 }
 \GutenPress\Model\ShortcodeFactory::create('getCategoryPosts');
 
-class TitleWithIcon extends \GutenPress\Model\Shortcode{
+class TitleParallax extends \GutenPress\Model\Shortcode{
 	public function setTag(){
-		$this->tag = 'titulo-icono';
+		$this->tag = 'titulo-parallax';
 	}
 	public function setFriendlyName(){
-		$this->friendly_name = 'Título con icono';
+		$this->friendly_name = 'Título con parallax';
 	}
 	public function setDescription(){
-		$this->description = 'Permite insertar un título acompañado de un ícono';
+		$this->description = 'Permite insertar un título acompañado de una imagen de fondo con efecto parallax';
 	}
 
 	public function display($atts, $content){
-		$icon = $atts['icon'];
-		$title = ( !empty( $atts['title'] ) ) ? $atts['title'] : 'h3';
-		$out = '<'.$title.'>';
-		if ( !empty( $icon ) ) {
-			$out .= '<i class="icn '.$icon.'"></i>';
-		}
-		$out .= ' '.$content;
-		$out .= '</'.$title.'>';
+		$image = $atts['img'];
+		$title = $atts['title'];
+		$subtitle = $atts['subtitle'];
+		$image_style = ( !empty( $image ) ) ? ' style="background: url('.current( wp_get_attachment_image_src( $atts['img'], 'full' ) ).') no-repeat fixed 100% 0%; height: 46vw;"' : '';
+		$out = '<div id="parallax-'.sanitize_title_with_dashes( remove_accents( $title ) ).'" class="relativo oculto-xs"'.$image_style.'>';
+			if ( !empty( $title ) ) {
+				$out .= '<h1 class="lg entry-title">'.$title.'</h1>';
+			}
+			if ( !empty( $subtitle ) ) {
+				$out .= '<h4 class="xs subtitulo">'.$subtitle.'</h4>';
+			}
+		$out .= '</div>';
 		
        	return $out;
 	}
-	public function iconSelect(){
-		$icons = sitio::get_icons();
-		$icons_select[] = 'Seleccionar icono';
-		foreach ($icons as $icon){
-			$icons_select[$icon] = $icon;
-		}
-		return $icons_select;
-	}
 	public function configForm(){
+		wp_enqueue_media();
 		$form = new Forms\MetaboxForm('requisitos-shortcode');
 		$form->addElement(
-				new Element\Select(
-					'Seleccionar icono',
-					'icon',
-					$this->iconSelect()
-				) )->addElement(
-				new Element\Select(
-					'Tipo de título',
-					'title',
+				new Element\WPImage(
+					'Imagen',
+					'img',
 					array(
-						'h1' => 'Título H1',
-						'h2' => 'Título H2',
-						'h3' => 'Título H3',
-						'h4' => 'Título H4',
-						'h5' => 'Título H5',
-						'h6' => 'Título H6',
-						),
-					array(
-						'style' => 'font-family: "Stampa";'
 						)
 				) )->addElement(
-				new Element\Textarea(
-					'Contenido',
-					'content'
+				new Element\InputText(
+					'Título',
+					'title'
+				) )->addElement(
+				new Element\InputText(
+					'Sub Título',
+					'subtitle'
 				) );
 		echo $form;
 		exit;
 	}
 }
-\GutenPress\Model\ShortcodeFactory::create('TitleWithIcon');
+\GutenPress\Model\ShortcodeFactory::create('TitleParallax');
+
+class CiteParallax extends \GutenPress\Model\Shortcode{
+	public function setTag(){
+		$this->tag = 'cita-parallax';
+	}
+	public function setFriendlyName(){
+		$this->friendly_name = 'Cita con parallax';
+	}
+	public function setDescription(){
+		$this->description = 'Permite insertar una cita acompañada de una imagen de fondo con efecto parallax';
+	}
+
+	public function display($atts, $content){
+		$image = $atts['img'];
+		$cite = $atts['cite'];
+		$firma = $atts['firma'];
+		$image_style = ( !empty( $image ) ) ? ' style="background: url('.current( wp_get_attachment_image_src( $atts['img'], 'full' ) ).') no-repeat fixed 100% 0%; height: 46vw;"' : '';
+		$out = '<div id="parallax-'.sanitize_title_with_dashes( remove_accents( $title ) ).'" class="relativo oculto-xs"'.$image_style.'>';
+			if ( !empty( $title ) ) {
+				$out .= '<h1 class="lg entry-title">'.$title.'</h1>';
+			}
+			if ( !empty( $subtitle ) ) {
+				$out .= '<h4 class="xs subtitulo">'.$subtitle.'</h4>';
+			}
+		$out .= '</div>';
+		
+       	return $out;
+	}
+	public function configForm(){
+		wp_enqueue_media();
+		$form = new Forms\MetaboxForm('requisitos-shortcode');
+		$form->addElement(
+				new Element\WPImage(
+					'Imagen',
+					'img',
+					array(
+						)
+				) )->addElement(
+				new Element\Textarea(
+					'Cita',
+					'cite'
+				) )->addElement(
+				new Element\InputText(
+					'Firma',
+					'firma'
+				) )->addElement(
+				new Element\Select(
+					'Estilo',
+					'style',
+					array(
+						'' => 'Seleccione un estilo',
+						'1' => 'Cita derecha + firma Izquierda',
+						'2' => 'Cita izquierda + firma Derecha',
+						'3' => 'Cita + firma a la Derecha',
+						'4' => 'Cita + firma a la Izquierda',
+						)
+				) );
+		echo $form;
+		exit;
+	}
+}
+\GutenPress\Model\ShortcodeFactory::create('CiteParallax');
