@@ -108,7 +108,7 @@ class TitleParallax extends \GutenPress\Model\Shortcode{
 		$title = $atts['title'];
 		$subtitle = $atts['subtitle'];
 		$image_style = ( !empty( $image ) ) ? ' style="background: url('.current( wp_get_attachment_image_src( $atts['img'], 'full' ) ).') no-repeat fixed 100% 0%; height: 46vw;"' : '';
-		$out = '<div id="parallax-'.sanitize_title_with_dashes( remove_accents( $title ) ).'" class="relativo oculto-xs"'.$image_style.'>';
+		$out = '<div id="parallax-'.sanitize_title_with_dashes( remove_accents( $title ) ).'" class="parallax-image relativo oculto-xs"'.$image_style.'>';
 			if ( !empty( $title ) ) {
 				$out .= '<h1 class="lg entry-title">'.$title.'</h1>';
 			}
@@ -156,16 +156,40 @@ class CiteParallax extends \GutenPress\Model\Shortcode{
 
 	public function display($atts, $content){
 		$image = $atts['img'];
-		$cite = $atts['cite'];
-		$firma = $atts['firma'];
+		$cite = $content;
+		$firma = $atts['ref'];
+		$style = $atts['style'];
+
 		$image_style = ( !empty( $image ) ) ? ' style="background: url('.current( wp_get_attachment_image_src( $atts['img'], 'full' ) ).') no-repeat fixed 100% 0%; height: 46vw;"' : '';
-		$out = '<div id="parallax-'.sanitize_title_with_dashes( remove_accents( $title ) ).'" class="relativo oculto-xs"'.$image_style.'>';
-			if ( !empty( $title ) ) {
-				$out .= '<h1 class="lg entry-title">'.$title.'</h1>';
-			}
-			if ( !empty( $subtitle ) ) {
-				$out .= '<h4 class="xs subtitulo">'.$subtitle.'</h4>';
-			}
+		switch ($style) {
+			case 1:
+				$cite_classes = array('wp-caption-text', 'sin-borde',  'derecha oculto-sm');
+				$ref_classes = array('sm', 'wp-caption-text', 'sin-borde', 'referencia');
+			break;
+			case 2:
+				$cite_classes = array('wp-caption-text', 'sin-borde oculto-sm');
+				$ref_classes = array('sm', 'wp-caption-text', 'sin-borde', 'referencia', 'derecha');
+			break;
+			case 3:
+				$cite_classes = array('wp-caption-text', 'sin-borde', 'derecha', 'oculto-sm');
+				$ref_classes = array('sm', 'wp-caption-text', 'sin-borde', 'referencia', 'oculto-sm');
+			break;
+			case 4:
+				$cite_classes = array('wp-caption-text', 'sin-borde', 'oculto-sm');
+				$ref_classes = array('sm', 'wp-caption-text', 'sin-borde', 'referencia', 'oculto-sm');
+			break;
+		}
+		$out = '<div id="parallax-'.sanitize_title_with_dashes( remove_accents( $ref ) ).'" class="parallax-image relativo oculto-xs"'.$image_style.'>';
+			$out .= '<div class="pag">';
+				$out .= '<span class="'.implode(' ',$cite_classes).'">'.$cite;
+				if ( ( $style == 1) || ( $style == 2 ) ) {
+					$out .= '</span>';
+				}
+				$out .= '<span class="'.implode(' ',$ref_classes).'">'.$firma.'</span>';
+				if ( ( $style == 3 ) || ( $style == 4 ) ) {
+					$out .= '</span>';	
+				}
+			$out .= '</div>';
 		$out .= '</div>';
 		
        	return $out;
@@ -182,11 +206,14 @@ class CiteParallax extends \GutenPress\Model\Shortcode{
 				) )->addElement(
 				new Element\Textarea(
 					'Cita',
-					'cite'
+					'content',
+					array(
+						'id' => 'gutenpress-shortcode-content'
+						)
 				) )->addElement(
 				new Element\InputText(
-					'Firma',
-					'firma'
+					'Referencia',
+					'ref'
 				) )->addElement(
 				new Element\Select(
 					'Estilo',

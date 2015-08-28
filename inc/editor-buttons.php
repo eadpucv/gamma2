@@ -22,6 +22,7 @@ class CustomButtons {
 		*/
 		add_shortcode( 'icn', array( $this, 'stampa_icon_shortcode' ) );
 		add_shortcode( 'titulo', array( $this, 'stampa_icon_title_shortcode' ) );
+		add_shortcode( 'contenido-parallax', array( $this, 'contenido_parallax' ) );
 	}
 	public function add_tinymce_button() {
 		global $typenow;
@@ -63,6 +64,14 @@ class CustomButtons {
 	    ), $atts );
 	    $out = '<'.$a['h'].'><i class="icn '.$a['icono'].'"></i> '.$content.' </'.$a['h'].'>';
 	    return $out;
+	}
+	public function contenido_parallax( $atts, $content = null) {
+		$out = '<div class="fondo-blanco">';
+			$out .= '<div class="pag">';
+				$out .= $content;
+			$out .= '</div>';
+		$out .= '</div>';
+		return $out;
 	}
 }
 
