@@ -194,6 +194,81 @@ class WP_Widget_news extends WP_Widget {
         echo '</p>';
     } 
 }
+class WP_Widget_news_thumb extends WP_Widget {
+    /** constructor */
+    function WP_Widget_news_thumb() {
+        $widget_ops = array('classname' => 'widget-news-thumb', 'description' => 'Muestra un listado de entradas de una categoría con su imagen destacada');
+        $control_ops = array();
+        $this->WP_Widget('widget-news-thumb', 'Entradas por categoría con imagen', $widget_ops, $control_ops);
+    }
+
+    function widget($args, $instance) {
+        extract($instance);
+        extract($args);
+        $num = ( !empty( $num_posts ) ) ? $num_posts : 4;
+        $post_list = sitio::get_posts_by_category($category,$num);
+        $the_title = (!empty( $title )) ? $title : 'Entradas';
+        $link_category = get_category_link( $category );
+        if (!empty($post_list)):
+            echo '<h6 class="xs seccion margen-sup">'.$the_title.'</h6>';
+            echo '<ul class="xs sin-relleno">';
+                $x = 0;
+                foreach ($post_list as $entry):
+                    echo '<li class="sin-estilo">';
+                        if ( has_post_thumbnail( $entry->ID ) ):
+                            echo '<a href="'.get_permalink( $entry->ID ).'">';
+                                echo get_the_post_thumbnail( $entry->ID, 'entry-img' );
+                            echo '</a>';
+                        endif;
+                        //<!-- Título, fecha de publicación, reseña de noticia -->
+                        echo '<h5 class="xs"><a href="'.get_permalink( $entry->ID ).'">'.get_the_title( $entry->ID ).'</a></h5>';
+                        
+                        echo '</li>';
+                endforeach;
+            echo '</ul>';
+        endif;
+    }
+
+    function update($new_instance, $old_instance) {
+        return $new_instance;
+    }
+    function form($instance) {
+        extract( $instance );
+        echo '<p><label for="'.$this->get_field_id('title').'">Titulo: <input type="text" name="'. $this->get_field_name('title') .'" id="'.$this->get_field_id('title').'" value="'.$instance['title'].'" class="widefat" /></label></p>';
+        echo '<p><label for="'.$this->get_field_id('num_posts').'">Entradas a mostrar: <input type="text" name="'. $this->get_field_name('num_posts') .'" id="'.$this->get_field_id('num_posts').'" value="'.$instance['num_posts'].'" class="widefat" /></label></p>';
+        echo '<p><label>Categoría</label>';
+        wp_dropdown_categories(array(
+                'selected' => $category,
+                'value_field' => 'slug',
+                'name' => $this->get_field_name('category'),
+                'class' => 'widefat'
+            ));
+        echo '</p>';
+    } 
+}
+
+class WP_Widget_twitter extends WP_Widget {
+    /** constructor */
+    function WP_Widget_twitter() {
+        $widget_ops = array('classname' => 'widget-twitter', 'description' => 'Muestra un timeline de twitter de la escuela, no se puede cambiar');
+        $control_ops = array();
+        $this->WP_Widget('widget-twitter', 'Timeline de Twitter e[ad]', $widget_ops, $control_ops);
+    }
+
+    function widget($args, $instance) {
+        echo '<h6 class="xs seccion margen-sup"><i class="icn icn-twitter relleno-der-xs"></i>Twitter</h6>';
+        echo '<a class="twitter-timeline" href="https://twitter.com/eadpucv" data-widget-id="556872650858201090">Tweets por el @eadpucv.</a>';
+        echo '<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?\'http\':\'https\';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>';
+    }
+
+    function update($new_instance, $old_instance) {
+        return $new_instance;
+    }
+    function form($instance) {
+        extract( $instance );
+        echo '<p>Este widget no tiene opciones configurables</p>';
+    } 
+}
 
 class WP_Widget_posts extends WP_Widget {
     /** constructor */
@@ -358,6 +433,100 @@ class WP_Widget_school_links extends WP_Widget {
         
     } 
 }
+
+class WP_ead_Nav_Menu_Widget extends WP_Widget {
+
+    public function __construct() {
+        $widget_ops = array( 'description' => __('Add a custom menu to your sidebar.') );
+        parent::__construct( 'nav_menu', __('Custom Menu'), $widget_ops );
+    }
+
+    public function widget($args, $instance) {
+        // Get menu
+        $nav_menu = ! empty( $instance['nav_menu'] ) ? wp_get_nav_menu_object( $instance['nav_menu'] ) : false;
+
+        if ( !$nav_menu )
+            return;
+
+        /** This filter is documented in wp-includes/default-widgets.php */
+        $instance['title'] = apply_filters( 'widget_title', empty( $instance['title'] ) ? '' : $instance['title'], $instance, $this->id_base );
+        $args['before_title'] = '<h6 class="xs seccion margen-sup">';
+        $args['after_title'] = '</h6>';
+
+        echo $args['before_widget'];
+
+        if ( !empty($instance['title']) )
+            echo $args['before_title'] . $instance['title'] . $args['after_title'];
+
+        $nav_menu_args = array(
+            'fallback_cb' => '',
+            'menu'        => $nav_menu
+        );
+
+        /**
+         * Filter the arguments for the Custom Menu widget.
+         *
+         * @since 4.2.0
+         *
+         * @param array    $nav_menu_args {
+         *     An array of arguments passed to wp_nav_menu() to retrieve a custom menu.
+         *
+         *     @type callback|bool $fallback_cb Callback to fire if the menu doesn't exist. Default empty.
+         *     @type mixed         $menu        Menu ID, slug, or name.
+         * }
+         * @param stdClass $nav_menu      Nav menu object for the current menu.
+         * @param array    $args          Display arguments for the current widget.
+         */
+        wp_nav_menu( apply_filters( 'widget_nav_menu_args', $nav_menu_args, $nav_menu, $args ) );
+
+        echo $args['after_widget'];
+    }
+
+    public function update( $new_instance, $old_instance ) {
+        $instance = array();
+        if ( ! empty( $new_instance['title'] ) ) {
+            $instance['title'] = strip_tags( stripslashes($new_instance['title']) );
+        }
+        if ( ! empty( $new_instance['nav_menu'] ) ) {
+            $instance['nav_menu'] = (int) $new_instance['nav_menu'];
+        }
+        return $instance;
+    }
+
+    public function form( $instance ) {
+        $title = isset( $instance['title'] ) ? $instance['title'] : '';
+        $nav_menu = isset( $instance['nav_menu'] ) ? $instance['nav_menu'] : '';
+
+        // Get menus
+        $menus = wp_get_nav_menus();
+
+        // If no menus exists, direct the user to go and create some.
+        if ( !$menus ) {
+            echo '<p>'. sprintf( __('No menus have been created yet. <a href="%s">Create some</a>.'), admin_url('nav-menus.php') ) .'</p>';
+            return;
+        }
+        ?>
+        <p>
+            <label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:') ?></label>
+            <input type="text" class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" value="<?php echo esc_attr( $title ); ?>" />
+        </p>
+        <p>
+            <label for="<?php echo $this->get_field_id('nav_menu'); ?>"><?php _e('Select Menu:'); ?></label>
+            <select id="<?php echo $this->get_field_id('nav_menu'); ?>" name="<?php echo $this->get_field_name('nav_menu'); ?>">
+                <option value="0"><?php _e( '&mdash; Select &mdash;' ) ?></option>
+        <?php
+            foreach ( $menus as $menu ) {
+                echo '<option value="' . $menu->term_id . '"'
+                    . selected( $nav_menu, $menu->term_id, false )
+                    . '>'. esc_html( $menu->name ) . '</option>';
+            }
+        ?>
+            </select>
+        </p>
+        <?php
+    }
+}
+
 // register WP_Widgets
 add_action('widgets_init', 'register_widgets');
 add_action('init', 'register_widgets');
@@ -367,4 +536,18 @@ function register_widgets(){
     register_widget('WP_Widget_events');
     register_widget('WP_Widget_school_links');
     register_widget('WP_Widget_posts');
+    register_widget( 'WP_ead_Nav_Menu_Widget' );
+    register_widget( 'WP_Widget_news_thumb' );
+    register_widget( 'WP_Widget_twitter' );
+
+    unregister_widget( 'WP_Widget_Pages' );
+    unregister_widget( 'WP_Widget_Links' );
+    unregister_widget( 'WP_Widget_Archives' );
+    unregister_widget( 'WP_Widget_Meta' );
+    unregister_widget( 'WP_Widget_Calendar' );
+    unregister_widget( 'WP_Widget_Categories' );
+    unregister_widget( 'WP_Widget_Recent_Posts' );
+    unregister_widget( 'WP_Widget_Recent_Comments' );
+    
+    unregister_widget( 'WP_Nav_Menu_Widget' );
 }

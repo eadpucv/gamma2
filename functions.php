@@ -702,3 +702,9 @@ function remove_thumbnail_dimensions( $html, $post_id, $post_image_id ) {
     $html = preg_replace( '/(width|height)=\"\d*\"\s/', "", $html );
     return $html;
 }
+
+add_filter( 'widget_nav_menu_args', 'ead_args_widget_menu', 10, 3 );
+function ead_args_widget_menu( $nav_menu_args, $nav_menu, $args ){
+	$args['menu_class'] = 'xs sin-relleno';
+	return $args;
+}
