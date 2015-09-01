@@ -356,7 +356,7 @@ class WP_Widget_school_links extends WP_Widget {
                             echo '<div class="col-md-4 col-sm-12 oculto-xs">';
                               echo '<h5 class="sm condensado gruesa negro margen-inf-sm">'.$current_title.'</h5>';
                               echo '<p class="serif italica sin-margen relleno-inf-sm">'.$current_content.'</p>';
-                                echo '<div class="oculto-sm margen-sup-xs">';
+                                echo '<div class="grupo-botones oculto-sm margen-sup-xs">';
                                     foreach ($current_pages as $the_page) {
                                         echo '<a href="'.get_permalink($the_page).'" class="btn btn-alerta">'.get_the_title($the_page).'</a>';
                                   }
