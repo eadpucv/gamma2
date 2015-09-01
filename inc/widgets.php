@@ -21,11 +21,11 @@
                   echo '<div class="h100 tooltip-demo">';
                     echo '<h6 class="xs sin-margen sans rojo gruesa en-linea w60 altas relleno-izq-sm">'.get_the_title( $the_post->ID ).'</h6>';
                     echo '<span class="xs italica margen-izq-sm relleno-inf-xs">'.mysql2date('d \d\e F\, Y', $the_post->post_date).'</span>';
-                    //Tooltip es necesario?
-                    /*echo '<a data-toggle="tooltip" href="#" title="Editar" class="xs en-linea rojo relleno-sup-xs sin-margen" href="#">';
-                      echo '<span><i class="icn icn-lapiz margen-izq-xs margen-sup-xs"></i></span>';
-                    echo '</a>';*/
-
+                    if ( is_user_logged_in() ){
+                        echo '<a data-toggle="tooltip" title="Editar" class="xs en-linea rojo relleno-sup-xs sin-margen" href="'.get_edit_post_link($the_post->ID).'">';
+                          echo '<span><i class="icn icn-lapiz margen-izq-xs margen-sup-xs"></i></span>';
+                        echo '</a>';
+                    }
                   echo '</div>';
                 echo '</div>';
                 echo '<div class="col-md-5 col-sm-12 relleno-izq-sm">';
@@ -100,9 +100,11 @@ class WP_Widget_events extends WP_Widget {
                       echo '<div class="col-lg-10 col-md-10 col-sm-12 contenido tooltip-demo">';
                         echo '<h5 class="xs sin-margen relleno-inf-xs"><a href="'.get_permalink($event->ID).'">'.get_the_title($event->ID).'</a></h5>';
                         echo '<span class="xs entry-details">Publicado el '.mysql2date('d \d\e F\, Y',$event->event_date).'.</span>';
-                        /*echo '<a data-toggle="tooltip" href="#" title="Editar" class="xs en-linea sin-margen" href="#">';
-                          echo '<span><i class="icn icn-lapiz icn-sm"></i></span>';
-                        echo '</a>';*/
+                        if ( is_user_logged_in() ){
+                            echo '<a data-toggle="tooltip" href="'.get_edit_post_link($event->ID).'" title="Editar" class="xs en-linea sin-margen">';
+                              echo '<span><i class="icn icn-lapiz icn-sm"></i></span>';
+                            echo '</a>';
+                        } 
                         $the_excerpt = ( !empty( $event->post_excerpt ) ) ?  $event->post_excerpt : smart_substr( $event->post_content, 255 );
                         echo '<p class="xs">'.$the_excerpt.' <a class="" href="'.get_permalink($event->iD).'">[<i class="icn icn-lentes"></i>]</a></p>';
                     echo '</div>';
@@ -151,22 +153,22 @@ class WP_Widget_news extends WP_Widget {
                     $x++;
                     if ($x == 4) { echo '</div><div class="fila">'; $x = 1; }
                         echo '<div class="col-md-4 col-sm-6 col-xs-12 noticia">';
-                            if ( has_post_thumbnail( $entry->ID ) ):
-                                echo '<div class="cabecera">';
-                                    echo '<a href="'.get_permalink( $entry->ID ).'">';
-                                        echo get_the_post_thumbnail( $entry->ID, 'entry-img' );
-                                    echo '</a>';
-                                echo '</div>';
-                            endif;
+                            echo '<div class="cabecera">';
+                                echo '<a href="'.get_permalink( $entry->ID ).'">';
+                                    echo sitio::ead_get_the_post_thumbnail( $entry->ID, 'entry-img' );
+                                echo '</a>';
+                            echo '</div>';
                             //<!-- Título, fecha de publicación, reseña de noticia -->
                             echo '<h4 class="xs sin-margen"><a href="'.get_permalink( $entry->ID ).'">'.get_the_title( $entry->ID ).'</a></h4>';
                             echo '<div class="xs entry-details">Publicado el '.mysql2date('d \d\e F\, Y',$entry->post_date).'.';
-                                // echo '<a data-toggle="tooltip" href="#" title="Editar" class="xs sin-margen" href="#">';
-                                //     echo '<span class="icn-stack">';
-                                //         echo '<span class="icn icn-cuadrolleno icn-stack-2x"></span>';
-                                //         echo '<span class="icn icn-lapiz icn-sm icn-stack-1x"></span>';
-                                //     echo '</span>';
-                                // echo '</a>';
+                            if ( is_user_logged_in() ){
+                                echo '<a data-toggle="tooltip" href="#" title="Editar" class="xs sin-margen" href="'.get_edit_post_link($entry->ID).'">';
+                                    echo '<span class="icn-stack">';
+                                        echo '<span class="icn icn-cuadrolleno icn-stack-2x"></span>';
+                                        echo '<span class="icn icn-lapiz icn-sm icn-stack-1x"></span>';
+                                    echo '</span>';
+                                echo '</a>';
+                            }
                             echo '</div>';
                             $the_excerpt = ( !empty( $entry->post_excerpt ) ) ? $entry->post_excerpt : smart_substr( $entry->post_content, 255 );
                             echo '<p class="xs">'.$the_excerpt.' <a href="'.get_permalink($entry->ID).'">[<i class="icn icn-lentes"></i>]</a></p>';
@@ -215,11 +217,9 @@ class WP_Widget_news_thumb extends WP_Widget {
                 $x = 0;
                 foreach ($post_list as $entry):
                     echo '<li class="sin-estilo">';
-                        if ( has_post_thumbnail( $entry->ID ) ):
-                            echo '<a href="'.get_permalink( $entry->ID ).'">';
-                                echo get_the_post_thumbnail( $entry->ID, 'entry-img' );
-                            echo '</a>';
-                        endif;
+                        echo '<a href="'.get_permalink( $entry->ID ).'">';
+                            echo sitio::ead_get_the_post_thumbnail( $entry->ID, 'entry-img' );
+                        echo '</a>';
                         //<!-- Título, fecha de publicación, reseña de noticia -->
                         echo '<h5 class="xs"><a href="'.get_permalink( $entry->ID ).'">'.get_the_title( $entry->ID ).'</a></h5>';
                         
@@ -301,10 +301,11 @@ class WP_Widget_posts extends WP_Widget {
                       echo '<div class="alto-xs auto margen-inf-sm tooltip-demo">';
                         echo '<h5 class="xs sin-margen relleno-inf-xs"><a href="'.get_permalink($the_post->ID).'">'.get_the_title($the_post->ID).'</a></h5>';
                         echo '<span class="xs entry-details">Publicado el '.mysql2date('d \d\e F\, Y',$the_post->post_date).'.</span>';
-                          /*<!--ícono de Tooltip -->
-                          <a data-toggle="tooltip" href="#" title="Editar" class="xs en-linea sin-margen" href="#">
-                          <span><i class="icn icn-lapiz icn-sm"></i></span>
-                          </a>*/
+                        if ( is_user_logged_in() ){
+                          echo '<a data-toggle="tooltip" title="Editar" class="xs en-linea sin-margen" href="'.get_edit_post_link($the_post->ID).'">';
+                            echo '<span><i class="icn icn-lapiz icn-sm"></i></span>';
+                          echo '</a>';
+                        }
                         $the_excerpt = ( !empty( $the_post->post_excerpt ) ) ? $the_post->post_excerpt : smart_substr( $the_post->post_content, 255 );
                         echo '<p class="xs margen-sup-xs">'.$the_excerpt.' <a class=" href="'.get_permalink( $the_post->ID ).'">[<i class="icn icn-lentes"></i>]</a></p>';
                       echo '</div>';
@@ -548,6 +549,6 @@ function register_widgets(){
     unregister_widget( 'WP_Widget_Categories' );
     unregister_widget( 'WP_Widget_Recent_Posts' );
     unregister_widget( 'WP_Widget_Recent_Comments' );
-    
+
     unregister_widget( 'WP_Nav_Menu_Widget' );
 }

@@ -317,7 +317,23 @@ class ThemeSettings{
 					'value' => isset($data['soundcloud_url']) ? $data['soundcloud_url'] : ''
 				)
 			) );
-
+			$form->addElement( new Element\DivContent(
+				'<h3>Configuraciones de imagenes</h3>'
+				) )->addElement( new Element\WPImage(
+				_x('Imagen Docencia', 'site settings fields', 'ead'),
+				'docencia_imagen',
+				array(
+					'value' => isset($data['docencia_imagen']) ? $data['docencia_imagen'] : '',
+					'description' => _x('Imagen de la cabecera en las entradas de docencia', 'ead')
+				)
+			) )->addElement( new Element\WPImage(
+				_x('Imagen por defecto', 'site settings fields', 'ead'),
+				'no_imagen',
+				array(
+					'value' => isset($data['no_imagen']) ? $data['no_imagen'] : '',
+					'description' => _x('Imagen de entradas cuando no se le asigna ninguna', 'ead')
+				)
+			) );
 			/*
 			Fin opciones newsletter
 			*/
@@ -350,7 +366,9 @@ class ThemeSettings{
 			'twitter_username',
 			'vimeo_username',
 			'flickr_url',
-			'soundcloud_url'
+			'soundcloud_url',
+			'docencia_imagen',
+			'no_imagen'
 		);
 		$raw_post = stripslashes_deep( $_POST );
 		$data = array_intersect_key($raw_post, array_combine($fields, $fields) );
@@ -452,6 +470,28 @@ class sitio {
 	}
 	static function archive_title() {
 		return get_queried_object()->name;
+	}
+	static function ead_get_the_post_thumbnail($post_id,$size,$attr='') {
+		if ( has_post_thumbnail( $post_id ) ) {
+			return get_the_post_thumbnail( $post_id, $size, $attr );
+		} else {
+			global $_set;
+			$settings = $_set->settings;
+			if ( !empty( $settings['no_imagen'] ) ) {
+				$src = current( wp_get_attachment_image_src( $settings['no_imagen'], $size ) );
+				//loop attr
+				$out = '';
+				if ( is_array($attr) ) {
+					foreach ( $attr as $key => $value ) {
+						$out .= ' '.$key.'="'.$value.'"';
+					}
+				}
+				return '<img src="'.$src.'"'.$out.'>';
+			} else {
+				return null;
+			}
+		}
+
 	}
 	static function get_icons() {
 		$icons = array(

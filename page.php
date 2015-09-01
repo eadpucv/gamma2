@@ -18,15 +18,7 @@
 
         <div id="ejemplo-sticky">
 		  <ul class="sin-relleno local-nav">
-		    <!-- <li class="sin-estilo active"><a href="#uno"><h6 class="xs active">Estudiar diseño en la e[ad]<i class="icn icn-usuariomas"></i></h6></a></li>
-		    <li class="sin-estilo"><a href="#dos"><h6 class="xs">Programa de estudios<i class="icn icn-libro"></i></h6></a></li>
-		    <li class="sin-estilo"><a href="#tres"><h6 class="xs">Malla curricular<i class="icn icn-biblioteca"></i></h6></a></li>
-		    <li class="sin-estilo"><a href="#cuatro"><h6 class="xs">Admisión<i class="icn icn-ingresar"></i></h6></a></li>
-		    <li class="sin-estilo"><a href="#cinco"><h6 class="xs">Concepción del diseñador<i class="icn icn-acto"></i></h6></a></li>
-		    <li class="sin-estilo"><a href="#seis"><h6 class="xs">Perfil de egreso<i class="icn icn-perfil"></i></h6></a></li>
-		    <li class="sin-estilo"><a href="#siete"><h6 class="xs">Competencias fundamentales<i class="icn icn-engranaje icn-spin"></i></h6></a></li>
-		    <li class="sin-estilo"><a href="#ocho"><h6 class="xs">Objetivos educacionales<i class="icn icn-lentes"></i></h6></a></li>
-		    <li class="sin-estilo"><a href="nueve"><h6 class="xs">Profesores<i class="icn icn-usuarios"></i></h6></a></li> -->
+		  <!--Links de navegación se agregan por JS-->
 		  </ul>
 		</div>
 

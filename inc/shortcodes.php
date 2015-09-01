@@ -38,7 +38,7 @@ class getCategoryPosts extends \GutenPress\Model\Shortcode{
        				$out .= '<div class="col-md-6 col-sm-6 col-xs-12 noticia margen-inf-sm h100">';
        				$out .= '<div class="cabecera">';
 				        $out .= '<a href="'.get_permalink($post->ID).'">';
-				        	$out .= get_the_post_thumbnail( $post->ID, 'entry-img', array( 'class' => 'ancho-maximo' ) );
+				        	$out .= sitio::ead_get_the_post_thumbnail( $post->ID, 'entry-img', array( 'class' => 'ancho-maximo' ) );
 				        $out .= '</a>';
 				      $out .= '</div>';
 				        $out .= '<div class="relleno-sup-xs tooltip-demo">';

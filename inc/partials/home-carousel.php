@@ -24,7 +24,7 @@
                 $class_active = ( $x == 0 ) ? 'active' : ''; //si es el primer slide, tendrá la clase active
         ?>
           <div class="item <?php echo $class_active ?> car-sm">
-            <?php echo get_the_post_thumbnail( $feature->ID, 'main-feature' ); ?>
+            <?php echo sitio::ead_get_the_post_thumbnail( $feature->ID, 'main-feature' ); ?>
             <div class='pag sin-relleno'>
               <div class='col-md-4 col-sm-6 oculto-xs'>
                   <!-- enlace -->
