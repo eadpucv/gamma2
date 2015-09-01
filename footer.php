@@ -7,15 +7,30 @@
   <div class="pag">
     <div class="fila">
       <div class="col-md-4 col-sm-5 col-xs-12">
-        <h6 class="sin-margen"><a href="#" class="ahuesado sans">Escuela de Arquitectura y Diseño</a></h6>
+        <h6 class="sin-margen"><a href="<?php bloginfo('url') ?>" class="ahuesado sans">Escuela de Arquitectura y Diseño</a></h6>
         <h6 class="xs fino sans blanco">Pontificia Universidad Católica de Valparaíso</h6>
-        <h6><a href="#" class="ahuesado sans fino"><i class="icn icn-light icn-email margen-der-xs"></i>Contacto</a></h6>
-        <p class="xs sans blanco sin-margen">Matta 12, Recreo, Viña del Mar, Chile.</p>
-        <p class="xs sans blanco sin-margen">Cód. Postal: 2580129, Casilla 4170 V2 Valparaíso.</p>
+        <?php if ( !empty( $settings['page_contact'] ) ): ?>
+          <h6><a href="<?php echo get_permalink($settings['page_contact']) ?>" class="ahuesado sans fino"><i class="icn icn-light icn-email margen-der-xs"></i>Contacto</a></h6>
+        <?php endif; ?>
+        <?php if ( !empty( $settings['address'] ) ): ?>
+          <?php echo apply_filters( 'the_content', $settings['address'] ); ?>
+        <?php else: ?>
+          <p class="xs sans blanco sin-margen">Matta 12, Recreo, Viña del Mar, Chile.</p>
+          <p class="xs sans blanco sin-margen">Cód. Postal: 2580129, Casilla 4170 V2 Valparaíso.</p>
+      <?php endif; ?>
       </div>
       <div class="col-md-4 col-sm-4 col-xs-12">
-        <p class="xs fino sans gris sin-margen">1998 - 2014 | <a href="#" class="sans blanco">Suscripción (RSS)</a> | <a href="#" class="sans blanco">Cómo Suscribirse</a> | <a href="#" class="sans blanco">Colofón</a> | Optimizado para <a href="#" class="sans blanco">Firefox</a>.</p>
-        <p class="xs fino sans gris relleno-inf-xs sin-margen relleno-inf-sm">e[ad] de la Escuela de Arquitectura y Diseño PUCV está licenciado bajo <a href="#" class="sans blanco">Creative Commons Atribución-No Comercial-Licenciar Igual 2.0 Chile License</a>.</p>
+        <p class="xs fino sans gris sin-margen">1998 - 2014 | <a href="<?php bloginfo('rss_url') ?>" class="sans blanco">Suscripción (RSS)</a> 
+        <?php if ( !empty( $settings['page_suscripcion'] ) ): ?>
+          | <a href="<?php echo get_permalink( $settings['page_suscripcion'] ) ?>" class="sans blanco">Cómo Suscribirse</a> 
+        <?php endif; ?>
+        <?php if ( !empty( $settings['page_colofon'] ) ): ?>
+          | <a href="<?php echo get_permalink( $settings['page_colofon'] ) ?>" class="sans blanco">Colofón</a> 
+        <?php endif; ?>
+        | Optimizado para <a href="http://www.mozilla.com" class="sans blanco">Firefox</a>.</p>
+        <p class="xs fino sans gris relleno-inf-xs sin-margen relleno-inf-sm">e[ad] de la Escuela de Arquitectura y Diseño PUCV está licenciado bajo 
+        <?php $cc = ( !empty( $settings['text_cc'] ) ? $settings['text_cc'] : 'Creative Commons Atribución-No Comercial-Licenciar Igual 2.0 Chile License' ) ?>
+        <a href="<?php echo $settings['url_cc'] ?>" class="sans blanco"><?php echo $cc ?></a>.</p>
       </div>
       <div class="col-md-4 col-sm-3 col-xs-12">
       <?php if ( !empty($settings['facebook_url'] ) ): ?>

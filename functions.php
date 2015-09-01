@@ -275,6 +275,18 @@ class ThemeSettings{
 	public function addAdminMenu(){
 		add_submenu_page( 'index.php' , _x('Configuraciones', 'site settings title', 'ead'), _x('Configuraciones', 'site settings menu', 'ead'), 'edit_theme_options', 'ead-site-settings', array($this, 'adminMenuScreen'));
 	}
+	public function list_pages() {
+		$pages_list = new WP_Query(array(
+            'post_type' =>  'page',
+            'posts_per_page' => -1,
+            'post_status' => 'publish'
+        ));
+        $pages[] = 'Seleccionar página';
+        foreach ( $pages_list->posts as $page ) {
+        	$pages[$page->ID] = $page->post_title;
+        }
+        return $pages;
+	}
 	public function adminMenuScreen(){
 		echo '<div class="wrap">';
 			screen_icon('index');
@@ -334,8 +346,43 @@ class ThemeSettings{
 					'description' => _x('Imagen de entradas cuando no se le asigna ninguna', 'ead')
 				)
 			) );
+			$form->addElement( new Element\DivContent(
+				'<h3>Configuracion de footer</h3>'
+				) )->addElement( new Element\Select(
+					_x('Página contacto', 'site settings fields', 'ead'),
+					'page_contact',
+					$this->list_pages()
+			) )->addElement( new Element\Select(
+					_x('Página como suscribirse', 'site settings fields', 'ead'),
+					'page_suscripcion',
+					$this->list_pages()
+			) )->addElement( new Element\Select(
+					_x('Colofón', 'site settings fields', 'ead'),
+					'page_colofon',
+					$this->list_pages()
+			) )->addElement( new Element\InputText(
+				_x('Licencia Creative Commons', 'site settings fields', 'ead'),
+				'text_cc',
+				array(
+					'value' => isset($data['text_cc']) ? $data['text_cc'] : ''
+				)
+			) )->addElement( new Element\InputText(
+				_x('Url licencia Creative Commons', 'site settings fields', 'ead'),
+				'url_cc',
+				array(
+					'value' => isset($data['url_cc']) ? $data['url_cc'] : ''
+				)
+			) )->addElement( new Element\WPEditor(
+				_x('Dirección escuela', 'site settings fields', 'ead'),
+				'address',
+				array(
+					'value' => isset($data['address']) ? $data['address'] : '',
+					'textarea_rows' => 7,
+					'media_buttons' => false
+				)
+			) );
 			/*
-			Fin opciones newsletter
+			Fin opciones
 			*/
 			$form->addElement( new Element\InputSubmit(
 				_x('Guardar', 'site settings fields', 'ead')
@@ -368,7 +415,13 @@ class ThemeSettings{
 			'flickr_url',
 			'soundcloud_url',
 			'docencia_imagen',
-			'no_imagen'
+			'no_imagen',
+			'page_contact',
+			'page_suscripcion',
+			'page_colofon',
+			'url_cc',
+			'text_cc',
+			'address'
 		);
 		$raw_post = stripslashes_deep( $_POST );
 		$data = array_intersect_key($raw_post, array_combine($fields, $fields) );
