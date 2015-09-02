@@ -121,9 +121,9 @@ class TitleParallax extends \GutenPress\Model\Shortcode{
 	}
 	public function configForm(){
 		wp_enqueue_media();
-		$form = new Forms\MetaboxForm('requisitos-shortcode');
+		$form = new Forms\MetaboxForm('parallax-title-shortcode');
 		$form->addElement(
-				new Element\WPImage(
+				new Element\WPImageSc(
 					'Imagen',
 					'img',
 					array(
@@ -196,9 +196,9 @@ class CiteParallax extends \GutenPress\Model\Shortcode{
 	}
 	public function configForm(){
 		wp_enqueue_media();
-		$form = new Forms\MetaboxForm('requisitos-shortcode');
+		$form = new Forms\MetaboxForm('parallax-cite-shortcode');
 		$form->addElement(
-				new Element\WPImage(
+				new Element\WPImageSc(
 					'Imagen',
 					'img',
 					array(
