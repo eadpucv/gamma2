@@ -15,8 +15,8 @@
   		echo '</div><div class="fila">';
   		$x = 0;
   	}
-  	echo '<div class="col-md-4 col-sm-4 col-xs-12 alto-sm auto">';
-  		echo '<div class="borde ocultar-desborde alto-sm auto radio-md">';
+  	echo '<div class="col-md-4 col-sm-4 col-xs-12 auto">';
+  		echo '<div class="borde ocultar-desborde auto radio-md">';
   			echo '<div class="relleno-sup-xs tooltip-demo">';
   				echo '<h4 class="xs sin-margen"><a href="'.get_permalink( $post->ID ).'"><i class="icn icn-anuncio"></i>'.get_the_title( $post->ID ).'</a></h4>';
   				echo '<span class="xs entry-details">Publicado el '.mysql2date( 'd \d\e F\, Y', $post->post_date ).'.';

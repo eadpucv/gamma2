@@ -92,7 +92,7 @@ class WP_Widget_events extends WP_Widget {
             echo '<div class="pag">';
             echo '<div class="fila">';
             foreach ($event_list as $event):
-                  echo '<div class="col-md-6 col-sm-6 col-xs-12 evento alto-xs margen-inf-sm">';
+                  echo '<div class="col-md-6 col-sm-6 col-xs-12 evento margen-inf-sm">';
                     echo '<div class="fila">';
                       echo '<div class="col-lg-2 col-md-2 col-sm-2 col-xs-3">';
                         echo '<div class="fecha"><span class="sm">'.mysql2date('d M',$event->event_date).'</span></div>';
@@ -298,7 +298,7 @@ class WP_Widget_posts extends WP_Widget {
                             echo '<i class="icn icn-archivo"></i><h6 class="xs">'.$the_category->name.'</h6>';
                           echo '</a>';
                     endif;
-                      echo '<div class="alto-xs auto margen-inf-sm tooltip-demo">';
+                      echo '<div class="auto margen-inf-sm tooltip-demo">';
                         echo '<h5 class="xs sin-margen relleno-inf-xs"><a href="'.get_permalink($the_post->ID).'">'.get_the_title($the_post->ID).'</a></h5>';
                         echo '<span class="xs entry-details">Publicado el '.mysql2date('d \d\e F\, Y',$the_post->post_date).'.</span>';
                         if ( is_user_logged_in() ){
