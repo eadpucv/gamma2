@@ -298,7 +298,7 @@ class WP_Widget_posts extends WP_Widget {
                             echo '<i class="icn icn-archivo"></i><h6 class="xs">'.$the_category->name.'</h6>';
                           echo '</a>';
                     endif;
-                      echo '<div class="auto margen-inf-sm tooltip-demo">';
+                      echo '<div class="auto margen-inf-sm tooltip-demo alto-xs">';
                         echo '<h5 class="xs sin-margen relleno-inf-xs"><a href="'.get_permalink($the_post->ID).'">'.get_the_title($the_post->ID).'</a></h5>';
                         echo '<span class="xs entry-details">Publicado el '.mysql2date('d \d\e F\, Y',$the_post->post_date).'.</span>';
                         if ( is_user_logged_in() ){
