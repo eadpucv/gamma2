@@ -35,6 +35,7 @@
 	</div>
 </div>
  <?php else: ?>
+ 	<?php if ( has_post_thumbnail( ) ): ?>
 	<div class="ocultar-desborde relativo alto-lg">
 	  <div class="absoluto ancho-completo alto-lg">
 	    <div class="cf h80 absoluto abs-inf ancho-completo">
@@ -44,6 +45,7 @@
 	  </div>
 	  <?php echo sitio::ead_get_the_post_thumbnail( $post->ID , 'main-feature', array( 'class' => 'ancho-completo fijo atras mas-atras noticia') ); ?>
 	</div>
+	<?php endif; ?>
 	<div id="post">
   <div class="al-frente cf margen-especial relleno-especial">
     <div class="pag cf">

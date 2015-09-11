@@ -506,6 +506,9 @@ class sitio {
 		 	}
 		 	echo '<li><a>'.get_the_title( $post->ID ).'</a></li>';
 		 }
+		 if (is_post_type_archive( ) ) {
+		 	echo '<li><a> Archivo '.get_queried_object()->labels->name.'</a></li>';
+		 } 
 		echo '</ul>';
 	}
 	static function get_featured_category($slug) {
