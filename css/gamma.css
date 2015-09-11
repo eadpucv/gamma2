@@ -4077,17 +4077,26 @@ h99 {
 .margen-sup-xs {
   margin-top: 5px;
 }
-.margen-sup-xs-negativo {
+.margen-sup-negativo-xs {
   margin-top: -5px;
 }
 .margen-sup-sm {
   margin-top: 20px;
 }
+.margen-sup-negativo-sm {
+  margin-top: -8.57142857px;
+}
 .margen-sup-md {
   margin-top: 45px;
 }
+.margen-sup-negativo-md {
+  margin-top: -45px;
+}
 .margen-sup-lg {
   margin-top: 60px;
+}
+.margen-sup-negativo-lg {
+  margin-top: -60px;
 }
 .margen-inf {
   margin-bottom: 30px;
@@ -4110,6 +4119,9 @@ h99 {
 .margen-auto {
   margin: 0 auto;
 }
+.sin-relleno {
+  padding: 0;
+}
 .relleno {
   padding: 30px;
 }
@@ -4124,6 +4136,9 @@ h99 {
 }
 .relleno-lg {
   padding: 60px;
+}
+.sin-relleno-horizontal {
+  padding: auto 0 !important;
 }
 .relleno-horizontal {
   padding: 0 30px !important;
@@ -4140,6 +4155,9 @@ h99 {
 .relleno-horizontal-lg {
   padding: 0 60px !important;
 }
+.sin-relleno-vertical {
+  padding: 0 auto !important;
+}
 .relleno-vertical {
   padding: 30px 0 !important;
 }
@@ -4154,6 +4172,9 @@ h99 {
 }
 .relleno-vertical-lg {
   padding: 60px 0 !important;
+}
+.sin-relleno-der {
+  padding-right: 0 !important;
 }
 .relleno-der {
   padding-right: 30px !important;
@@ -4173,6 +4194,9 @@ h99 {
 .relleno-der-lg {
   padding-right: 60px !important;
 }
+.sin-relleno-izq {
+  padding-left: 0 !important;
+}
 .relleno-izq {
   padding-left: 30px !important;
 }
@@ -4191,6 +4215,9 @@ h99 {
 .relleno-izq-lg {
   padding-left: 60px !important;
 }
+.sin-relleno-sup {
+  padding-top: 0 !important;
+}
 .relleno-sup {
   padding-top: 30px !important;
 }
@@ -4208,6 +4235,9 @@ h99 {
 }
 .relleno-sup-lg {
   padding-top: 60px !important;
+}
+.sin-relleno-inf {
+  padding-bottom: 0 !important;
 }
 .relleno-inf {
   padding-bottom: 30px !important;
@@ -4896,6 +4926,12 @@ strong {
 }
 .fijo {
   position: fixed !important;
+}
+.flexbox {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  overflow: hidden;
 }
 .centrada,
 .centrado {
@@ -10374,12 +10410,14 @@ tbody.collapse.in {
 #tag .titulo-seccion a i {
   margin-right: 5px;
 }
-#index .flexbox,
-#tag .flexbox {
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  overflow: hidden;
+#index .docencia-flex,
+#tag .docencia-flex {
+  display: -webkit-flex !important;
+  display: flex !important;
+}
+#index .docencia-flex a,
+#tag .docencia-flex a {
+  margin: auto !important;
 }
 #index .carousel-flex,
 #tag .carousel-flex {

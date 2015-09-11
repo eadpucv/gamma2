@@ -16,27 +16,34 @@
             echo '<h2 class="xs titulo-seccion margen-sup-md"><i class="icn icn-anuncio icn-light"></i>'.$the_title.'</h2>';
             echo '<div class="pag">';
               echo '<div class="fila">';
-                echo '<div class="col-md-3 col-sm-4 borde radio-sup-der-sm radio-inf-der-sm">';
-                  echo '<i class="icn icn-lg rojo icn-anuncio icn-light en-linea izquierda"></i>';
-                  echo '<div class="h100 tooltip-demo">';
-                    echo '<h6 class="xs sin-margen sans rojo gruesa en-linea w60 altas relleno-izq-sm">'.get_the_title( $the_post->ID ).'</h6>';
-                    echo '<span class="xs italica margen-izq-sm relleno-inf-xs">'.mysql2date('d \d\e F\, Y', $the_post->post_date).'</span>';
-                    if ( is_user_logged_in() ){
-                        echo '<a data-toggle="tooltip" title="Editar" class="xs en-linea rojo relleno-sup-xs sin-margen" href="'.get_edit_post_link($the_post->ID).'">';
-                          echo '<span><i class="icn icn-lapiz margen-izq-xs margen-sup-xs"></i></span>';
-                        echo '</a>';
-                    }
-                  echo '</div>';
-                echo '</div>';
-                echo '<div class="col-md-5 col-sm-12 relleno-izq-sm">';
-                  echo '<div class="der-lineal-xs">';
-                    echo '<p class="xs sans sin-margen justificado">'.smart_substr( $the_post->post_content,255 ).'</p>';
-                  echo '</div>';
-                echo '</div>';
-                echo '<div class="col-md-4 oculto-sm oculto-xs">';
-                  echo '<div class="fila">';
-                    echo '<span class="centrado"><a href="'.get_permalink( $the_post->ID ).'" class="btn btn-alerta fondo-blanco">Ver información</a></span>';
-                  echo '</div>';
+                echo '<div class="flexbox">';
+                    echo '<div class="col-md-1">';
+                      echo '<i class="icn icn-lg rojo icn-anuncio icn-light en-linea izquierda margen-sup-negativo-sm"></i>';
+                    echo '</div>';
+                    echo '<div class="col-md-8 col-sm-4 borde radio-sup-der-sm radio-inf-der-sm sin-relleno-izq">';
+                      // echo '<i class="icn icn-lg rojo icn-anuncio icn-light en-linea izquierda"></i>';
+                      echo '<div class="h100 tooltip-demo">';
+                        // echo '<i class="icn icn-lg rojo icn-anuncio icn-light en-linea izquierda"></i>';
+                        echo '<h6 class="xs sin-margen sans rojo gruesa en-linea w60 altas">'.get_the_title( $the_post->ID ).'</h6>';
+                        echo '<p class="sin-margen"><span class="xs italica relleno-inf-xs">'.mysql2date('d \d\e F\, Y', $the_post->post_date).'</span></p>';
+                        if ( is_user_logged_in() ){
+                            echo '<a data-toggle="tooltip" title="Editar" class="xs en-linea rojo relleno-sup-xs sin-margen" href="'.get_edit_post_link($the_post->ID).'">';
+                              echo '<span><i class="icn icn-lapiz margen-izq-xs margen-sup-xs"></i></span>';
+                            echo '</a>';
+                        }
+                      echo '</div>';
+                      echo '<div class="der-lineal-xs">';
+                        echo '<p class="xs sans sin-margen justificado">'.smart_substr( $the_post->post_content,255 ).'</p>';
+                      echo '</div>';
+                    echo '</div>';
+                    // echo '<div class="col-md-5 col-sm-12 relleno-izq-sm">';
+                    //   echo '<div class="der-lineal-xs">';
+                    //     echo '<p class="xs sans sin-margen justificado">'.smart_substr( $the_post->post_content,255 ).'</p>';
+                    //   echo '</div>';
+                    // echo '</div>';
+                    echo '<div class="col-md-3 oculto-sm oculto-xs docencia-flex">';
+                        echo '<a href="'.get_permalink( $the_post->ID ).'" class="btn centrado btn-alerta fondo-blanco sin-margen">Ver información</a>';
+                    echo '</div>';
                 echo '</div>';
               echo '</div>';
             echo '</div>';
