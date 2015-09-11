@@ -92,19 +92,23 @@ class WP_Widget_events extends WP_Widget {
             echo '<div class="pag">';
             echo '<div class="fila">';
             foreach ($event_list as $event):
-                  echo '<div class="col-md-6 col-sm-6 col-xs-12 evento margen-inf-sm">';
+                  echo '<div class="col-md-4 col-sm-4 col-xs-12 evento margen-inf-sm">';
                     echo '<div class="fila">';
-                      echo '<div class="col-lg-2 col-md-2 col-sm-2 col-xs-3">';
-                        echo '<div class="fecha"><span class="sm">'.mysql2date('d M',$event->event_date).'</span></div>';
-                      echo '</div>';
-                      echo '<div class="col-lg-10 col-md-10 col-sm-12 contenido tooltip-demo">';
-                        echo '<h5 class="xs sin-margen relleno-inf-xs"><a href="'.get_permalink($event->ID).'">'.get_the_title($event->ID).'</a></h5>';
-                        echo '<span class="xs entry-details">Publicado el '.mysql2date('d \d\e F\, Y',$event->event_date).'.</span>';
-                        if ( is_user_logged_in() ){
-                            echo '<a data-toggle="tooltip" href="'.get_edit_post_link($event->ID).'" title="Editar" class="xs en-linea sin-margen">';
-                              echo '<span><i class="icn icn-lapiz icn-sm"></i></span>';
-                            echo '</a>';
-                        } 
+                        echo '<div class="flexbox">';
+                          echo '<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">';
+                            echo '<div class="fecha"><span class="sm">'.mysql2date('d M',$event->event_date).'</span></div>';
+                          echo '</div>';
+                          echo '<div class="col-lg-9 col-md-9 col-sm-12 cabecera tooltip-demo">';
+                            echo '<h5 class="xs sin-margen relleno-inf-xs"><a href="'.get_permalink($event->ID).'">'.get_the_title($event->ID).'</a></h5>';
+                            // echo '<span class="xs entry-details">Publicado el '.mysql2date('d \d\e F\, Y',$event->event_date).'.</span>';
+                            if ( is_user_logged_in() ){
+                                echo '<a data-toggle="tooltip" href="'.get_edit_post_link($event->ID).'" title="Editar" class="xs en-linea sin-margen">';
+                                  echo '<span><i class="icn icn-lapiz icn-sm"></i></span>';
+                                echo '</a>';
+                            } 
+                            echo '</div>';
+                        echo '</div>';
+                        echo '<div class="col-lg-12 col-md-12 col-sm-12 contenido">';
                         $the_excerpt = ( !empty( $event->post_excerpt ) ) ?  $event->post_excerpt : smart_substr( $event->post_content, 255 );
                         echo '<p class="xs">'.$the_excerpt.' <a class="" href="'.get_permalink($event->iD).'">[<i class="icn icn-lentes"></i>]</a></p>';
                     echo '</div>';
@@ -293,6 +297,11 @@ class WP_Widget_posts extends WP_Widget {
                     $categories = wp_get_post_categories( $the_post->ID );
                     $the_category = get_category($categories[0]);
                     echo '<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 publicacion">';
+                    // if ( count( $categories ) ):
+                    //       echo '<a class="categoria" href="'.get_category_link($the_category->term_id).'">';
+                    //         echo '<i class="icn icn-archivo"></i><h6 class="xs">'.$the_category->name.'</h6>';
+                    //       echo '</a>';
+                    // endif;
                       echo '<div class="auto margen-sup-sm margen-inf-sm tooltip-demo">';
                         echo '<h5 class="xs sin-margen relleno-inf-xs"><a href="'.get_permalink($the_post->ID).'">'.get_the_title($the_post->ID).'</a></h5>';
                         echo '<span class="xs entry-details">Publicado en <a class="categoria" href="'.get_category_link($the_category->term_id).'">'.$the_category->name.'</a>, el '.mysql2date('d \d\e F\, Y',$the_post->post_date).'</span>';
