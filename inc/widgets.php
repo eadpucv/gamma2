@@ -356,20 +356,27 @@ class WP_Widget_school_links extends WP_Widget {
                         $class_active = ( $i == 0 ) ? ' active' : '';
                       echo '<div class="item'.$class_active.' car-xs escuela-y-enlaces">';
                         echo '<div class="pag sin-relleno">';
-                          echo '<div class="fila">';
-                            echo '<div class="col-md-4 col-sm-12 oculto-xs">';
-                              echo '<h5 class="sm condensado gruesa negro margen-inf-sm">'.$current_title.'</h5>';
-                              echo '<p class="serif italica sin-margen relleno-inf-sm">'.$current_content.'</p>';
-                                echo '<div class="grupo-botones oculto-sm margen-sup-xs">';
-                                    foreach ($current_pages as $the_page) {
-                                        echo '<a href="'.get_permalink($the_page).'" class="btn btn-alerta">'.get_the_title($the_page).'</a>';
-                                  }
-                                echo '</div>';
+                          echo '<div class="fila flexbox">';
+                            echo '<div class="col-md-4 col-sm-12 oculto-xs carousel-flex">';
+                              echo '<div>';
+                                echo '<h5 class="sm condensado gruesa negro margen-inf-sm">'.$current_title.'</h5>';
+                                echo '<p class="serif italica sin-margen relleno-inf-sm">'.$current_content.'</p>';
+                                // echo '<div class="grupo-botones oculto-sm margen-sup-xs">';
+                                //     foreach ($current_pages as $the_page) {
+                                //         echo '<a href="'.get_permalink($the_page).'" class="btn btn-xs btn-alerta">'.get_the_title($the_page).'</a>';
+                                //   }
+                                // echo '</div>';
+                              echo '</div>';
                             echo '</div>';
                             echo '<div class="col-md-8 col-sm-12 oculto-xs">';
-                              echo '<div class="ocultar-desborde alto-md sombra borde radio-md">';
+                                echo '<div class="grupo-botones oculto-sm margen-sup-xs">';
+                                    foreach ($current_pages as $the_page) {
+                                        echo '<a href="'.get_permalink($the_page).'" class="btn btn-xs btn-alerta">'.get_the_title($the_page).'</a>';
+                                  }
+                                echo '</div>';
+                              echo '<div class="img ocultar-desborde sombra borde radio-md">';
                               echo $current_image;
-                            echo '</div>';
+                              echo '</div>';
                             echo '</div>';
                           echo '</div>';
                         echo '</div>';

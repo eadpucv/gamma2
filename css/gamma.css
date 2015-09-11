@@ -9349,7 +9349,15 @@ tbody.collapse.in {
   height: 360px;
   overflow: hidden;
 }
+.carousel-inner > .item.car-xs .img {
+  height: 360px;
+  overflow: hidden;
+}
 .carousel-inner > .item.car-sm {
+  height: 500px;
+  overflow: hidden;
+}
+.carousel-inner > .item.car-sm .img {
   height: 500px;
   overflow: hidden;
 }
@@ -9357,8 +9365,16 @@ tbody.collapse.in {
   height: 600px;
   overflow: hidden;
 }
+.carousel-inner > .item.car-md .img {
+  height: 600px;
+  overflow: hidden;
+}
 .carousel-inner > .item.car-lg {
   height: 700px;
+}
+.carousel-inner > .item.car-lg .img {
+  height: 700px;
+  overflow: hidden;
 }
 .carousel-inner > .item.car-lg.relativo-vw {
   height: 55vw;
@@ -9600,28 +9616,60 @@ tbody.collapse.in {
   .carousel-inner > .item.car-xs {
     height: 360px;
   }
+  .carousel-inner > .item.car-xs .img {
+    height: 360px;
+    overflow: hidden;
+  }
   .carousel-inner > .item.car-sm {
     height: 200px;
+  }
+  .carousel-inner > .item.car-sm .img {
+    height: 200px;
+    overflow: hidden;
   }
   .carousel-inner > .item.car-md {
     height: auto;
   }
+  .carousel-inner > .item.car-md .img {
+    height: auto;
+    overflow: hidden;
+  }
   .carousel-inner > .item.car-lg {
     height: auto;
+  }
+  .carousel-inner > .item.car-lg .img {
+    height: auto;
+    overflow: hidden;
   }
 }
 @media (min-width: 768px) and (max-width: 991px) {
   .carousel-inner > .item.car-xs {
     height: 360px;
   }
+  .carousel-inner > .item.car-xs .img {
+    height: 360px;
+    overflow: hidden;
+  }
   .carousel-inner > .item.car-sm {
     height: 400px;
+  }
+  .carousel-inner > .item.car-sm .img {
+    height: 400px;
+    overflow: hidden;
   }
   .carousel-inner > .item.car-md {
     height: auto;
   }
+  .carousel-inner > .item.car-md .img {
+    height: auto;
+    overflow: hidden;
+  }
   .carousel-inner > .item.car-lg {
     height: 400px;
+  }
+  .carousel-inner > .item.car-lg .img {
+    height: 400;
+    overflow: hidden;
   }
   .carousel-control {
     text-shadow: none;
@@ -9656,14 +9704,30 @@ tbody.collapse.in {
   .carousel-inner > .item.car-xs {
     height: 420px;
   }
+  .carousel-inner > .item.car-xs .img {
+    height: 420px;
+    overflow: hidden;
+  }
   .carousel-inner > .item.car-sm {
     height: 36vw;
+  }
+  .carousel-inner > .item.car-sm .img {
+    height: 36vw;
+    overflow: hidden;
   }
   .carousel-inner > .item.car-md {
     height: 650px;
   }
+  .carousel-inner > .item.car-md .img {
+    height: 650px;
+    overflow: hidden;
+  }
   .carousel-inner > .item.car-lg {
     height: 700px;
+  }
+  .carousel-inner > .item.car-lg .img {
+    height: 700px;
+    overflow: hidden;
   }
   .carousel-inner > .item > img.altura-maxima,
   .carousel-inner > .item > a > img.altura-maxima {
@@ -10276,6 +10340,19 @@ tbody.collapse.in {
 .carousel .carousel-inner .car-sm .pag .oculto-md a div h5 i {
   margin-right: 5px;
 }
+.carousel .carousel-inner .car-xs div {
+  position: relative;
+}
+.carousel .carousel-inner .car-xs .grupo-botones {
+  display: inline-block;
+  position: absolute;
+  z-index: 1000;
+  bottom: 10px;
+  left: 25px;
+}
+.carousel .carousel-inner .car-xs .grupo-botones a {
+  margin: 0;
+}
 #index .titulo-seccion,
 #tag .titulo-seccion {
   text-align: center;
@@ -10303,6 +10380,19 @@ tbody.collapse.in {
   display: -ms-flexbox;
   display: flex;
   overflow: hidden;
+}
+#index .carousel-flex,
+#tag .carousel-flex {
+  display: -webkit-flex !important;
+  display: flex !important;
+}
+#index .carousel-flex div,
+#tag .carousel-flex div {
+  margin: auto 0;
+}
+#index .carousel-flex div h5,
+#tag .carousel-flex div h5 {
+  margin-top: -25px;
 }
 #index .evento:nth-child(4),
 #tag .evento:nth-child(4) {
