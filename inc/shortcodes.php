@@ -28,19 +28,20 @@ class getCategoryPosts extends \GutenPress\Model\Shortcode{
 		$x = 0; $y = 1;
 		$out = '';
 		if ($publications->have_posts()):
-			$out .= '<div class="fila alto-md">';
+			$out .= '<div class="fila alto-md widget-post-categories">';
 				while ($publications->have_posts()){ $publications->the_post();
 					global $post;
 					
-					if ($x >= 2) {
-       					$out .= '</div><div class="fila alto-md">'; $x = 0;
-       				}
+					
        				$out .= '<div class="col-md-6 col-sm-6 col-xs-12 noticia margen-inf-sm h100">';
-       				$out .= '<div class="cabecera">';
-				        $out .= '<a href="'.get_permalink($post->ID).'">';
-				        	$out .= sitio::ead_get_the_post_thumbnail( $post->ID, 'entry-img', array( 'class' => 'ancho-maximo' ) );
-				        $out .= '</a>';
-				      $out .= '</div>';
+       				if (has_post_thumbnail( $post->ID )) {
+	       				$out .= '<div class="cabecera">';
+					        $out .= '<a href="'.get_permalink($post->ID).'">';
+					        	$out .= sitio::ead_get_the_post_thumbnail( $post->ID, 'entry-img', array( 'class' => 'ancho-maximo' ) );
+					        $out .= '</a>';
+					      $out .= '</div>';
+					}
+
 				        $out .= '<div class="relleno-sup-xs tooltip-demo">';
 				        	$out .= '<h4 class="xs sin-margen relleno-inf-xs  sombra-cabecera-claro-xs"><a class="condensado  negro-fundido gruesa" href="'.get_permalink($post->ID).'"><i class="icn icn-noticias margen-der-xs"></i>'.get_the_title( $post->ID ).'</a></h4>';
 					        $out .= '<span class="xs entry-details">Publicado el '.mysql2date( 'd \d\e F\, Y', $post->post_date ).'.';

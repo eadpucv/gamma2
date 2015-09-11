@@ -6,19 +6,18 @@
   <h1 class="lg entry-title especifico"><?php echo sitio::archive_title(); ?></h1>
   <?php 
   $x = 0;
-  echo '<div class="fila alto-md margen-sup-sm margen-inf">';	
+  echo '<div class="fila alto-md margen-sup-sm margen-inf widget-post-categories">';	
   while ( have_posts() ): the_post();
   global $post;
-  if ($x >= 3) {
-  		echo '</div><div class="fila alto-md margen-sup-sm margen-inf">';
-  		$x = 0;
-  	}
+
   	echo '<div class="col-md-4 col-sm-6 col-xs-12 noticia margen-inf-sm">';
-	  	echo '<div class="cabecera">';
-          echo '<a href="'.get_permalink( $post->ID ).'">';
-            echo sitio::ead_get_the_post_thumbnail( $post->ID, 'entry-img' );
-          echo '</a>';
-	      echo '</div>';
+  		if (has_post_thumbnail( $post->ID )):
+		  	echo '<div class="cabecera">';
+	          echo '<a href="'.get_permalink( $post->ID ).'">';
+	            echo sitio::ead_get_the_post_thumbnail( $post->ID, 'entry-img' );
+	          echo '</a>';
+		      echo '</div>';
+	      endif;
 	      echo '<div class="relleno-sup-xs tooltip-demo">';
 	        echo '<h4 class="xs sin-margen"><a href="'.get_permalink( $post->ID ).'"><i class="icn icn-noticias margen-der-xs"></i>'.get_the_title( $post->ID ).'</a></h4>';
 	        echo '<span class="xs entry-details">Publicado el '.mysql2date( 'd \d\e F\, Y', $post->post_date ).'.';
@@ -37,10 +36,12 @@
 	    echo '</div>';
   	$x++;
   	endwhile;
-  	if ( function_exists( 'wp_pagenavi' ) )
-  		wp_pagenavi();
   ?>
-
+	</div>
+	<?php 
+		if ( function_exists( 'wp_pagenavi' ) )
+  		wp_pagenavi();
+	 ?>
   </div><!-- fin de page -->
 </div><!-- fin de tag -->
 
