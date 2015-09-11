@@ -30,7 +30,14 @@
 				<?php the_content(); ?>
 			</div>
 		</article>
-
+		<div class="paginas-hijas">
+			<?php wp_list_pages(array(
+							'child_of' => $post->ID,
+							'show_date' => '',
+							'title_li' => 'Ver más'
+							));
+				 ?>
+		</div>
       </div>
     </div> <!-- fin de fila -->
   </div> <!-- fin de pag -->
