@@ -222,6 +222,7 @@ class site {
 	function enqueue_scripts(){
 		// front-end scripts
 		wp_enqueue_script( 'jquery' );
+		wp_enqueue_script( 'masonry' );
 		wp_enqueue_script( 'collapse', THEME_JS .'/collapse.js', array('jquery'), self::theme_ver, '' );
 		wp_enqueue_script( 'carousel', THEME_JS .'/carousel.js', array('jquery'), self::theme_ver, '' );
 		wp_enqueue_script( 'transition', THEME_JS .'/transition.js', array('jquery'), self::theme_ver, '' );
@@ -505,6 +506,9 @@ class sitio {
 		 	}
 		 	echo '<li><a>'.get_the_title( $post->ID ).'</a></li>';
 		 }
+		 if (is_post_type_archive( ) ) {
+		 	echo '<li><a> Archivo '.get_queried_object()->labels->name.'</a></li>';
+		 } 
 		echo '</ul>';
 	}
 	static function get_featured_category($slug) {
@@ -528,21 +532,21 @@ class sitio {
 		if ( has_post_thumbnail( $post_id ) ) {
 			return get_the_post_thumbnail( $post_id, $size, $attr );
 		} else {
-			global $_set;
-			$settings = $_set->settings;
-			if ( !empty( $settings['no_imagen'] ) ) {
-				$src = current( wp_get_attachment_image_src( $settings['no_imagen'], $size ) );
-				//loop attr
-				$out = '';
-				if ( is_array($attr) ) {
-					foreach ( $attr as $key => $value ) {
-						$out .= ' '.$key.'="'.$value.'"';
-					}
-				}
-				return '<img src="'.$src.'"'.$out.'>';
-			} else {
-				return null;
-			}
+			// global $_set;
+			// $settings = $_set->settings;
+			// if ( !empty( $settings['no_imagen'] ) ) {
+			// 	$src = current( wp_get_attachment_image_src( $settings['no_imagen'], $size ) );
+			// 	//loop attr
+			// 	$out = '';
+			// 	if ( is_array($attr) ) {
+			// 		foreach ( $attr as $key => $value ) {
+			// 			$out .= ' '.$key.'="'.$value.'"';
+			// 		}
+			// 	}
+			// 	return '<img src="'.$src.'"'.$out.'>';
+			// } else {
+			// 	return null;
+			// }
 		}
 
 	}

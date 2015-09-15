@@ -32,6 +32,15 @@ function string_to_slug(str) {
 
  jQuery(document).ready(function($){
 
+    if ( window.screen.width > 481 ) {
+        $grid = $('.widget-post-categories');
+        $grid.imagesLoaded( function(){
+            $grid.masonry({
+                itemSelector: '.noticia'
+            });
+        });
+    }
+
     $('.page-contenido').find('h4').each(function(){
         var obj = $(this);
         var slug = string_to_slug(obj.text());

@@ -15,6 +15,9 @@
 <!-- Menú dropdown -->
 <div class="oculto-xs nav-ead relleno-sup-sm">
   <div class="pag sin-relleno borde">
+    <!-- <div class="nav-busqueda-login">
+      <input type="text" placeholder="buscador"> <a href="#"><i class="icn icn-usuario"></i></a>
+    </div> -->
   	<div class="bloque auto margen-inf-sm en-linea izquierda cf">
   		<div class="izquierda margen-der-xs logo en-linea">
       		<span class="bloque izquierda sombra-cabecera-claro-xs relleno-der-xs rojo sans"><a class="lg ead sans" href="<?php bloginfo("url") ?>">e[ad]</a></span>
@@ -33,7 +36,9 @@
       	);
       
       	wp_nav_menu( $args ); ?>
-
+        <div class="nav-busqueda-login">
+          <input type="text" placeholder="buscador"> <a href="#"><i class="icn icn-usuario"></i></a>
+        </div>
   </div>
 </div>
 

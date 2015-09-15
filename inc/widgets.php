@@ -153,18 +153,20 @@ class WP_Widget_news extends WP_Widget {
             echo '<h2 class="xs titulo-seccion margen-inf-md">';
                 echo '<a href="'.$link_category.'"><i class="icn icn-noticias icn-light"></i> '.$the_title.'</a>';
             echo '</h2>';
-            echo '<div class="pag sin-relleno gutter margen-sup-sm">';
+            echo '<div class="pag sin-relleno gutter margen-sup-sm widget-post-categories">';
                 $x = 0;
                 foreach ($post_list as $entry):
                     if ($x == 0) { echo '<div class="fila">'; }
                     $x++;
                     if ($x == 4) { echo '</div><div class="fila">'; $x = 1; }
                         echo '<div class="col-md-4 col-sm-6 col-xs-12 noticia">';
-                            echo '<div class="cabecera">';
-                                echo '<a href="'.get_permalink( $entry->ID ).'">';
-                                    echo sitio::ead_get_the_post_thumbnail( $entry->ID, 'entry-img' );
-                                echo '</a>';
-                            echo '</div>';
+                            if (has_post_thumbnail( $entry->ID )):
+                                echo '<div class="cabecera">';
+                                    echo '<a href="'.get_permalink( $entry->ID ).'">';
+                                        echo sitio::ead_get_the_post_thumbnail( $entry->ID, 'entry-img' );
+                                    echo '</a>';
+                                echo '</div>';
+                            endif;
                             //<!-- Título, fecha de publicación, reseña de noticia -->
                             echo '<h4 class="xs sin-margen"><a href="'.get_permalink( $entry->ID ).'">'.get_the_title( $entry->ID ).'</a></h4>';
                             echo '<div class="xs entry-details">Publicado el '.mysql2date('d \d\e F\, Y',$entry->post_date).'.';
