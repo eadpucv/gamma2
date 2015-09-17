@@ -13,11 +13,8 @@
  ?>
 <body <?php body_class(); ?>>
 <!-- Menú dropdown -->
-<div class="oculto-xs nav-ead relleno-sup-sm">
+<div class="oculto-xs nav-ead">
   <div class="pag sin-relleno borde">
-    <!-- <div class="nav-busqueda-login">
-      <input type="text" placeholder="buscador"> <a href="#"><i class="icn icn-usuario"></i></a>
-    </div> -->
   	<div class="bloque auto margen-inf-sm en-linea izquierda cf">
   		<div class="izquierda margen-der-xs logo en-linea">
       		<span class="bloque izquierda sombra-cabecera-claro-xs relleno-der-xs rojo sans"><a class="lg ead sans" href="<?php bloginfo("url") ?>">e[ad]</a></span>
@@ -27,6 +24,10 @@
       <!--<span class='xs bloque izquierda sans negro-fundido en-linea'>Pontificia universidad católica de Valparaíso</span>-->
   	</div>
   	</div>
+      <div class="nav-busqueda-login">
+        <a href="#"><i class="icn icn-usuario"></i> <span></span></a>
+        <input type="text" class="form-control" placeholder="Buscar">
+      </div>
       <?php 
       	$args = array(
       		'theme_location' => 'principal',
@@ -36,9 +37,6 @@
       	);
       
       	wp_nav_menu( $args ); ?>
-        <div class="nav-busqueda-login">
-          <input type="text" placeholder="buscador"> <a href="#"><i class="icn icn-usuario"></i></a>
-        </div>
   </div>
 </div>
 

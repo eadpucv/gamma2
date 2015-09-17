@@ -1344,7 +1344,7 @@ nav[role=navigation] li a {
 .nav > li > a {
   position: relative;
   display: block;
-  padding: 10px 0;
+  padding: 10px 10px 10px 0;
 }
 .nav > li > a:hover,
 .nav > li > a:focus {
@@ -1370,28 +1370,108 @@ nav[role=navigation] li a {
   max-width: none;
 }
 .nav-busqueda-login {
-  height: 25px;
-  padding: 10px 0;
+  background-color: rgba(236, 238, 230, 0.8);
+  position: absolute;
+  top: -25px;
+  right: 0;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  padding: 2px 6px 4px 6px;
   float: right;
-  max-width: 130px;
 }
 .nav-busqueda-login input {
-  float: left;
+  float: right;
   background-color: transparent;
   border-color: transparent !important;
-  border-bottom: 1px solid #575851 !important;
-  width: 75% !important;
+  border-bottom: 1px solid rgba(194, 196, 186, 0.45) !important;
+  width: 120px !important;
+  margin-top: 1px !important;
+  margin-right: 10px !important;
+  margin-bottom: 0 !important;
   padding: 0 !important;
+  font-size: 11.5px !important;
+  -webkit-transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -o-transition: 0.2s ease all;
+  transition: 0.2s ease all;
+  text-align: right;
+}
+.nav-busqueda-login input::-webkit-input-placeholder {
+  color: rgba(194, 196, 186, 0.6);
+  text-align: right;
+}
+.nav-busqueda-login input:-moz-placeholder {
+  /* Firefox 18- */
+  color: rgba(194, 196, 186, 0.6);
+  text-align: right;
+}
+.nav-busqueda-login input::-moz-placeholder {
+  /* Firefox 19+ */
+  color: rgba(194, 196, 186, 0.6);
+  text-align: right;
+}
+.nav-busqueda-login input:-ms-input-placeholder {
+  color: rgba(194, 196, 186, 0.6);
+  text-align: right;
 }
 .nav-busqueda-login input:focus {
-  inner-shadow: none;
-  box-shadow: 0;
-  outline: 0;
-  background-color: rgba(255, 255, 255, 0.2) !important;
+  box-shadow: none !important;
+  outline: 0 !important;
+  color: #575851;
+  background-color: transparent !important;
+  -webkit-transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -o-transition: 0.2s ease all;
+  transition: 0.2s ease all;
+}
+.nav-busqueda-login input:focus::-webkit-input-placeholder {
+  color: #c2c4ba;
+  border-bottom: 1px solid #c2c4ba !important;
+  -webkit-transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -o-transition: 0.2s ease all;
+  transition: 0.2s ease all;
+}
+.nav-busqueda-login input:focus:-moz-placeholder {
+  /* Firefox 18- */
+  color: #c2c4ba;
+  border-bottom: 1px solid #c2c4ba !important;
+  -webkit-transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -o-transition: 0.2s ease all;
+  transition: 0.2s ease all;
+}
+.nav-busqueda-login input:focus::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #c2c4ba;
+  border-bottom: 1px solid #c2c4ba !important;
+  -webkit-transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -o-transition: 0.2s ease all;
+  transition: 0.2s ease all;
+}
+.nav-busqueda-login input:focus:-ms-input-placeholder {
+  color: #c2c4ba;
+  border-bottom: 1px solid #c2c4ba !important;
+  -webkit-transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -o-transition: 0.2s ease all;
+  transition: 0.2s ease all;
 }
 .nav-busqueda-login a {
-  border: 1px solid red;
+  *zoom: 1;
   float: right;
+}
+.nav-busqueda-login a:before,
+.nav-busqueda-login a:after {
+  display: table;
+  content: "";
+}
+.nav-busqueda-login a:after {
+  clear: both;
+}
+.nav-busqueda-login a span {
+  font-size: 11.5px;
 }
 .nav-tabs {
   margin-bottom: 0px;
@@ -10472,8 +10552,11 @@ tbody.collapse.in {
   margin-right: 0;
   border-left: none !important;
   background-color: rgba(236, 238, 230, 0.8);
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
   box-shadow: none;
-  border-radius: 0;
   width: 100%;
 }
 #index .evento .fecha span,
@@ -19734,6 +19817,7 @@ tbody.collapse.in {
   background: url(../img/ruido-fondo-pyxis.png) repeat center;
 }
 .nav-ead {
+  padding-top: 25px;
   background: url(../img/ruido-fondo-pyxis.png) repeat center;
 }
 #tag .fila {
