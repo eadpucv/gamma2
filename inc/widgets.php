@@ -18,9 +18,9 @@
               echo '<div class="fila">';
                 echo '<div class="flexbox">';
                     echo '<div class="col-md-1">';
-                      echo '<i class="icn icn-lg rojo icn-anuncio icn-light en-linea izquierda margen-sup-negativo-sm"></i>';
+                      echo '<a href="'.get_permalink( $the_post->ID ).'"><i class="icn icn-lg rojo icn-anuncio icn-light en-linea izquierda margen-sup-negativo-sm"></i></a>';
                     echo '</div>';
-                    echo '<div class="col-md-8 col-sm-4 borde radio-sup-der-sm radio-inf-der-sm sin-relleno-izq">';
+                    echo '<div class="col-md-8 col-sm-8 borde radio-sup-der-sm radio-inf-der-sm sin-relleno-izq">';
                       echo '<div class="tooltip-demo">';
                         echo '<h6 class="xs sin-margen sans rojo gruesa en-linea altas">'.get_the_title( $the_post->ID ).'</h6>';
                         echo '<p class="sin-margen">';
@@ -36,7 +36,7 @@
                         echo '<p class="xs sans sin-margen justificado">'.smart_substr( $the_post->post_content,255 ).'</p>';
                       echo '</div>';
                     echo '</div>';
-                    echo '<div class="col-md-3 oculto-sm oculto-xs docencia-flex">';
+                    echo '<div class="col-md-3 docencia-flex">';
                         echo '<a href="'.get_permalink( $the_post->ID ).'" class="btn centrado btn-alerta fondo-blanco sin-margen">Ver información</a>';
                     echo '</div>';
                 echo '</div>';

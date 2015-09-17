@@ -1663,6 +1663,27 @@ footer ul li {
   -moz-border-radius-topleft: 0;
   border-top-left-radius: 0;
 }
+.menu-movil-categorias {
+  border-top: 1px solid #c2c4ba !important;
+}
+.menu-movil-categorias li {
+  display: block;
+  background-color: rgba(236, 238, 230, 0.8);
+  border-bottom: 1px solid #c2c4ba;
+}
+.menu-movil-categorias li a {
+  color: #a84744 !important;
+}
+.menu-movil-categorias li ul {
+  border-top: 1px solid #c2c4ba !important;
+}
+.menu-movil-categorias li ul li {
+  background-color: #fff;
+  border-bottom: 1px solid rgba(236, 238, 230, 0.8);
+}
+.menu-movil-categorias li ul li a {
+  color: #010101 !important;
+}
 @media (max-width: 767px) {
   .logo-pyxis {
     float: left;
@@ -10522,8 +10543,8 @@ tbody.collapse.in {
 }
 #index .docencia-flex,
 #tag .docencia-flex {
-  display: -webkit-flex !important;
-  display: flex !important;
+  display: -webkit-flex;
+  display: flex;
 }
 #index .docencia-flex a,
 #tag .docencia-flex a {
@@ -20760,6 +20781,15 @@ tbody.collapse.in {
   .p-name .wp-caption-text {
     line-height: 1.375em;
     font-size: 16px;
+  }
+  .docencia-flex {
+    display: none !important;
+  }
+  .noticia {
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    margin-bottom: 40px;
   }
 }
 @media (min-width: 768px) and (max-width: 991px) {

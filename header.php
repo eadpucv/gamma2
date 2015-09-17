@@ -43,7 +43,7 @@
 
 <!-- Menú responsivo -->
 <div class="oculto-lg oculto-md oculto-sm">
-  <div class="fondo-negro">
+  <div class="fondo-blanco">
     <div class="pag menu-movil">
       <div class="centrado bloque izquierda margen-der-xs logo en-linea">
         <h1 class="sm linea centrado sans"><a class="sans rojo centrado" href="<?php bloginfo('url') ?>">e[ad]</a></h1>
@@ -59,7 +59,7 @@
         $args = array(
           'theme_location' => 'principal',
           'container' => '',
-          'menu_class' => '',
+          'menu_class' => 'menu-movil-categorias',
           'walker' => new Walker_Nav_Menu_ead_mobile()
         );
       
