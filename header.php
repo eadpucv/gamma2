@@ -25,7 +25,7 @@
   	</div>
   	</div>
       <div class="nav-busqueda-login">
-        <a href="#"><i class="icn icn-usuario"></i> <span></span></a>
+        <a href="#"><i class="icn icn-usuario"></i> <span>"Username"</span></a>
         <input type="text" class="form-control" placeholder="Buscar">
       </div>
       <?php 
