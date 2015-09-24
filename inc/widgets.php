@@ -16,27 +16,29 @@
             echo '<h2 class="xs titulo-seccion margen-sup-md"><i class="icn icn-anuncio icn-light"></i>'.$the_title.'</h2>';
             echo '<div class="pag">';
               echo '<div class="fila">';
-                echo '<div class="col-md-3 col-sm-4 borde radio-sup-der-sm radio-inf-der-sm">';
-                  echo '<i class="icn icn-lg rojo icn-anuncio icn-light en-linea izquierda"></i>';
-                  echo '<div class="h100 tooltip-demo">';
-                    echo '<h6 class="xs sin-margen sans rojo gruesa en-linea w60 altas relleno-izq-sm">'.get_the_title( $the_post->ID ).'</h6>';
-                    echo '<span class="xs italica margen-izq-sm relleno-inf-xs">'.mysql2date('d \d\e F\, Y', $the_post->post_date).'</span>';
-                    if ( is_user_logged_in() ){
-                        echo '<a data-toggle="tooltip" title="Editar" class="xs en-linea rojo relleno-sup-xs sin-margen" href="'.get_edit_post_link($the_post->ID).'">';
-                          echo '<span><i class="icn icn-lapiz margen-izq-xs margen-sup-xs"></i></span>';
-                        echo '</a>';
-                    }
-                  echo '</div>';
-                echo '</div>';
-                echo '<div class="col-md-5 col-sm-12 relleno-izq-sm">';
-                  echo '<div class="der-lineal-xs">';
-                    echo '<p class="xs sans sin-margen justificado">'.smart_substr( $the_post->post_content,255 ).'</p>';
-                  echo '</div>';
-                echo '</div>';
-                echo '<div class="col-md-4 oculto-sm oculto-xs">';
-                  echo '<div class="fila">';
-                    echo '<span class="centrado"><a href="'.get_permalink( $the_post->ID ).'" class="btn btn-alerta fondo-blanco">Ver información</a></span>';
-                  echo '</div>';
+                echo '<div class="flexbox">';
+                    echo '<div class="col-md-1">';
+                      echo '<a href="'.get_permalink( $the_post->ID ).'"><i class="icn icn-lg rojo icn-anuncio icn-light en-linea izquierda margen-sup-negativo-sm"></i></a>';
+                    echo '</div>';
+                    echo '<div class="col-md-8 col-sm-8 borde radio-sup-der-sm radio-inf-der-sm sin-relleno-izq">';
+                      echo '<div class="tooltip-demo">';
+                        echo '<h6 class="xs sin-margen sans rojo gruesa en-linea altas">'.get_the_title( $the_post->ID ).'</h6>';
+                        echo '<p class="sin-margen">';
+                            echo '<span class="xs italica relleno-inf-xs">'.mysql2date('d \d\e F\, Y', $the_post->post_date).'</span>';
+                            if ( is_user_logged_in() ){
+                            echo '<a data-toggle="tooltip" title="Editar" class="xs en-linea rojo relleno-sup-xs sin-margen" href="'.get_edit_post_link($the_post->ID).'">';
+                              echo '<span><i class="icn icn-lapiz margen-izq-xs margen-sup-xs"></i></span>';
+                            echo '</a>';
+                        }
+                        echo '</p>';
+                      echo '</div>';
+                      echo '<div class="der-lineal-xs">';
+                        echo '<p class="xs sans sin-margen justificado">'.smart_substr( $the_post->post_content,255 ).'</p>';
+                      echo '</div>';
+                    echo '</div>';
+                    echo '<div class="col-md-3 docencia-flex">';
+                        echo '<a href="'.get_permalink( $the_post->ID ).'" class="btn centrado btn-alerta fondo-blanco sin-margen">Ver información</a>';
+                    echo '</div>';
                 echo '</div>';
               echo '</div>';
             echo '</div>';
@@ -92,19 +94,24 @@ class WP_Widget_events extends WP_Widget {
             echo '<div class="pag">';
             echo '<div class="fila">';
             foreach ($event_list as $event):
-                  echo '<div class="col-md-6 col-sm-6 col-xs-12 evento margen-inf-sm">';
+                  echo '<div class="col-md-4 col-sm-4 col-xs-12 evento margen-inf-sm">';
                     echo '<div class="fila">';
-                      echo '<div class="col-lg-2 col-md-2 col-sm-2 col-xs-3">';
-                        echo '<div class="fecha"><span class="sm">'.mysql2date('d M',$event->event_date).'</span></div>';
-                      echo '</div>';
-                      echo '<div class="col-lg-10 col-md-10 col-sm-12 contenido tooltip-demo">';
-                        echo '<h5 class="xs sin-margen relleno-inf-xs"><a href="'.get_permalink($event->ID).'">'.get_the_title($event->ID).'</a></h5>';
-                        echo '<span class="xs entry-details">Publicado el '.mysql2date('d \d\e F\, Y',$event->event_date).'.</span>';
-                        if ( is_user_logged_in() ){
-                            echo '<a data-toggle="tooltip" href="'.get_edit_post_link($event->ID).'" title="Editar" class="xs en-linea sin-margen">';
-                              echo '<span><i class="icn icn-lapiz icn-sm"></i></span>';
-                            echo '</a>';
-                        } 
+                        echo '<div class="flexbox">';
+                          echo '<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">';
+                            echo '<div class="fecha"><span class="sm">'.mysql2date('d M',$event->event_date).'</span></div>';
+                          echo '</div>';
+                          echo '<div class="col-lg-9 col-md-9 col-sm-12 cabecera tooltip-demo">';
+                            echo '<h5 class="xs sin-margen relleno-inf-xs">';
+                                echo '<a href="'.get_permalink($event->ID).'">'.get_the_title($event->ID).' </a>';
+                                if ( is_user_logged_in() ){
+                                echo '<a data-toggle="tooltip" href="'.get_edit_post_link($event->ID).'" title="Editar" class="xs en-linea sin-margen">';
+                                  echo '<span><i class="icn icn-lapiz icn-sm"></i></span>';
+                                echo '</a>';
+                            } 
+                            echo '</h5>';
+                            echo '</div>';
+                        echo '</div>';
+                        echo '<div class="col-lg-12 col-md-12 col-sm-12 contenido">';
                         $the_excerpt = ( !empty( $event->post_excerpt ) ) ?  $event->post_excerpt : smart_substr( $event->post_content, 255 );
                         echo '<p class="xs">'.$the_excerpt.' <a class="" href="'.get_permalink($event->iD).'">[<i class="icn icn-lentes"></i>]</a></p>';
                     echo '</div>';
@@ -294,15 +301,15 @@ class WP_Widget_posts extends WP_Widget {
                 foreach ( $post_list as $the_post ):
                     $categories = wp_get_post_categories( $the_post->ID );
                     $the_category = get_category($categories[0]);
-                    echo '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 publicacion">';
-                    if ( count( $categories ) ):
-                          echo '<a class="categoria" href="'.get_category_link($the_category->term_id).'">';
-                            echo '<i class="icn icn-archivo"></i><h6 class="xs">'.$the_category->name.'</h6>';
-                          echo '</a>';
-                    endif;
-                      echo '<div class="auto margen-inf-sm tooltip-demo alto-xs">';
+                    echo '<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 publicacion">';
+                    // if ( count( $categories ) ):
+                    //       echo '<a class="categoria" href="'.get_category_link($the_category->term_id).'">';
+                    //         echo '<i class="icn icn-archivo"></i><h6 class="xs">'.$the_category->name.'</h6>';
+                    //       echo '</a>';
+                    // endif;
+                      echo '<div class="auto margen-sup-sm margen-inf-sm tooltip-demo">';
                         echo '<h5 class="xs sin-margen relleno-inf-xs"><a href="'.get_permalink($the_post->ID).'">'.get_the_title($the_post->ID).'</a></h5>';
-                        echo '<span class="xs entry-details">Publicado el '.mysql2date('d \d\e F\, Y',$the_post->post_date).'.</span>';
+                        echo '<span class="xs entry-details">Publicado en <a class="categoria" href="'.get_category_link($the_category->term_id).'">'.$the_category->name.'</a>, el '.mysql2date('d \d\e F\, Y',$the_post->post_date).' </span> ';
                         if ( is_user_logged_in() ){
                           echo '<a data-toggle="tooltip" title="Editar" class="xs en-linea sin-margen" href="'.get_edit_post_link($the_post->ID).'">';
                             echo '<span><i class="icn icn-lapiz icn-sm"></i></span>';
@@ -354,20 +361,27 @@ class WP_Widget_school_links extends WP_Widget {
                         $class_active = ( $i == 0 ) ? ' active' : '';
                       echo '<div class="item'.$class_active.' car-xs escuela-y-enlaces">';
                         echo '<div class="pag sin-relleno">';
-                          echo '<div class="fila">';
-                            echo '<div class="col-md-4 col-sm-12 oculto-xs">';
-                              echo '<h5 class="sm condensado gruesa negro margen-inf-sm">'.$current_title.'</h5>';
-                              echo '<p class="serif italica sin-margen relleno-inf-sm">'.$current_content.'</p>';
-                                echo '<div class="grupo-botones oculto-sm margen-sup-xs">';
-                                    foreach ($current_pages as $the_page) {
-                                        echo '<a href="'.get_permalink($the_page).'" class="btn btn-alerta">'.get_the_title($the_page).'</a>';
-                                  }
-                                echo '</div>';
+                          echo '<div class="fila flexbox">';
+                            echo '<div class="col-md-4 col-sm-12 oculto-xs carousel-flex">';
+                              echo '<div>';
+                                echo '<h5 class="sm condensado gruesa negro margen-inf-sm">'.$current_title.'</h5>';
+                                echo '<p class="serif italica sin-margen relleno-inf-sm">'.$current_content.'</p>';
+                                // echo '<div class="grupo-botones oculto-sm margen-sup-xs">';
+                                //     foreach ($current_pages as $the_page) {
+                                //         echo '<a href="'.get_permalink($the_page).'" class="btn btn-xs btn-alerta">'.get_the_title($the_page).'</a>';
+                                //   }
+                                // echo '</div>';
+                              echo '</div>';
                             echo '</div>';
                             echo '<div class="col-md-8 col-sm-12 oculto-xs">';
-                              echo '<div class="ocultar-desborde alto-md sombra borde radio-md">';
+                                echo '<div class="grupo-botones oculto-sm margen-sup-xs">';
+                                    foreach ($current_pages as $the_page) {
+                                        echo '<a href="'.get_permalink($the_page).'" class="btn btn-xs btn-alerta">'.get_the_title($the_page).'</a>';
+                                  }
+                                echo '</div>';
+                              echo '<div class="img ocultar-desborde sombra borde radio-md">';
                               echo $current_image;
-                            echo '</div>';
+                              echo '</div>';
                             echo '</div>';
                           echo '</div>';
                         echo '</div>';

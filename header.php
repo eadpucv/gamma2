@@ -13,7 +13,7 @@
  ?>
 <body <?php body_class(); ?>>
 <!-- Menú dropdown -->
-<div class="oculto-xs nav-ead relleno-sup-sm">
+<div class="oculto-xs nav-ead">
   <div class="pag sin-relleno borde">
   	<div class="bloque auto margen-inf-sm en-linea izquierda cf">
   		<div class="izquierda margen-der-xs logo en-linea">
@@ -24,6 +24,10 @@
       <!--<span class='xs bloque izquierda sans negro-fundido en-linea'>Pontificia universidad católica de Valparaíso</span>-->
   	</div>
   	</div>
+      <div class="nav-busqueda-login">
+        <a href="#"><i class="icn icn-usuario"></i> <span>"Username"</span></a>
+        <input type="text" class="form-control" placeholder="Buscar">
+      </div>
       <?php 
       	$args = array(
       		'theme_location' => 'principal',
@@ -33,14 +37,13 @@
       	);
       
       	wp_nav_menu( $args ); ?>
-
   </div>
 </div>
 
 
 <!-- Menú responsivo -->
 <div class="oculto-lg oculto-md oculto-sm">
-  <div class="fondo-negro">
+  <div class="fondo-blanco">
     <div class="pag menu-movil">
       <div class="centrado bloque izquierda margen-der-xs logo en-linea">
         <h1 class="sm linea centrado sans"><a class="sans rojo centrado" href="<?php bloginfo('url') ?>">e[ad]</a></h1>
@@ -56,7 +59,7 @@
         $args = array(
           'theme_location' => 'principal',
           'container' => '',
-          'menu_class' => '',
+          'menu_class' => 'menu-movil-categorias',
           'walker' => new Walker_Nav_Menu_ead_mobile()
         );
       
