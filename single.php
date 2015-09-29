@@ -28,8 +28,8 @@
 			<?php the_content(); ?>
 		</div>
 		<aside id="sidebar">
-  			<div class="col-md-3 col-sm-3">
-  			<?php dynamic_sidebar( 'single-right' ); ?>
+  			<div class="col-md-3 col-sm-3 ddd">
+  			<?php dynamic_sidebar( 'single-right' ); ?>			
   			</div>
   		</aside>
 	</div>
