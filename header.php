@@ -24,9 +24,12 @@
       <!--<span class='xs bloque izquierda sans negro-fundido en-linea'>Pontificia universidad católica de Valparaíso</span>-->
   	</div>
   	</div>
-      <div class="nav-busqueda-login">
+      <!-- <div class="nav-busqueda-login">
         <a href="#"><i class="icn icn-usuario"></i> <span>"Username"</span></a>
         <input type="text" class="form-control" placeholder="Buscar">
+      </div> -->
+      <div class="nav-login">
+        <a href="#"><i class="icn icn-usuario"></i> <span>Herbert Spencer</span></a>
       </div>
       <?php 
       	$args = array(
@@ -37,6 +40,9 @@
       	);
       
       	wp_nav_menu( $args ); ?>
+        <div class="nav-busqueda">
+          <input type="text" class="form-control" placeholder="Buscar">
+        </div>
   </div>
 </div>
 
