@@ -31,7 +31,7 @@
       <div class="nav-login">
       <?php 
         $current_user = wp_get_current_user();
-        $admin_link = ( is_user_logged_in() ) ? admin_url() : admin_url('profile.php');
+        $admin_link = ( is_user_logged_in() ) ? admin_url('profile.php') : admin_url();
         $admin_user = ( is_user_logged_in() ) ? '<span>'.$current_user->display_name.'</span>' : '';
        ?>
         <a href="<?php echo $admin_link ?>"><i class="icn icn-usuario"></i> <?php echo $admin_user; ?></a>
