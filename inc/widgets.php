@@ -1,4 +1,7 @@
 <?php 
+    /*
+    *  WIDGET DE NOTICIAS DE DOCENCIA EN HOME
+    */
     class WP_Widget_docencia extends WP_Widget {
     /** constructor */
     function WP_Widget_docencia() {
@@ -72,7 +75,9 @@
         echo $this->get_docencia($ev);
     } 
 }
-
+/*
+*  WIDGET DE LISTADO DE EVENTOS EN HOME
+*/
 class WP_Widget_events extends WP_Widget {
     /** constructor */
     function WP_Widget_events() {
@@ -89,7 +94,7 @@ class WP_Widget_events extends WP_Widget {
         $the_title = (!empty( $title )) ? $title : 'Eventos';
 
         if (!empty($event_list)):
-            echo '<h2 class="xs titulo-seccion margen-inf-sm margen-sup"><i class="icn icn-calendario icn-light"></i>'.$the_title.'</h2>';
+            echo '<h2 class="xs titulo-seccion margen-inf-sm margen-sup"><a href="'.site_url('actividades').'"><i class="icn icn-calendario icn-light"></i>'.$the_title.'</h2>';
 
             echo '<div class="pag">';
             echo '<div class="fila">';
@@ -133,7 +138,9 @@ class WP_Widget_events extends WP_Widget {
         echo '<p><label for="'.$this->get_field_id('events').'">Eventos a mostrar: <input type="text" name="'. $this->get_field_name('events') .'" id="'.$this->get_field_id('events').'" value="'.$instance['events'].'" class="widefat" /></label></p>';
     } 
 }
-
+/*
+*  WIDGET DE NOTICIAS POR CATEGORIA EN HOME
+*/
 class WP_Widget_news extends WP_Widget {
     /** constructor */
     function WP_Widget_news() {
@@ -148,17 +155,16 @@ class WP_Widget_news extends WP_Widget {
         $num = ( !empty( $num_posts ) ) ? $num_posts : 4;
         $post_list = sitio::get_posts_by_category($category,$num);
         $the_title = (!empty( $title )) ? $title : 'Entradas';
-        $link_category = get_category_link( $category );
+        $category_id = get_category_by_slug( $category );
+        $link_category = get_category_link( $category_id->term_id );
         if (!empty($post_list)):
             echo '<h2 class="xs titulo-seccion margen-inf-md">';
                 echo '<a href="'.$link_category.'"><i class="icn icn-noticias icn-light"></i> '.$the_title.'</a>';
             echo '</h2>';
             echo '<div class="pag sin-relleno gutter margen-sup-sm widget-post-categories">';
+            echo '<div class="fila">';
                 $x = 0;
                 foreach ($post_list as $entry):
-                    if ($x == 0) { echo '<div class="fila">'; }
-                    $x++;
-                    if ($x == 4) { echo '</div><div class="fila">'; $x = 1; }
                         echo '<div class="col-md-4 col-sm-6 col-xs-12 noticia">';
                             if (has_post_thumbnail( $entry->ID )):
                                 echo '<div class="cabecera">';
@@ -171,7 +177,7 @@ class WP_Widget_news extends WP_Widget {
                             echo '<h4 class="xs sin-margen"><a href="'.get_permalink( $entry->ID ).'">'.get_the_title( $entry->ID ).'</a></h4>';
                             echo '<div class="xs entry-details">Publicado el '.mysql2date('d \d\e F\, Y',$entry->post_date).'.';
                             if ( is_user_logged_in() ){
-                                echo '<a data-toggle="tooltip" href="#" title="Editar" class="xs sin-margen" href="'.get_edit_post_link($entry->ID).'">';
+                                echo '<a data-toggle="tooltip" title="Editar" class="xs sin-margen" href="'.get_edit_post_link($entry->ID).'">';
                                     echo '<span class="icn-stack">';
                                         echo '<span class="icn icn-cuadrolleno icn-stack-2x"></span>';
                                         echo '<span class="icn icn-lapiz icn-sm icn-stack-1x"></span>';
@@ -205,6 +211,9 @@ class WP_Widget_news extends WP_Widget {
         echo '</p>';
     } 
 }
+/*
+*  WIDGET DE LISTADO DE NOTICIAS CON THUMBNAIL
+*/
 class WP_Widget_news_thumb extends WP_Widget {
     /** constructor */
     function WP_Widget_news_thumb() {
@@ -255,7 +264,9 @@ class WP_Widget_news_thumb extends WP_Widget {
         echo '</p>';
     } 
 }
-
+/*
+*  WIDGET QUE CONTIENE EL TIMELINE DE TWITTER DE LA ESCUELA
+*/
 class WP_Widget_twitter extends WP_Widget {
     /** constructor */
     function WP_Widget_twitter() {
@@ -279,6 +290,9 @@ class WP_Widget_twitter extends WP_Widget {
     } 
 }
 
+/*
+*  WIDGET DE LISTADO DE ULTIMAS ENTRADAS
+*/
 class WP_Widget_posts extends WP_Widget {
     /** constructor */
     function WP_Widget_posts() {
@@ -335,6 +349,9 @@ class WP_Widget_posts extends WP_Widget {
     } 
 }
 
+/*
+*  WIDGET DE ESCUELA & ENLACES DEL HOME
+*/
 class WP_Widget_school_links extends WP_Widget {
     /** constructor */
     function WP_Widget_school_links() {
@@ -451,6 +468,9 @@ class WP_Widget_school_links extends WP_Widget {
     } 
 }
 
+/*
+*  WIDGET DE MENU CUSTOM MODIFICADO PARA EAD
+*/
 class WP_ead_Nav_Menu_Widget extends WP_Widget {
 
     public function __construct() {

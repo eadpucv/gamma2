@@ -509,6 +509,9 @@ class sitio {
 		 if (is_post_type_archive( ) ) {
 		 	echo '<li><a> Archivo '.get_queried_object()->labels->name.'</a></li>';
 		 } 
+		 if ( is_search() ) {
+		 	echo '<li><a> Búsqueda de :'.get_search_query().'</a></li>';
+		 }
 		echo '</ul>';
 	}
 	static function get_featured_category($slug) {
@@ -668,45 +671,48 @@ class sitio {
 class render {
 	static function carousel_portadilla($slug) {
 		$entries = sitio::get_featured_category($slug);
-		echo '<div data-ride="carousel" class="carousel slide oculto-sm oculto-xs bloque ancho-completo" id="carousel-home">';
-	  		echo '<div class="carousel-inner">';
-	  			$x = 0;
-	  			foreach ( $entries as $entry) {
-	  				$class_active = ($x == 0) ? ' active' : '';
-	  				echo '<div class="item'.$class_active.' car-xs">';
-	  					if ( has_post_thumbnail( $entry->ID ) ){
-	  						echo get_the_post_thumbnail( $entry->ID, 'main-feature', array('class' => 'ancho-completo atras fijo absoluto abs-der portadilla') );
-	  					}
-				      echo '<div class="ancho-completo alto-completo oculto-xs izquierda cf">';
-				          echo '<a href="'.get_permalink( $entry->ID ).'">';
-				            echo '<div class="fondo-gris-blanco-trans-xs alto-completo absoluto abs-inf abs-izq bloque ancho-completo margen-sup-xs-negativo relleno-xs">';
-				              echo '<div class="pag sin-relleno cf">';
-				              	echo '<div class="col-md-10 col-md-offset-1">';
-				              		//echo '<h4 class="xs semi-gruesa interletraje-sm altas rojo relleno-sup-xs centrado sans fino">Noticias</h4>';
-				              		echo '<h2 class="sm interletraje-negativo relleno-sup-xs centrado margen-sup-xs sombra-cabecera-blanco-xs gruesa negro-fundido condensado"><i class="icn icn-noticias margen-der-xs sin-interletraje"></i> '.get_the_title( $entry->ID ).'</h2>';
-				              		echo '<div class="ancho-completo bloque izquierda">';
-				              			echo '<span class="italica negro-fundido sombra-cabecera-blanco-xs relleno-sup-xs centrado relleno-inf-xs gruesa">Publicado el '. mysql2date( 'd \d\e F\, Y',$entry->post_date ) .'</span>';
-				              			$the_excerpt = ( !empty( $entry->post_excerpt ) ) ? $entry->post_excerpt : smart_substr( $entry->post_content, 255 );
-				              			echo '<p class="margen-inf-sm sans sm negro centrado sombra-cabecera-blanco-xs relleno-sup-sm oculto-sm">'.$the_excerpt.'</p>';
-				              			echo '<div class="centrado oculto-sm">';
-				              			echo '</div>';
-				            		echo '</div>';
-				            	echo '</div>';
-				              echo '</div>';
-				            echo '</div>';
-				         echo '</a>';
-				    echo '</div>';
-				    echo '</div>';
-				    $x++;
-	  			}
+		
+		if ( !empty( $entries ) ) {
+			echo '<div data-ride="carousel" class="carousel slide oculto-sm oculto-xs bloque ancho-completo" id="carousel-home">';
+		  		echo '<div class="carousel-inner">';
+		  			$x = 0;
+		  			foreach ( $entries as $entry) {
+		  				$class_active = ($x == 0) ? ' active' : '';
+		  				echo '<div class="item'.$class_active.' car-xs">';
+		  					if ( has_post_thumbnail( $entry->ID ) ){
+		  						echo get_the_post_thumbnail( $entry->ID, 'main-feature', array('class' => 'ancho-completo atras fijo absoluto abs-der portadilla') );
+		  					}
+					      echo '<div class="ancho-completo alto-completo oculto-xs izquierda cf">';
+					          echo '<a href="'.get_permalink( $entry->ID ).'">';
+					            echo '<div class="fondo-gris-blanco-trans-xs alto-completo absoluto abs-inf abs-izq bloque ancho-completo margen-sup-xs-negativo relleno-xs">';
+					              echo '<div class="pag sin-relleno cf">';
+					              	echo '<div class="col-md-10 col-md-offset-1">';
+					              		//echo '<h4 class="xs semi-gruesa interletraje-sm altas rojo relleno-sup-xs centrado sans fino">Noticias</h4>';
+					              		echo '<h2 class="sm interletraje-negativo relleno-sup-xs centrado margen-sup-xs sombra-cabecera-blanco-xs gruesa negro-fundido condensado"><i class="icn icn-noticias margen-der-xs sin-interletraje"></i> '.get_the_title( $entry->ID ).'</h2>';
+					              		echo '<div class="ancho-completo bloque izquierda">';
+					              			echo '<span class="italica negro-fundido sombra-cabecera-blanco-xs relleno-sup-xs centrado relleno-inf-xs gruesa">Publicado el '. mysql2date( 'd \d\e F\, Y',$entry->post_date ) .'</span>';
+					              			$the_excerpt = ( !empty( $entry->post_excerpt ) ) ? $entry->post_excerpt : smart_substr( $entry->post_content, 255 );
+					              			echo '<p class="margen-inf-sm sans sm negro centrado sombra-cabecera-blanco-xs relleno-sup-sm oculto-sm">'.$the_excerpt.'</p>';
+					              			echo '<div class="centrado oculto-sm">';
+					              			echo '</div>';
+					            		echo '</div>';
+					            	echo '</div>';
+					              echo '</div>';
+					            echo '</div>';
+					         echo '</a>';
+					    echo '</div>';
+					    echo '</div>';
+					    $x++;
+		  			}
+		  		echo '</div>';
+			      echo '<a data-slide="prev" data-target="#carousel-home" href="#carousel-2" class="left portadilla carousel-control">';
+			        echo '<span class="icn icn-navizquierda"></span>';
+			      echo '</a>';
+			      echo '<a data-slide="next" data-target="#carousel-home" href="#carousel-2" class="right portadilla carousel-control">';
+			        echo '<span class="icn icn-nav"></span>';
+			      echo '</a>';
 	  		echo '</div>';
-		      echo '<a data-slide="prev" data-target="#carousel-home" href="#carousel-2" class="left portadilla carousel-control">';
-		        echo '<span class="icn icn-navizquierda"></span>';
-		      echo '</a>';
-		      echo '<a data-slide="next" data-target="#carousel-home" href="#carousel-2" class="right portadilla carousel-control">';
-		        echo '<span class="icn icn-nav"></span>';
-		      echo '</a>';
-  		echo '</div>';
+  		}
 	}
 }
 

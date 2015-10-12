@@ -29,7 +29,12 @@
         <input type="text" class="form-control" placeholder="Buscar">
       </div> -->
       <div class="nav-login">
-        <a href="#"><i class="icn icn-usuario"></i> <span>Herbert Spencer</span></a>
+      <?php 
+        $current_user = wp_get_current_user();
+        $admin_link = ( is_user_logged_in() ) ? admin_url() : admin_url('profile.php');
+        $admin_user = ( is_user_logged_in() ) ? '<span>'.$current_user->display_name.'</span>' : '';
+       ?>
+        <a href="<?php echo $admin_link ?>"><i class="icn icn-usuario"></i> <?php echo $admin_user; ?></a>
       </div>
       <?php 
       	$args = array(
@@ -40,9 +45,7 @@
       	);
       
       	wp_nav_menu( $args ); ?>
-        <div class="nav-busqueda">
-          <input type="text" class="form-control" placeholder="Buscar">
-        </div>
+        <?php get_search_form(); ?>
   </div>
 </div>
 
