@@ -165,7 +165,7 @@ class WP_Widget_news extends WP_Widget {
             echo '<div class="fila">';
                 $x = 0;
                 foreach ($post_list as $entry):
-                        echo '<div class="col-md-4 col-sm-6 col-xs-12 noticia">';
+                        echo '<div class="noticia">';
                             if (has_post_thumbnail( $entry->ID )):
                                 echo '<div class="cabecera">';
                                     echo '<a href="'.get_permalink( $entry->ID ).'">';

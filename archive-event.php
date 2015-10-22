@@ -10,7 +10,7 @@
   while ( have_posts() ): the_post();
   global $post;
 
-  	echo '<div class="col-md-4 col-sm-6 col-xs-12 noticia margen-inf-sm">';
+  	echo '<div class="noticia margen-inf-sm">';
   		if (has_post_thumbnail( $post->ID )):
 		  	echo '<div class="cabecera">';
 	          echo '<a href="'.get_permalink( $post->ID ).'">';
