@@ -36,8 +36,7 @@ function string_to_slug(str) {
         $grid = $('.widget-post-categories');
         $grid.imagesLoaded( function(){
             $grid.masonry({
-                itemSelector: '.noticia',
-                columnWidth: 280
+                itemSelector: '.noticia'
             });
         });
     }
