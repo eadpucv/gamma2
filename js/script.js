@@ -40,7 +40,16 @@ function string_to_slug(str) {
             });
         });
     }
-
+    $('.wiki-embed').find('h2').each(function(){
+        var obj = $(this);
+        var slug = string_to_slug(obj.text());
+        obj.attr('id',slug);
+        var icon = obj.find('.icn').clone().get(0);
+        var h6 = $('<h6>').addClass('xs').append(obj.text()).append(icon);
+        var link = $('<a>').attr('href','#'+slug).append(h6);
+        var li = $('<li>').addClass("sin-estilo").append(link);
+        $('.local-nav').append(li);
+    });
     $('.page-contenido').find('h4').each(function(){
         var obj = $(this);
         var slug = string_to_slug(obj.text());
