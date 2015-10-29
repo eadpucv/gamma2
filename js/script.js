@@ -32,7 +32,7 @@ function string_to_slug(str) {
 
  jQuery(document).ready(function($){
 
-    if ( window.screen.width > 481 ) {
+    if ( window.screen.width > 600 ) {
         $grid = $('.widget-post-categories');
         $grid.imagesLoaded( function(){
             $grid.masonry({
