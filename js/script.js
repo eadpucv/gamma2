@@ -44,7 +44,6 @@ function string_to_slug(str) {
     $('.page-contenido').find('h4, h2').each(function(){
         var obj = $(this);
         var tag_name = obj.prop('tagName');
-        console.log(tag_name);
         if ( ( tag_name == 'H2' && obj.parent().hasClass('wikiembed-fragment') ) || ( tag_name == 'H4' ) ) {
             var slug = string_to_slug(obj.text());
             obj.attr('id',slug);
