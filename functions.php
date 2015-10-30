@@ -811,3 +811,50 @@ function ead_args_widget_menu( $nav_menu_args, $nav_menu, $args ){
 	$args['menu_class'] = 'xs sin-relleno';
 	return $args;
 }
+
+/*
+	Plantilla portadilla Metabox
+*/
+class PortadillaMeta extends Model\PostMeta{
+    protected function setId(){
+        return 'publication';
+    }
+    private function get_categories() {
+    	$cat_list = array('' => 'Seleccione');
+    	$cats = get_categories();
+    	foreach ($cats as $c) {
+    		$cat_list[$c->slug] = $c->name;
+    	}
+    	return $cat_list;
+    }
+    protected function setDataModel(){
+    	global $post;
+    	$mensaje = array(
+    		new Model\PostMetaData(
+    			'message',
+    			'Mensaje',
+    			'\GutenPress\Forms\Element\DivContent',
+    			array(
+    				'content' => '<p class="description">Este template no posee configuraciones</p>'
+                )
+                )
+    		);
+        $metabox =  array(
+        	new Model\PostMetaData(
+                'category',
+                'Seleccionar Categoria',
+                '\GutenPress\Forms\Element\Select',
+                array(
+                	'options' => $this->get_categories()
+                )
+            ),
+        );
+		$template_name = get_page_template_slug( $post->ID );
+		if ($template_name == 'template-postgrado.php') {
+			return $metabox;
+		} else {
+			return $mensaje;
+		}
+    }
+}
+new Model\Metabox( 'PortadillaMeta', 'Categoría de la portadilla', 'page', array('priority' => 'high') );

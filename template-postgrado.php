@@ -28,7 +28,11 @@ the_post();
       </div>
   </div>
 </div>
-<?php render::carousel_portadilla('postgrado'); ?>
+<?php 
+  global $post;
+  $the_category = ( !empty( $post->publication_category) ? $post->publication_category : 'postgrado' );
+  render::carousel_portadilla($the_category); 
+?>
 
 <div id="portadilla">
 <!-- Pag para page (para toda la página) -->
