@@ -16,7 +16,7 @@
         $the_post = get_post($ev);
         $the_title = (!empty( $title )) ? $title : 'Información de docencia';
         if (!empty($the_post)):
-            echo '<h2 class="xs titulo-seccion margen-sup-md"><i class="icn icn-anuncio icn-light"></i>'.$the_title.'</h2>';
+            echo '<h2 class="xs titulo-seccion margen-sup-md"><a href="'.site_url('paginas/docencia').'"><i class="icn icn-anuncio icn-light"></i>'.$the_title.'</a></h2>';
             echo '<div class="pag">';
               echo '<div class="fila">';
                 echo '<div class="flexbox">';

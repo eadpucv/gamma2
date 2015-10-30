@@ -8,11 +8,12 @@
 	</div>
   <?php 
   $x = 0;
-  echo '<div class="fila widget-post-categories">';	
+  echo '<div class="widget-post-categories">';
+  echo '<div class="fila">';	
   while ( have_posts() ): the_post();
   global $post;
  
-  	echo '<div class="col-md-4 col-sm-4 col-xs-12 auto noticia">';
+  	echo '<div class="auto noticia">';
   		echo '<div class="borde ocultar-desborde auto radio-md">';
   			echo '<div class="relleno-sup-xs tooltip-demo">';
   				echo '<h4 class="xs sin-margen"><a href="'.get_permalink( $post->ID ).'"><i class="icn icn-anuncio"></i>'.get_the_title( $post->ID ).'</a></h4>';
@@ -34,6 +35,7 @@
 
   	$x++;
   	endwhile;
+    echo '</div>';
   ?>
     </div>
   	<?php 
