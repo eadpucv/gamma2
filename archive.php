@@ -6,7 +6,8 @@
   <h1 class="lg entry-title especifico"><?php echo sitio::archive_title(); ?></h1>
   <?php 
   $x = 0;
-  echo '<div class="fila alto-md margen-sup-sm margen-inf widget-post-categories">';	
+  echo '<div class="widget-post-categories">';
+  echo '<div class="fila alto-md margen-sup-sm margen-inf">';	
   while ( have_posts() ): the_post();
   global $post;
 
@@ -36,6 +37,7 @@
 	    echo '</div>';
   	$x++;
   	endwhile;
+  	echo '</div>';
   ?>
 	</div>
 	<?php 
