@@ -310,12 +310,12 @@ class WP_Widget_posts extends WP_Widget {
 
         if ( !empty( $post_list ) ):
            echo '<h2 class="xs titulo-seccion margen-vertical-sm"><i class="icn icn-lapiz icn-light"></i>'.$the_title.'</h2>';
-            echo '<div class="pag">';
+            echo '<div class="pag widget-post-categories">';
               echo '<div class="fila">';
                 foreach ( $post_list as $the_post ):
                     $categories = wp_get_post_categories( $the_post->ID );
                     $the_category = get_category($categories[0]);
-                    echo '<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 publicacion">';
+                    echo '<div class="publicacion noticia">';
                     // if ( count( $categories ) ):
                     //       echo '<a class="categoria" href="'.get_category_link($the_category->term_id).'">';
                     //         echo '<i class="icn icn-archivo"></i><h6 class="xs">'.$the_category->name.'</h6>';
