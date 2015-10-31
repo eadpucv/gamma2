@@ -238,7 +238,7 @@ class site {
 		wp_enqueue_script( 'jquery.sticky', THEME_JS .'/jquery.sticky.js', array('jquery'), self::theme_ver, '' );
 		wp_enqueue_script( 'jquery.parallax-1.1.3', THEME_JS .'/jquery.parallax-1.1.3.js', array('jquery'), self::theme_ver, '' );
 		wp_enqueue_script( 'jquery.localScroll', THEME_JS .'/jquery.localScroll.js', array('jquery'), self::theme_ver, '' );
-		wp_enqueue_script( 'jquery.localScroll', THEME_JS .'/swipebox.js', array('jquery'), self::theme_ver, '' );
+		wp_enqueue_script( 'jquery.swipebox', THEME_JS .'/swipebox.js', array('jquery'), self::theme_ver, '' );
 		wp_enqueue_script( 'giornata_script', THEME_JS .'/script.js', array('jquery'), self::theme_ver, '' );
 		wp_enqueue_script( 'scrollspy', THEME_JS .'/scrollspy.js', array('giornata_script'), self::theme_ver, '' );
 
