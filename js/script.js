@@ -40,7 +40,8 @@ function string_to_slug(str) {
             });
         });
     }
-
+    $('.box').swipebox();
+    $('.gallery').find('a').swipebox();
     $('.page-contenido').find('h4, h2').each(function(){
         var obj = $(this);
         var tag_name = obj.prop('tagName');
