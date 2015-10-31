@@ -354,15 +354,24 @@ class ThemeSettings{
 				) )->addElement( new Element\Select(
 					_x('Página contacto', 'site settings fields', 'ead'),
 					'page_contact',
-					$this->list_pages()
+					$this->list_pages(),
+					array(
+						'value' => isset($data['page_contact']) ? $data['page_contact'] : ''
+						)
 			) )->addElement( new Element\Select(
 					_x('Página como suscribirse', 'site settings fields', 'ead'),
 					'page_suscripcion',
-					$this->list_pages()
+					$this->list_pages(),
+					array(
+						'value' => isset($data['page_suscripcion']) ? $data['page_suscripcion'] : ''
+						)
 			) )->addElement( new Element\Select(
 					_x('Colofón', 'site settings fields', 'ead'),
 					'page_colofon',
-					$this->list_pages()
+					$this->list_pages(),
+					array(
+						'value' => isset($data['page_colofon']) ? $data['page_colofon'] : ''
+						)
 			) )->addElement( new Element\InputText(
 				_x('Licencia Creative Commons', 'site settings fields', 'ead'),
 				'text_cc',
