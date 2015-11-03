@@ -20,10 +20,10 @@
             echo '<div class="pag">';
               echo '<div class="fila">';
                 echo '<div class="flexbox">';
-                    echo '<div class="col-md-1">';
+                    echo '<div class="col-md-1 col-xs-2">';
                       echo '<a href="'.get_permalink( $the_post->ID ).'"><i class="icn icn-lg rojo icn-anuncio icn-light en-linea izquierda margen-sup-negativo-sm"></i></a>';
                     echo '</div>';
-                    echo '<div class="col-md-8 col-sm-8 borde radio-sup-der-sm radio-inf-der-sm sin-relleno-izq">';
+                    echo '<div class="col-md-8 col-sm-8 col-xs-8 borde radio-sup-der-sm radio-inf-der-sm sin-relleno-izq">';
                       echo '<div class="tooltip-demo">';
                         echo '<h6 class="xs sin-margen sans rojo gruesa en-linea altas">'.get_the_title( $the_post->ID ).'</h6>';
                         echo '<p class="sin-margen">';
