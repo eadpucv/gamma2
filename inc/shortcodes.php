@@ -28,12 +28,13 @@ class getCategoryPosts extends \GutenPress\Model\Shortcode{
 		$x = 0; $y = 1;
 		$out = '';
 		if ($publications->have_posts()):
-			$out .= '<div class="fila alto-md widget-post-categories">';
+			$out .= '<div class="pag widget-post-categories">';
+			$out .= '<div class="fila">';
 				while ($publications->have_posts()){ $publications->the_post();
 					global $post;
 					
 					
-       				$out .= '<div class="col-md-6 col-sm-6 col-xs-12 noticia margen-inf-sm h100">';
+       				$out .= '<div class="noticia">';
        				if (has_post_thumbnail( $post->ID )) {
 	       				$out .= '<div class="cabecera">';
 					        $out .= '<a href="'.get_permalink($post->ID).'">';
@@ -59,6 +60,7 @@ class getCategoryPosts extends \GutenPress\Model\Shortcode{
 					$x++; $y++;
 					$out .= '</div>';
 			}
+			$out .= '</div>';
 			$out .= '</div>';
        		return $out;
 		endif;
