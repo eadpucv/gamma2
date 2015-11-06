@@ -28,7 +28,7 @@ class getCategoryPosts extends \GutenPress\Model\Shortcode{
 		$x = 0; $y = 1;
 		$out = '';
 		if ($publications->have_posts()):
-			$out .= '<div class="pag widget-post-categories">';
+			$out .= '<div class="widget-post-categories">';
 			$out .= '<div class="fila">';
 				while ($publications->have_posts()){ $publications->the_post();
 					global $post;
@@ -44,7 +44,7 @@ class getCategoryPosts extends \GutenPress\Model\Shortcode{
 					}
 
 				        $out .= '<div class="relleno-sup-xs tooltip-demo">';
-				        	$out .= '<h4 class="xs sin-margen relleno-inf-xs  sombra-cabecera-claro-xs"><a class="condensado  negro-fundido gruesa" href="'.get_permalink($post->ID).'"><i class="icn icn-noticias margen-der-xs"></i>'.get_the_title( $post->ID ).'</a></h4>';
+				        	$out .= '<h3 class="xs sin-margen relleno-inf-xs  sombra-cabecera-claro-xs"><a class="condensado  negro-fundido gruesa" href="'.get_permalink($post->ID).'"><i class="icn icn-noticias margen-der-xs"></i>'.get_the_title( $post->ID ).'</a></h3>';
 					        $out .= '<span class="xs entry-details">Publicado el '.mysql2date( 'd \d\e F\, Y', $post->post_date ).'.';
 					          $out .= '<a data-toggle="tooltip" href="#" title="Editar" class="xs en-linea sin-margen" href="#">';
 					           $out .= '<span class="icn-stack">';
