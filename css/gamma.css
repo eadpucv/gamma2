@@ -20402,6 +20402,24 @@ tbody.collapse.in {
 .prev-imagen.portada-imagenes img {
   width: 100%;
 }
+.edit-absolute {
+  background-color: rgba(236, 238, 230, 0.8);
+  border-top: 2px solid #a84744;
+  position: absolute;
+  right: 95px;
+  top: 32px;
+  padding: 2px 10px 2px 10px;
+  font-size: 11px;
+}
+.ayuda-absolute {
+  background-color: rgba(236, 238, 230, 0.8);
+  border-top: 2px solid #a84744;
+  position: absolute;
+  right: 32px;
+  top: 32px;
+  padding: 2px 10px 2px 10px;
+  font-size: 11px;
+}
 @media (max-width: 767px) {
   .wrap,
   .contenedor-sin-relleno,
