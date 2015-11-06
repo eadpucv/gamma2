@@ -1,6 +1,6 @@
 <?php 
 /*
-	Template name: Portadilla postgrado
+	Template name: Portadilla Programa de Estudio
 */
 get_header(); 
 the_post();
