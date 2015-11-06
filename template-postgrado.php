@@ -35,19 +35,24 @@ the_post();
 ?>
 
 <div id="portadilla">
+
 <!-- Pag para page (para toda la página) -->
 <div class="pag page gutter">
-<!-- Breadcrumbs -->
-  <!-- Contenido 1/8 -->
   <div class="fila margen-sup-sm">
-  	<div class="col-md-9 col-sm-8 col-xs-12">
-  		<?php the_content(); ?>
+    <!-- Menú de navegación -->
+    <div class="col-md-3 col-sm-4 oculto-xs alto-lg">
+        <div id="ejemplo-sticky">
+          <ul class="sin-relleno local-nav">
+            <!--Links de navegación se agregan por JS-->
+          </ul>
+        </div>
+    </div>
+    <!-- Contenido -->
+  	<div class="col-md-9 col-sm-8 col-xs-12 relativo" class="scroll-able" data-spy="scroll" data-target="#target_nav">
+      <div class="page-contenido">
+        <?php the_content(); ?>
+      </div>
   	</div>
-    <aside id="sidebar">
-  		<div class="col-md-3 col-sm-4 col-xs-12">
-  			<?php dynamic_sidebar( 'sidebar-template' ); ?>
-  		</div>
-  	</aside>
   </div> <!-- fin de fila-->
 </div> <!-- fin de * pag page * -->
 </div> <!-- fin de portadilla -->
