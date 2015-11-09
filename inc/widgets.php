@@ -367,7 +367,7 @@ class WP_Widget_school_links extends WP_Widget {
             echo '<h2 class="xs titulo-seccion margen-vertical-md oculto-xs"><i class="icn icn-cruzdelsur icn-light"></i>'.$title.'</h2>';
             //<!-- Carrousel ancho completo-->
             echo '<div class="margen-inf-lg oculto-xs cf">';
-              echo '<div data-ride="carousel" class="carousel slide" id="carousel-enlaces">';
+              echo '<div data-ride="carousel" class="carousel slide fondo-carrusel" id="carousel-enlaces">';
                 echo '<div class="carousel-inner">';
                 for ( $i = 0; $i < $num; $i++ ) {
                       //<!-- item (la clase "car-xs" corresponde al height de visibilidad) -->
