@@ -869,3 +869,10 @@ class PortadillaMeta extends Model\PostMeta{
     }
 }
 new Model\Metabox( 'PortadillaMeta', 'Categoría de la portadilla', 'page', array('priority' => 'high') );
+
+add_filter( 'rdp_wpe_shortcode', 'filter_wiki_url', 10, 1 );
+
+function filter_wiki_url($html) {
+	$html_rep = str_replace('http://wiki.ead.pucv.clhttp://', 'http://', $html);
+	return $html_rep;
+}
