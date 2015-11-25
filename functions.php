@@ -524,7 +524,7 @@ class sitio {
 		 	echo '<li><a> Búsqueda de :'.get_search_query().'</a></li>';
 		 	echo '</ul>';
 		 	echo '<div class="bloque ancho-completo">';
-				echo '<h1 class="lg entry-title especifico">Resultados de: '.get_search_query().'</h1>';
+				echo '<h4 class="lg entry-title especifico">Resultados de búsqueda: '.get_search_query().'</h4>';
 			echo '</div>';
 		 }
 		echo '</ul>';
