@@ -16,7 +16,7 @@ class getCategoryPosts extends \GutenPress\Model\Shortcode{
 	public function display($atts, $content){
 		$paged = get_query_var('paged') ? get_query_var('paged') : 1;
 		$category = (!empty($atts['cat'])) ? $atts['cat'] : 'sin-categoria';
-		$publications = new WP_Query(array(
+		$args = array(
 						'post_type' => 'post',
 						'post_status' => 'publish',
 						'category_name' => $category,
@@ -24,7 +24,11 @@ class getCategoryPosts extends \GutenPress\Model\Shortcode{
 						'posts_per_page' => $atts['total'],
 						'orderby' => 'date',
 						'order' => 'DESC'
-					));
+					);
+		if (!empty( $atts['tags'] )) {
+			$args['tag'] = $atts['tags'];
+		}
+		$publications = new WP_Query($args);
 		$x = 0; $y = 1;
 		$out = '';
 		if ($publications->have_posts()):
@@ -87,6 +91,13 @@ class getCategoryPosts extends \GutenPress\Model\Shortcode{
 					'total',
 					array(
 						'description' => '0 para mostrar todas las entradas'
+						)
+				) )->addElement(
+				new Element\InputText(
+					'Tags',
+					'tags',
+					array(
+						'description' => 'Separar por coma (ej: tag1,tag2,tag3) para incluir posts con al menos 1 de los tags. Para obtener las entradas que contengan obligatoriamente los tags definidos separar por signo + (ej: tag1+tag2+tag3 )'
 						)
 				) );
 		echo $form;
