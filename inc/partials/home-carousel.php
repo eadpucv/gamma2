@@ -33,7 +33,8 @@
                       <h2><i class='icn icn-noticias'></i> <?php echo get_the_title($feature->ID) ?></h2>
                       <?php 
                         if ( !empty( $feature->post_excerpt ) ) {
-                            echo apply_filters( 'the_content', $feature->post_excerpt );
+                            //echo apply_filters( 'the_content', $feature->post_excerpt );
+                            echo '<p>'.$feature->post_excerpt.'</p>';
                         }
                        ?>
                        <?php 
