@@ -5,7 +5,7 @@
     class WP_Widget_docencia extends WP_Widget {
     /** constructor */
     function WP_Widget_docencia() {
-        $widget_ops = array('classname' => 'widget-docencia', 'description' => 'Muestra una entrada de la categoría docencia');
+        $widget_ops = array('classname' => 'widget-docencia', 'description' => 'Muestra la última entrada de la categoría docencia');
         $control_ops = array();
         $this->WP_Widget('widget-docencia', 'Aviso de docencia', $widget_ops, $control_ops);
     }
@@ -13,7 +13,19 @@
     function widget($args, $instance) {
         extract($instance);
         extract($args);
-        $the_post = get_post($ev);
+         $pub = new WP_Query(array(
+                'post_type' => 'post',
+                'posts_per_page' => 1,
+                'post_status' => 'publish',
+                'category_name' => 'docencia'
+            ));
+
+         if ($pub->have_posts()) {
+            $the_post = current( $pub->posts );
+         } else {
+            $the_post = '';
+         }
+
         $the_title = (!empty( $title )) ? $title : 'Información de docencia';
         if (!empty($the_post)):
             echo '<h2 class="xs titulo-seccion margen-sup-md"><a href="'.site_url('paginas/docencia').'"><i class="icn icn-anuncio icn-light"></i>'.$the_title.'</a></h2>';
