@@ -522,6 +522,10 @@ class sitio {
 		 } 
 		 if ( is_search() ) {
 		 	echo '<li><a> Búsqueda de :'.get_search_query().'</a></li>';
+		 	echo '</ul>';
+		 	echo '<div class="bloque ancho-completo">';
+				echo '<h4 class="lg entry-title especifico">Resultados de búsqueda: '.get_search_query().'</h4>';
+			echo '</div>';
 		 }
 		echo '</ul>';
 	}

@@ -50,7 +50,7 @@ class getCategoryPosts extends \GutenPress\Model\Shortcode{
 				        $out .= '<div class="relleno-sup-xs tooltip-demo">';
 				        	$out .= '<h3 class="xs sin-margen relleno-inf-xs  sombra-cabecera-claro-xs"><a class="condensado  negro-fundido gruesa" href="'.get_permalink($post->ID).'"><i class="icn icn-noticias margen-der-xs"></i>'.get_the_title( $post->ID ).'</a></h3>';
 					        $out .= '<span class="xs entry-details">Publicado el '.mysql2date( 'd \d\e F\, Y', $post->post_date ).'.';
-					          $out .= '<a data-toggle="tooltip" href="#" title="Editar" class="xs en-linea sin-margen" href="#">';
+					          $out .= '<a data-toggle="tooltip" href="'.get_edit_post_link($the_post->ID).'" title="Editar" class="xs en-linea sin-margen">';
 					           $out .= '<span class="icn-stack">';
 						            $out .= '<span class="icn icn-cuadrolleno icn-stack-2x"></span>';
 						            $out .= '<span class="icn icn-lapiz icn-sm icn-stack-1x"></span>';
