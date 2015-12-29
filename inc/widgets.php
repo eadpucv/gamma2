@@ -434,6 +434,7 @@ class WP_Widget_school_links extends WP_Widget {
     }
     function form($instance) {
         extract( $instance );
+        echo '<pre>'; print_r($instance); echo '</pre>';
         $pages_list = new WP_Query(array(
                         'post_type' =>  array('page'),
                         'posts_per_page' => -1,
