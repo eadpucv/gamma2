@@ -4,7 +4,7 @@
     */
     class WP_Widget_docencia extends WP_Widget {
     /** constructor */
-    function WP_Widget_docencia() {
+    function __construct() {
         $widget_ops = array('classname' => 'widget-docencia', 'description' => 'Muestra la última entrada de la categoría docencia');
         $control_ops = array();
         $this->WP_Widget('widget-docencia', 'Aviso de docencia', $widget_ops, $control_ops);
@@ -92,7 +92,7 @@
 */
 class WP_Widget_events extends WP_Widget {
     /** constructor */
-    function WP_Widget_events() {
+    function __construct() {
         $widget_ops = array('classname' => 'widget-events', 'description' => 'Muestra un listado de eventos activos (los que pasaron irán desapareciendo)');
         $control_ops = array();
         $this->WP_Widget('widget-events', 'Listado de Eventos', $widget_ops, $control_ops);
@@ -155,7 +155,7 @@ class WP_Widget_events extends WP_Widget {
 */
 class WP_Widget_news extends WP_Widget {
     /** constructor */
-    function WP_Widget_news() {
+    function __construct() {
         $widget_ops = array('classname' => 'widget-news', 'description' => 'Muestra un listado de entradas de una categoría');
         $control_ops = array();
         $this->WP_Widget('widget-news', 'Listado de Entradas por categoría', $widget_ops, $control_ops);
@@ -228,7 +228,7 @@ class WP_Widget_news extends WP_Widget {
 */
 class WP_Widget_news_thumb extends WP_Widget {
     /** constructor */
-    function WP_Widget_news_thumb() {
+    function __construct() {
         $widget_ops = array('classname' => 'widget-news-thumb', 'description' => 'Muestra un listado de entradas de una categoría con su imagen destacada');
         $control_ops = array();
         $this->WP_Widget('widget-news-thumb', 'Entradas por categoría con imagen', $widget_ops, $control_ops);
@@ -281,7 +281,7 @@ class WP_Widget_news_thumb extends WP_Widget {
 */
 class WP_Widget_twitter extends WP_Widget {
     /** constructor */
-    function WP_Widget_twitter() {
+    function __construct() {
         $widget_ops = array('classname' => 'widget-twitter', 'description' => 'Muestra un timeline de twitter de la escuela, no se puede cambiar');
         $control_ops = array();
         $this->WP_Widget('widget-twitter', 'Timeline de Twitter e[ad]', $widget_ops, $control_ops);
@@ -307,7 +307,7 @@ class WP_Widget_twitter extends WP_Widget {
 */
 class WP_Widget_posts extends WP_Widget {
     /** constructor */
-    function WP_Widget_posts() {
+    function __construct() {
         $widget_ops = array('classname' => 'widget-posts', 'description' => 'Muestra un listado de las últimas entradas');
         $control_ops = array();
         $this->WP_Widget('widget-posts', 'Últimas entradas', $widget_ops, $control_ops);
@@ -366,7 +366,7 @@ class WP_Widget_posts extends WP_Widget {
 */
 class WP_Widget_school_links extends WP_Widget {
     /** constructor */
-    function WP_Widget_school_links() {
+    function __construct() {
         $widget_ops = array('classname' => 'widget-links', 'description' => 'Muestra un texto acompañado de links a páginas');
         $control_ops = array();
         $this->WP_Widget('widget-links', 'Escuela & enlaces', $widget_ops, $control_ops);
