@@ -12,6 +12,7 @@ use GutenPress\Validate;
 use GutenPress\Validate\Validations;
 use GutenPress\Model;
 /* Theme Constants (to speed up some common things) ------*/
+define('THEME_VERSION', '1.0');
 define('HOME_URI', get_bloginfo( 'url' ));
 define('PRE_HOME_URI',get_bloginfo('url').'/wp-content/themes');
 define('SITE_NAME', get_bloginfo( 'name' ));
@@ -877,6 +878,18 @@ new Model\Metabox( 'PortadillaMeta', 'Categoría de la portadilla', 'page', arra
 add_filter( 'rdp_wpe_shortcode', 'filter_wiki_url', 10, 1 );
 
 function filter_wiki_url($html) {
-	$html_rep = str_replace('src="/images/', 'src="http://wiki.ead.pucv.cl/images/', $html);
-	return $html_rep;
+	$dom = new \DOMDocument();
+	$dom->loadHtml($html);
+	$images = $fom->getElementsByTagName('img');
+	foreach ($images as $image) {
+		$src = $image->getAttribute('src');
+		$src = str_replace('/images/','http://wiki.ead.pucv.cl/images/',$src);
+		$image->setAttribute('src',$src);
+		$srcset = $image->getAttribute('srcset');
+		$srcset = str_replace('/images/','http://wiki.ead.pucv.cl/images/',$src);
+		$image->setAttribute('srcset',$srcset);
+	}
+	//$html_rep = str_replace('src="/images/', 'src="http://wiki.ead.pucv.cl/images/', $html);
+	//$html_rep = str_replace('srcset="/images/', 'src="http://wiki.ead.pucv.cl/images/', $html_rep);
+	return $dom->saveHTML();
 }
