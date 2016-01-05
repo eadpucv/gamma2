@@ -878,7 +878,7 @@ new Model\Metabox( 'PortadillaMeta', 'Categoría de la portadilla', 'page', arra
 add_filter( 'rdp_wpe_shortcode', 'filter_wiki_url', 10, 1 );
 
 function filter_wiki_url($html) {
-	$dom = new \DOMDocument();
+	$dom = new DOMDocument();
 	$dom->loadHtml($html);
 	$images = $fom->getElementsByTagName('img');
 	foreach ($images as $image) {
