@@ -880,7 +880,8 @@ add_filter( 'rdp_wpe_shortcode', 'filter_wiki_url', 10, 1 );
 function filter_wiki_url($html) {
 	$dom = new DOMDocument();
 	$dom->loadHtml($html);
-	$images = $fom->getElementsByTagName('img');
+	$images = $dom->getElementsByTagName('img');
+	
 	foreach ($images as $image) {
 		$src = $image->getAttribute('src');
 		$src = str_replace('/images/','http://wiki.ead.pucv.cl/images/',$src);
