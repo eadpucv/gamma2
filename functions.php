@@ -887,10 +887,8 @@ function filter_wiki_url($html) {
 		$src = str_replace('/images/','http://wiki.ead.pucv.cl/images/',$src);
 		$image->setAttribute('src',$src);
 		$srcset = $image->getAttribute('srcset');
-		$srcset = str_replace('/images/','http://wiki.ead.pucv.cl/images/',$src);
+		$srcset = str_replace('/images/','http://wiki.ead.pucv.cl/images/',$srcset);
 		$image->setAttribute('srcset',$srcset);
 	}
-	//$html_rep = str_replace('src="/images/', 'src="http://wiki.ead.pucv.cl/images/', $html);
-	//$html_rep = str_replace('srcset="/images/', 'src="http://wiki.ead.pucv.cl/images/', $html_rep);
 	return $dom->saveHTML();
 }
